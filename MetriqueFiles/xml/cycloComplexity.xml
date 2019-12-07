@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+
+<ruleset name="Custom Rules"
+	xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 https://pmd.sourceforge.io/ruleset_2_0_0.xsd">
+
+	<description>
+		My custom rules
+	</description>
+	
+	<exclude-pattern>.*/com/.*</exclude-pattern>
+	<exclude-pattern>.*/audio/.*</exclude-pattern>
+	<exclude-pattern>.*/graphisme/.*</exclude-pattern>
+	<include-pattern>.*/graphisme/GCartes.*</include-pattern>
+	<include-pattern>.*/graphisme/TapisDeBelote.*</include-pattern>
+
+<!-- Your rules will code here -->
+	
+	<rule ref="category/java/design.xml/CyclomaticComplexity"/>
+	<rule ref="category/java/design.xml/NPathComplexity"/>
+
+</ruleset>
