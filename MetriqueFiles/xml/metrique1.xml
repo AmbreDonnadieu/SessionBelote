@@ -38,6 +38,9 @@ Design
 	<rule ref="category/java/design.xml/CouplingBetweenObjects" />
 
 	<rule ref="category/java/performance.xml/RedundantFieldInitializer" />
+	
+	<rule ref="category/java/bestpractices.xml/UnusedImports" />
+
 
 	
 
