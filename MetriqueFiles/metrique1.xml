@@ -1,0 +1,11 @@
+Performance
+- RedundantFieldInitializer
+
+Design
+- CouplingBetweenObjects
+- ExcessiveClassLength
+- LawOfDemeter
+- ExcessiveClassLength
+- TooManyMethods
+- DataClass
+- GodClass
