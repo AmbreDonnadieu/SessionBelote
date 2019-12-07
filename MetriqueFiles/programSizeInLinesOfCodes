@@ -1,0 +1,15 @@
+/home/eddy/UQAC/8INF957/JBelote/src/belote/AnalyseurDeJeu.java:36:	This class has too many methods, consider refactoring it.
+/home/eddy/UQAC/8INF957/JBelote/src/belote/JoueurBelote.java:29:	This class has too many methods, consider refactoring it.
+/home/eddy/UQAC/8INF957/JBelote/src/belote/JoueurBelote.java:234:	Avoid really long methods.
+/home/eddy/UQAC/8INF957/JBelote/src/belote/JoueurBelote.java:234:	The method 'joueUneCarte()' has a NCSS line count of 96.
+/home/eddy/UQAC/8INF957/JBelote/src/cartes/PileDeCarte.java:31:	This class has too many methods, consider refactoring it.
+/home/eddy/UQAC/8INF957/JBelote/src/belote/RegleBelote.java:33:	Avoid really long classes.
+/home/eddy/UQAC/8INF957/JBelote/src/belote/RegleBelote.java:33:	This class has too many methods, consider refactoring it.
+/home/eddy/UQAC/8INF957/JBelote/src/belote/RegleBelote.java:33:	Too many fields
+/home/eddy/UQAC/8INF957/JBelote/src/belote/RegleBelote.java:228:	Avoid really long methods.
+/home/eddy/UQAC/8INF957/JBelote/src/belote/RegleBelote.java:228:	The method 'run()' has a NCSS line count of 225.
+/home/eddy/UQAC/8INF957/JBelote/src/graphisme/TapisDeBelote.java:23:	A high number of imports can indicate a high degree of coupling within an object.
+/home/eddy/UQAC/8INF957/JBelote/src/graphisme/TapisDeBelote.java:61:	This class has too many methods, consider refactoring it.
+/home/eddy/UQAC/8INF957/JBelote/src/graphisme/TapisDeBelote.java:61:	Too many fields
+/home/eddy/UQAC/8INF957/JBelote/src/graphisme/TapisDeBelote.java:215:	Avoid really long methods.
+/home/eddy/UQAC/8INF957/JBelote/src/graphisme/TapisDeBelote.java:215:	The method 'paintComponent(Graphics)' has a NCSS line count of 109.

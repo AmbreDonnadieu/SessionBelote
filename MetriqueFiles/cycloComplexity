@@ -1,0 +1,23 @@
+/home/eddy/UQAC/8INF957/JBelote/src/belote/AnalyseurDeJeu.java:146:	The method 'addCarteJouee(Carte)' has a cyclomatic complexity of 11.
+/home/eddy/UQAC/8INF957/JBelote/src/belote/JoueurBelote.java:29:	The class 'JoueurBelote' has a total cyclomatic complexity of 283 (highest 50).
+/home/eddy/UQAC/8INF957/JBelote/src/belote/JoueurBelote.java:143:	The method 'getChoixAtout(CouleurCarte, int)' has a cyclomatic complexity of 25.
+/home/eddy/UQAC/8INF957/JBelote/src/belote/JoueurBelote.java:143:	The method 'getChoixAtout(CouleurCarte, int)' has an NPath complexity of 3600
+/home/eddy/UQAC/8INF957/JBelote/src/belote/JoueurBelote.java:234:	The method 'joueUneCarte()' has a cyclomatic complexity of 50.
+/home/eddy/UQAC/8INF957/JBelote/src/belote/JoueurBelote.java:234:	The method 'joueUneCarte()' has an NPath complexity of 1320
+/home/eddy/UQAC/8INF957/JBelote/src/belote/JoueurBelote.java:410:	The method 'donneLaGrosseDefausse()' has a cyclomatic complexity of 28.
+/home/eddy/UQAC/8INF957/JBelote/src/belote/JoueurBelote.java:410:	The method 'donneLaGrosseDefausse()' has an NPath complexity of 1134
+/home/eddy/UQAC/8INF957/JBelote/src/belote/JoueurBelote.java:540:	The method 'donneUnePetiteCarte()' has a cyclomatic complexity of 16.
+/home/eddy/UQAC/8INF957/JBelote/src/belote/JoueurBelote.java:632:	The method 'donneCarteJusteDessous(Carte, boolean)' has a cyclomatic complexity of 12.
+/home/eddy/UQAC/8INF957/JBelote/src/belote/JoueurBelote.java:658:	The method 'donneCarteJusteDessus(Carte, boolean)' has a cyclomatic complexity of 12.
+/home/eddy/UQAC/8INF957/JBelote/src/belote/JoueurBelote.java:698:	The method 'donneMeilleurAtoutNonMaitre()' has a cyclomatic complexity of 11.
+/home/eddy/UQAC/8INF957/JBelote/src/belote/StatistiquesBelote.java:140:	The method 'getValueAt(int, int)' has a cyclomatic complexity of 10.
+/home/eddy/UQAC/8INF957/JBelote/src/cartes/PileDeCarte.java:164:	The method 'sort(AnalyseurDeJeu)' has a cyclomatic complexity of 13.
+/home/eddy/UQAC/8INF957/JBelote/src/cartes/ValeureCarte.java:77:	The method 'valueOf(String)' has a cyclomatic complexity of 15.
+/home/eddy/UQAC/8INF957/JBelote/src/belote/RegleBelote.java:33:	The class 'RegleBelote' has a total cyclomatic complexity of 131 (highest 18).
+/home/eddy/UQAC/8INF957/JBelote/src/belote/RegleBelote.java:228:	The method 'run()' has a cyclomatic complexity of 71.
+/home/eddy/UQAC/8INF957/JBelote/src/belote/RegleBelote.java:228:	The method 'run()' has an NPath complexity of 2147483647
+/home/eddy/UQAC/8INF957/JBelote/src/belote/RegleBelote.java:590:	The method 'joueUnTour()' has a cyclomatic complexity of 18.
+/home/eddy/UQAC/8INF957/JBelote/src/belote/RegleBelote.java:749:	The method 'changeEtat(int)' has a cyclomatic complexity of 10.
+/home/eddy/UQAC/8INF957/JBelote/src/belote/RegleBelote.java:843:	The method 'pointsDe(Carte)' has a cyclomatic complexity of 11.
+/home/eddy/UQAC/8INF957/JBelote/src/graphisme/TapisDeBelote.java:215:	The method 'paintComponent(Graphics)' has a cyclomatic complexity of 41.
+/home/eddy/UQAC/8INF957/JBelote/src/graphisme/TapisDeBelote.java:215:	The method 'paintComponent(Graphics)' has an NPath complexity of 285048
