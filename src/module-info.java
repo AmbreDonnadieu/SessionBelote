@@ -1,0 +1,5 @@
+
+ // @author Ambre
+module JBelote {
+	
+}
