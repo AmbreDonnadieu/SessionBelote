@@ -46,7 +46,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
-import sun.misc.Regexp;
+//import sun.misc.Regexp;
 
 /**
  * Gestionnaire de parties réseau
