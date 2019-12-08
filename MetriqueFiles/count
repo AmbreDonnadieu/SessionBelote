@@ -1,0 +1,5 @@
+find ./storybook/* -name *.java -exec cat {} \; | wc -l
+find ./storybook/* -name *.java | wc -l
+rgrep -F "class" ./storybook/* --exclude-dir= --include=*.java | wc -l
+rgrep -F "//" ./storybook/* | wc -l
+rgrep -F "/*" ./storybook/* | wc -l

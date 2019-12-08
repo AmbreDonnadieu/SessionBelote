@@ -1,11 +1,15 @@
 cd ~/Documents/UQAC/8INF957/SessionBelote/MetriqueFiles
 mkdir -p ./resultat
 
-FILE1=programSizeInLinesOfCodes
-FILE2=documentation
+FILE1=badclass
+FILE2=classTooLenght
 FILE3=complexity
+FILE4=coupling
+FILE5=cycloComplexity
+FILE6=documentation
+FILE7=programSizeInLinesOfCodes
 
-METRICS=${FILE3}
+METRICS=${FILE7}
 
 OUT_SUFFIXES=
 
