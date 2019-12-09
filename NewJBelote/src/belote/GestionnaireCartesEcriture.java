@@ -1,5 +1,6 @@
 package belote;
 
+import cartes.Carte;
 import cartes.PileDeCarte;
 
 public class GestionnaireCartesEcriture extends GestionnaireCartesLecture {
@@ -9,5 +10,12 @@ public class GestionnaireCartesEcriture extends GestionnaireCartesLecture {
 		// TODO Auto-generated constructor stub
 	}
 
+	
+	void addCartesJouee(Carte c) {
+		carteJouees.add(c);
+		cartesNonJouees.remove(c);
+		
+		nombreJouees[ c.getCouleur().toInt()]++;
+	}
 
 }

@@ -53,7 +53,7 @@ public class PileDeCarte extends ArrayList<Carte> {
         }
     }
 
-    /** Renvoie une pile des 'nb' premiÃ¨res cartes de cette pile */
+    /** Renvoie une pile des 'nb' premières cartes de cette pile */
     public PileDeCarte donneDesCartes( int nb) {
         PileDeCarte p = new PileDeCarte();
 
@@ -64,7 +64,7 @@ public class PileDeCarte extends ArrayList<Carte> {
         return p;
     }
 
-    /** Donne la premiÃ¨re carte de cette pile */
+    /** Donne la première carte de cette pile */
     public Carte donneUneCarte() {
         PileDeCarte p = new PileDeCarte();
 

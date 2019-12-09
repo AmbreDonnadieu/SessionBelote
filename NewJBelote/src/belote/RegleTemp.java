@@ -1,5 +1,6 @@
 package belote;
 
+import cartes.Carte;
 import cartes.CouleurCarte;
 import cartes.PileDeCarte;
 
@@ -22,7 +23,11 @@ public class RegleTemp {
 			return false;
 	}
 	
-	public CouleurCarte couleurDemandee(PileDeCarte pile) {
+	public boolean isAtout(Carte carte) {
+		return isAtout(carte.getCouleur());
+	}
+	
+	public CouleurCarte getCouleurDemandee(PileDeCarte pile) {
 		if(pile.isEmpty())
 			return null;
 		else

@@ -6,10 +6,19 @@ import cartes.PileDeCarte;
 import cartes.ValeureCarte;
 
 public class GestionnaireCartesLecture {
+	
 	RegleTemp regle;
-
 	/* Les cartes jouées dans la partie */
-	PileDeCarte carteJouees, cartesNonJouees, copieJeuDeCarte;
+	protected PileDeCarte carteJouees, cartesNonJouees, copieJeuDeCarte;
+	protected PileDeCarte tapis;
+
+	public PileDeCarte getTapis() {
+		return tapis;
+	}
+
+	public void setTapis(PileDeCarte tapis) {
+		this.tapis = tapis;
+	}
 
 	/* Nombre de cartes jouées par couleur */
 	int[] nombreJouees;
@@ -25,7 +34,7 @@ public class GestionnaireCartesLecture {
 	}
 
 	public int combienIlResteDeCartesNonJoueesA(CouleurCarte couleur) {
-		return 8 - carteJouees.nombreDe( couleur);
+		return 8 - carteJouees.nombreDe(couleur);
 	}
 
 	/** Renvoie vraie si toutes les cartes > sont déjà tombées */
@@ -75,7 +84,7 @@ public class GestionnaireCartesLecture {
 					if ( regle.isAtout(c.getCouleur()) )
 						meilleur = c;
 					else if ( !regle.isAtout(meilleur.getCouleur()))
-						if ( c.getCouleur().equals(regle.couleurDemandee(pile)))
+						if ( c.getCouleur().equals(regle.getCouleurDemandee(pile)))
 							meilleur = c;
 
 			} else meilleur = c;
@@ -90,8 +99,8 @@ public class GestionnaireCartesLecture {
 	}
 
 	/** Renvoie le nombre de cartes déjà jouées à la couleur */
-	int nombreDeCartesJoueesA( CouleurCarte c) {
-		return nombreJouees[ c.toInt()];
+	int nombreDeCartesJoueesA(CouleurCarte c) {
+		return nombreJouees[c.toInt()];
 	}
 
 	void nouvellePartie() {
@@ -134,7 +143,7 @@ public class GestionnaireCartesLecture {
 	boolean estMeilleurQue(Carte carte, PileDeCarte pile) {
 
 		Carte m = meilleurCarte(pile);
-		return meilleurCarteEntre(carte, m, regle.couleurDemandee(pile)) == carte;
+		return meilleurCarteEntre(carte, m, regle.getCouleurDemandee(pile)) == carte;
 	}
 
 	Carte meilleurCarteEntre( Carte c1, Carte c2, CouleurCarte couleurDemandee) {

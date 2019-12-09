@@ -14,6 +14,7 @@ public class AnalyseurJeuTemp {
 	/* Liste des joueurs qui n'ont plus d'atout */
 	boolean[] nAPlusDAtout= new boolean[4];
 	GestionnaireCartesEcriture gestionnaireCartes;
+	JoueurBelote joueurCourant;
 	
 	public AnalyseurJeuTemp() {
 		// TODO Auto-generated constructor stub
@@ -33,7 +34,7 @@ public class AnalyseurJeuTemp {
 		nAPlusDAtout[j.ordre] = true;
 		if ( (regle.getCouleurAtout() == null) || (naPlusDe.get(regle.getCouleurAtout())==null))
 			System.out.print("PAS BON");
-		naPlusDe.get(regle.getCouleurAtout()).add(regle.joueurCourant);
+		naPlusDe.get(regle.getCouleurAtout()).add(joueurCourant);
 		/*   for ( CouleurCarte col : CouleurCarte.COULEURS)
 	            naPlusDe.get(col).remove(regle.joueurCourant); */
 	}
@@ -51,33 +52,28 @@ public class AnalyseurJeuTemp {
 
 	
 	void addCarteJouee(Carte c) {
-		carteJouees.add(c);
-		cartesNonJouees.remove(c);
-		PileDeCarte p = regle.getTapis();
-
-		nombreJouees[ c.getCouleur().toInt()]++;
+		PileDeCarte p = gestionnaireCartes.getTapis();
 
 		// Vérifie qui devait fournir mais ne l'a pas fait
-		if ( !  c.getCouleur().equals(regle.getCouleurDemandee()))
-			if ( ! regle.getCouleurDemandee().equals(regle.getCouleurAtout())) {
-				naPlusDe.get(regle.getCouleurDemandee()).add(regle.joueurCourant);
+		if ( !  c.getCouleur().equals(regle.getCouleurDemandee(p)))
+			if ( ! regle.getCouleurDemandee(p).equals(regle.getCouleurAtout())) {
+				naPlusDe.get(regle.getCouleurDemandee(p)).add(joueurCourant);
 				if ( ! c.getCouleur().equals(regle.getCouleurAtout()))
 					switch (p.size()) {
 					case 2: // il n'a plus d'atout
-						setNaPlusDatout(regle.joueurCourant);
+						setNaPlusDatout(joueurCourant);
 						break;
 					case 3:
-					case 4: if ( meilleurCarte(p) == p.get(p.size()-3))
+					case 4: if ( gestionnaireCartes.meilleurCarte(p) == p.get(p.size()-3))
 						break; // Le partenaire est maitre on ne peut pas savoir
 					else
-						setNaPlusDatout(regle.joueurCourant);
+						setNaPlusDatout(joueurCourant);
 					}
 			} else // il n'a pas fourni à la couleur qui était l'atout
-				setNaPlusDatout(regle.joueurCourant);
+				setNaPlusDatout(joueurCourant);
 
-
-		if ( c.getCouleur().equals(regle.getCouleurAtout()) && 
-				(nombreJouees[ regle.getCouleurAtout().toInt()] == 8)) {
+		if ( regle.isAtout(c) && 
+				(gestionnaireCartes.combienIlResteDeCartesNonJoueesA(c.getCouleur()) == 0)) {
 			// Les 8 atouts sont tombés, plus personne ne coupe
 			for ( int i = 0; i < 4; i ++)
 				nAPlusDAtout[i] = true;
