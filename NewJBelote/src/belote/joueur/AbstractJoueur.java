@@ -4,8 +4,10 @@ import java.awt.Component;
 import java.awt.Graphics;
 
 import belote.AnalyseurDeJeu;
+import belote.GestionnaireCartesLecture;
 import belote.JoueurBelote;
 import belote.RegleBelote;
+import belote.RegleTemp;
 import cartes.Carte;
 import cartes.CouleurCarte;
 import cartes.PileDeCarte;
@@ -14,7 +16,8 @@ import java.lang.String;
 
 public abstract class AbstractJoueur implements IJoueurBelote {
 
-	protected RegleBelote regle;
+	protected GestionnaireCartesLecture gestionnaireCarte;
+	protected RegleTemp regle;
     /** Ce que le joueur à dans sa main */
     protected PileDeCarte carteEnMain;
     /** Le tas du joueur pour la partie en cours */
@@ -41,14 +44,14 @@ public abstract class AbstractJoueur implements IJoueurBelote {
         return j;
     }*/ 
 
-    public AbstractJoueur( String nom0, int ordre0 ) {
+    public AbstractJoueur(String nom0, int ordre0) {
         nom = nom0;
         ordre = ordre0;
         carteEnMain = new PileDeCarte();
         tas = new PileDeCarte();
     }
 
-    /** Dit au joueur où il se trouve autour de la table */
+	/** Dit au joueur où il se trouve autour de la table */
     @Override
 	public void setOrdre( int pos) {
         ordre = pos;
@@ -63,7 +66,7 @@ public abstract class AbstractJoueur implements IJoueurBelote {
 
     /** Définit la règle avec laquelle il va jouer */
     @Override
-	public void setRegle( RegleBelote regle0) {
+	public void setRegle( RegleTemp regle0) {
         regle = regle0;
     }
 
@@ -78,6 +81,16 @@ public abstract class AbstractJoueur implements IJoueurBelote {
 	public int getOrdre() {
         return ordre;
     }
+    
+    @Override
+	public GestionnaireCartesLecture getGestionnaireCarte() {
+		return gestionnaireCarte;
+	}
+
+    @Override
+	public void setGestionnaireCarte(GestionnaireCartesLecture gestionnaireCarte) {
+		this.gestionnaireCarte = gestionnaireCarte;
+	}
 
     /** Renvoie le joueur suivant */
     @Override

@@ -3,8 +3,10 @@ package belote.joueur;
 import java.awt.Component;
 import java.awt.Graphics;
 
+import belote.GestionnaireCartesLecture;
 import belote.JoueurBelote;
 import belote.RegleBelote;
+import belote.RegleTemp;
 import cartes.Carte;
 import cartes.PileDeCarte;
 
@@ -17,13 +19,17 @@ public interface IJoueurBelote {
 	void setEntreLesJoueurs(AbstractJoueur precedent0, AbstractJoueur suivant0);
 
 	/** Définit la règle avec laquelle il va jouer */
-	void setRegle(RegleBelote regle0);
+	void setRegle(RegleTemp regle0);
 
 	/** Défini la PileDeCartes qu'il utilisera pour stocker son tas */
 	void setTas(PileDeCarte tas0);
 
 	/** Renvoie la position du joueur */
 	int getOrdre();
+	
+	public GestionnaireCartesLecture getGestionnaireCarte();
+	
+	public void setGestionnaireCarte(GestionnaireCartesLecture gestionnaireCarte);
 
 	/** Renvoie le joueur suivant */
 	IJoueurBelote getSuivant();
@@ -64,5 +70,4 @@ public interface IJoueurBelote {
 	void setNom(String nom);
 
 	int getNbPlis();
-
 }

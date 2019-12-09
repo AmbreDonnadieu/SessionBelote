@@ -6,7 +6,7 @@ import cartes.PileDeCarte;
 import cartes.ValeureCarte;
 
 public class GestionnaireCartesLecture {
-	
+
 	RegleTemp regle;
 	/* Les cartes jouées dans la partie */
 	protected PileDeCarte carteJouees, cartesNonJouees, copieJeuDeCarte;
@@ -71,6 +71,27 @@ public class GestionnaireCartesLecture {
 
 		return nb_cartesPlusFortes == 0;
 	}
+	
+	/** Renvoie vraie si toutes les cartes > sont déjà tombées en tenant compte
+	 *  des cartes déjà jouées du tapis */
+	public boolean estMaitreTapis(Carte carte) {
+
+		if ( carte == null) return false;
+
+		if ( ! estMeilleurQue(carte, this.tapis)) return false;
+
+		if ( tapis.size() == 3) return true; // c'est le dernier à jouer
+
+		int pos = positionDe(carte);
+		int nb_cartesPlusFortes = 8 - pos;
+
+		for ( Carte c : carteJouees)
+			if ( c.estCouleur(carte))
+				if ( positionDe(c)>pos)
+					nb_cartesPlusFortes--;
+
+		return nb_cartesPlusFortes == 0;
+	}
 
 	/** Renvoie la meilleur carte du plis en tenant compte de l'atout */
 	public Carte meilleurCarte(PileDeCarte pile) {
@@ -99,11 +120,11 @@ public class GestionnaireCartesLecture {
 	}
 
 	/** Renvoie le nombre de cartes déjà jouées à la couleur */
-	int nombreDeCartesJoueesA(CouleurCarte c) {
+	public int nombreDeCartesJoueesA(CouleurCarte c) {
 		return nombreJouees[c.toInt()];
 	}
 
-	void nouvellePartie() {
+	public void nouvellePartie() {
 		for ( int i = 0; i < 4; i++) {
 			nombreJouees[i] = 0;
 		}
@@ -125,7 +146,7 @@ public class GestionnaireCartesLecture {
 		return i;
 	}
 
-	Carte meilleurCarteDansA(PileDeCarte pile, CouleurCarte couleur) {
+	public Carte meilleurCarteDansA(PileDeCarte pile, CouleurCarte couleur) {
 		Carte meilleur = null;
 
 		for ( Carte c : pile)
@@ -140,13 +161,13 @@ public class GestionnaireCartesLecture {
 	 * Retourne vrai si la carte est la meilleur de la pile, en tenant compte
 	 * de la couleur d'atout.
 	 */
-	boolean estMeilleurQue(Carte carte, PileDeCarte pile) {
+	public boolean estMeilleurQue(Carte carte, PileDeCarte pile) {
 
 		Carte m = meilleurCarte(pile);
 		return meilleurCarteEntre(carte, m, regle.getCouleurDemandee(pile)) == carte;
 	}
 
-	Carte meilleurCarteEntre( Carte c1, Carte c2, CouleurCarte couleurDemandee) {
+	public Carte meilleurCarteEntre( Carte c1, Carte c2, CouleurCarte couleurDemandee) {
 		if ( c1 == null) return c2;
 		if ( c2 == null) return c1;
 
@@ -160,13 +181,13 @@ public class GestionnaireCartesLecture {
 			else return c2;
 	}
 
-	int nombreRestantePlusForteQue(Carte c2) {
+	public int nombreDeCartesNonJoueesPlusForteQue(Carte carte) {
 		int n = 0;
-		for ( Carte c : cartesNonJouees) {
-			if ( c.getCouleur().equals(c2.getCouleur()))
-				if (positionDe(c)>positionDe(c2))
+		for ( Carte c : cartesNonJouees)
+			if ( c.estCouleur(carte))
+				if ( positionDe(c)>positionDe(carte))
 					n++;
-		}
+
 		return n;
 	}
 }

@@ -102,7 +102,7 @@ public class JoueurIA extends AbstractJoueur {
         return null;
     }
 
-    /** Affiche avec 'g' les cartes qu'il a dans la carteEnMain √† la position o√π elle sont */
+    /** Affiche avec 'g' les cartes qu'il a dans la carteEnMain ‡ la position o˘ elle sont */
     public void dessinecarteEnMain( Graphics g, int x, int y, int dx, int dy, boolean turned, Component comp) {
 
         for ( Carte c : carteEnMain) {
@@ -135,16 +135,16 @@ public class JoueurIA extends AbstractJoueur {
         CouleurCarte couleurDemandee = regle.getCouleurDemandee();
         CouleurCarte couleurAtout = regle.getCouleurAtout();
 
-        if ( combienOntJoues() == 0 ) { // Premier √† jouer ?
+        if ( combienOntJoues() == 0 ) { // Premier ‡ jouer ?
             if ( onAPris() ) {
                 if ( ilOntDesAtouts() && jAiDeLaCouleur(couleurAtout) ) {
 
                         carte = donnePlusGrosseCarteA( couleurAtout );
-                        if ( ! analyseur.estMaitrePourPlusTard(carte))
+                        if ( ! gestionnaireCarte.estMaitrePourPlusTard(carte))
 
-                            // Cherche √† ne pas se faire manger un gros atout, mais √† faire tomber les autres
+                            // Cherche ‡ ne pas se faire manger un gros atout, mais ‡ faire tomber les autres
                             if ((regle.getQuiAPris()==this) &&
-                                    (nombreDeCartesNonJoueesPlusForteQue(carte)>0) &&
+                                    (gestionnaireCarte.nombreDeCartesNonJoueesPlusForteQue(carte)>0) &&
                                     (regle.pointsDe(carte)>=10))
                                 if ( donneUneCarteMaitre() != null)
                                     carte = donneCarteJusteDessous(carte, true);
@@ -161,7 +161,7 @@ public class JoueurIA extends AbstractJoueur {
                 carte = donneUneCarteMaitre();
                 if (carte == null) carte = donneUneCarteQuiFaitMaitre();
             }
-        } else { // ! premier √† jouer
+        } else { // ! premier ‡ jouer
             if ( couleurDemandee != couleurAtout) {
                     if ( jAiDeLaCouleur( couleurDemandee)) {
                         if ( jAiUneCarteMaitreA( couleurDemandee))
@@ -182,7 +182,7 @@ public class JoueurIA extends AbstractJoueur {
                                 if ( onAPris()) carte = donneUneQuiFaitUneCoupe();
                                 else
                                     if ( monPartenaireSeraMaitre() && ! ceJoueurCoupeA(suivant, couleurDemandee) &&
-                                            (analyseur.nombreDeCartesJoueesA(couleurDemandee)==regle.tapis.nombreDe(couleurDemandee)))
+                                            (gestionnaireCarte.nombreDeCartesJoueesA(couleurDemandee)==regle.tapis.nombreDe(couleurDemandee)))
                                         carte = donneLaGrosseDefausse();
                                     else
                                         carte = donneUneQuiFaitUneCoupe(); // Joue la petite d√©fausse
@@ -204,7 +204,7 @@ public class JoueurIA extends AbstractJoueur {
                                 else
                                     carte = donneUnePetiteCarte();
                     }
-            } else { // la couleur est de l'atout, ! premier √† jouer
+            } else { // la couleur est de l'atout, ! premier ‡ jouer
                 if ( jAiDeLaCouleur(couleurAtout))
                     if ( onAPris()) {
                         // Si c'est mon partenaire qui joue atout, joue une grosse
@@ -311,21 +311,21 @@ public class JoueurIA extends AbstractJoueur {
 
         /* pour les cartes de valeurs identiques et non maitres, comparer:
            - le nombre de carte directement en dessous (prendre celle qui en a le plus)
-           - sinon le nombre de carte zero (prendre celle qui en √† le moins)
+           - sinon le nombre de carte zero (prendre celle qui en ‡ le moins)
          */
         for ( Carte c : carteEnMain)
             if ( ! c.getCouleur().equals(regle.getCouleurAtout())) {
-                if (((analyseur.positionDe(meilleur) < analyseur.positionDe(c)))
-                        || ((analyseur.positionDe(meilleur) == analyseur.positionDe(c) &&
+                if (((gestionnaireCarte.positionDe(meilleur) < gestionnaireCarte.positionDe(c)))
+                        || ((gestionnaireCarte.positionDe(meilleur) == gestionnaireCarte.positionDe(c) &&
                                 ((nbJusteDessous(c)<nbDessous1) || (nbPlusPetiteALaCouleur(c)<nbPP1)))))
                     if ( ! estMaitrePourPlusTard(c)) {
                         meilleur = c;
                         nbPP1 = nbPlusPetiteALaCouleur(c);
                         nbDessous1 = nbJusteDessous(c);
                     } else
-                        if ( (analyseur.combienIlResteDeCartesNonJoueesA(c.getCouleur())>2))
-                            if ((maitre==null) || (analyseur.positionDe(maitre)<analyseur.positionDe(c)) ||
-                                    ((analyseur.positionDe(maitre) ==analyseur.positionDe(c)) &&
+                        if ( (gestionnaireCarte.combienIlResteDeCartesNonJoueesA(c.getCouleur())>2))
+                            if ((maitre==null) || (gestionnaireCarte.positionDe(maitre)<gestionnaireCarte.positionDe(c)) ||
+                                    ((gestionnaireCarte.positionDe(maitre) ==gestionnaireCarte.positionDe(c)) &&
                                     ((nbJusteDessous(c)>nbDessous2) || (nbPlusPetiteALaCouleur(c)>nbPP2)))) {
                                         maitre = c;
                                         nbPP2 = nbPlusPetiteALaCouleur(c);
@@ -333,9 +333,9 @@ public class JoueurIA extends AbstractJoueur {
                             }
 
             } else
-                if ((atout == null) || (analyseur.positionDe(atout) < analyseur.positionDe(c)))
-                    if ( ! analyseur.estMaitrePourPlusTard(c))
-                        if ( analyseur.positionDe(donneMiniAtout()) <= analyseur.positionDe(c))
+                if ((atout == null) || (gestionnaireCarte.positionDe(atout) < gestionnaireCarte.positionDe(c)))
+                    if ( ! gestionnaireCarte.estMaitrePourPlusTard(c))
+                        if ( gestionnaireCarte.positionDe(donneMiniAtout()) <= gestionnaireCarte.positionDe(c))
                             atout = c;
 
         // On sauve un bon atout qui risque de se faire zigouiller
@@ -376,7 +376,7 @@ public class JoueurIA extends AbstractJoueur {
 
         for ( Carte c : carteEnMain)
             if ( c.getCouleur().equals(couleur))
-                if ( (meilleur == null) || (analyseur.positionDe(meilleur)<analyseur.positionDe(c)))
+                if ( (meilleur == null) || (analyseur.positionDe(meilleur)<gestionnaireCarte.positionDe(c)))
                     meilleur = c;
 
         return meilleur;
@@ -388,7 +388,7 @@ public class JoueurIA extends AbstractJoueur {
 
         for ( Carte c : carteEnMain)
             if ( c.getCouleur().equals(couleur))
-                if ( (pire == null) || (analyseur.positionDe(pire)>analyseur.positionDe(c)))
+                if ( (pire == null) || (gestionnaireCarte.positionDe(pire)>gestionnaireCarte.positionDe(c)))
                     pire = c;
 
         return pire;
@@ -396,7 +396,7 @@ public class JoueurIA extends AbstractJoueur {
 
     private boolean onEstMaitre() {
         PileDeCarte tapis = regle.getTapis();
-        Carte meilleur = analyseur.meilleurCarte(tapis);
+        Carte meilleur = gestionnaireCarte.meilleurCarte(tapis);
 
         return ((tapis.size()==3) &&
                     (meilleur==tapis.get(1))) ||
@@ -404,10 +404,10 @@ public class JoueurIA extends AbstractJoueur {
                     (!ceJoueurCoupeA(suivant, tapis.get(0).getCouleur())));
     }
 
-    /** Dit si le joueur coupe √† la couleur */
+    /** Dit si le joueur coupe ‡ la couleur */
     private boolean ceJoueurCoupeA(JoueurBelote j, CouleurCarte c) {
         return (regle.getCarteJoueePar(j)!=null) && 
-                 analyseur.resteCartesNonTombeesAPour(c,j) &&
+        		 gestionnaireCarte.resteCartesNonTombeesAPour(c,j) &&
                ! analyseur.nAPlusDAtout[j.ordre] &&
                  analyseur.naPlusDe.get(c).contains(j);
     }
@@ -418,15 +418,15 @@ public class JoueurIA extends AbstractJoueur {
 
     private Carte donneMiniAtout() {
         Carte ok = null, pire = null;
-        Carte mini = analyseur.meilleurCarteDansA(regle.getTapis(), regle.atout);
+        Carte mini = gestionnaireCarte.meilleurCarteDansA(regle.getTapis(), regle.atout);
 
         for ( Carte c : carteEnMain)
             if ( c.getCouleur().equals(regle.getCouleurAtout())) {
-                if ((pire==null) || (analyseur.positionDe(pire)>analyseur.positionDe(c)))
+                if ((pire==null) || (gestionnaireCarte.positionDe(pire)>gestionnaireCarte.positionDe(c)))
                     pire = c;
 
-                if ( (analyseur.positionDe(mini)<analyseur.positionDe(c))) {
-                    if ((ok==null) || ((analyseur.positionDe(ok)>analyseur.positionDe(c))))
+                if ( (gestionnaireCarte.positionDe(mini)<gestionnaireCarte.positionDe(c))) {
+                    if ((ok==null) || ((gestionnaireCarte.positionDe(ok)>gestionnaireCarte.positionDe(c))))
                         ok = c;
                 }
             }
@@ -446,7 +446,7 @@ public class JoueurIA extends AbstractJoueur {
                         if ((pire==null) ||(regle.pointsDe(pire)>regle.pointsDe(c))
                             || ((regle.pointsDe(pire)==regle.pointsDe(c)) 
                                     && (nbPetiteALaCouleur(c)>nbPP)))
-                                        if ( ! analyseur.estMaitrePourPlusTard(c)) {
+                                        if ( ! gestionnaireCarte.estMaitrePourPlusTard(c)) {
                                             nbPP = nbPetiteALaCouleur(c);
                                             pire = c;
                                         }
@@ -458,7 +458,7 @@ public class JoueurIA extends AbstractJoueur {
                 if ( ! col.equals(regle.getCouleurAtout())) {
                         c = donneUnePetiteCarteA(col);
                         if ( c != null)
-                            if ((pire==null) ||( analyseur.positionDe(pire)>analyseur.positionDe(c)))
+                            if ((pire==null) ||(gestionnaireCarte.positionDe(pire)>gestionnaireCarte.positionDe(c)))
                                 pire = c;
                 }
             }
@@ -485,7 +485,7 @@ public class JoueurIA extends AbstractJoueur {
         Carte c = regle.getCarteJoueePar( suivant.suivant);
         if ( c == null) return false;
 
-        if ( analyseur.estMaitreTapis(c))
+        if ( gestionnaireCarte.estMaitreTapis(c))
             if ( c.getCouleur().equals(regle.getCouleurAtout()))
                 return true;
             else
@@ -509,7 +509,7 @@ public class JoueurIA extends AbstractJoueur {
 
         // Cherche d'abord la carte juste au dessous
         for ( Carte c : carteEnMain) if ( c.estCouleur(carte) && ! c.equals(carte))
-            if (analyseur.positionDe(carte)==(analyseur.positionDe(c)+1))
+            if (gestionnaireCarte.positionDe(carte)==(gestionnaireCarte.positionDe(c)+1))
                     meilleur = c;
 
         if ( auMax && (meilleur!=null))
@@ -518,7 +518,7 @@ public class JoueurIA extends AbstractJoueur {
                 // Recherche la carte juste avant carte
                 for ( Carte c : carteEnMain)
                     if ( c.estCouleur(carte) && ! c.equals(carte))
-                        if (analyseur.positionDe(meilleur)==(analyseur.positionDe(c)+1)) {
+                        if (gestionnaireCarte.positionDe(meilleur)==(gestionnaireCarte.positionDe(c)+1)) {
                             meilleur = c;
                             recommence = true;
                             break;
@@ -535,7 +535,7 @@ public class JoueurIA extends AbstractJoueur {
 
         // Cherche d'abord la carte juste au dessous
         for ( Carte c : carteEnMain) if ( c.estCouleur(carte) && ! c.equals(carte))
-            if (analyseur.positionDe(carte)==(analyseur.positionDe(c)-1))
+            if (gestionnaireCarte.positionDe(carte)==(gestionnaireCarte.positionDe(c)-1))
                     meilleur = c;
 
         if ( auMax && (meilleur!=null))
@@ -544,7 +544,7 @@ public class JoueurIA extends AbstractJoueur {
                 // Recherche la carte juste avant carte
                 for ( Carte c : carteEnMain)
                     if ( c.estCouleur(carte) && ! c.equals(carte))
-                        if (analyseur.positionDe(meilleur)==(analyseur.positionDe(c)-1)) {
+                        if (gestionnaireCarte.positionDe(meilleur)==(gestionnaireCarte.positionDe(c)-1)) {
                             meilleur = c;
                             recommence = true;
                             break;
@@ -560,7 +560,7 @@ public class JoueurIA extends AbstractJoueur {
         return ((! analyseur.nAPlusDAtout[suivant.ordre])
                 ^ (! analyseur.nAPlusDAtout[precedent.ordre]))
             &&
-               ((carteEnMain.size()-1) <= (8-analyseur.nombreJouees[regle.atout.toInt()]));
+               ((carteEnMain.size()-1) <= gestionnaireCarte.combienIlResteDeCartesNonJoueesA(regle.getCouleurAtout()));
     }
 
     /** Renvoie une carte d'atout non maitre */
@@ -568,10 +568,10 @@ public class JoueurIA extends AbstractJoueur {
         Carte meilleur, ok = donnePlusGrosseCarteA(regle.getCouleurAtout());
         boolean recommence;
 
-        if ( donneUneCarteMaitreA(regle.atout) != null)
+        if ( donneUneCarteMaitreA(regle.getCouleurAtout()) != null)
             return donneMiniAtout();
 
-        if ( (ok!=null) && ! analyseur.estMaitrePourPlusTard(ok)) return ok;
+        if ( (ok!=null) && ! gestionnaireCarte.estMaitrePourPlusTard(ok)) return ok;
 
         do {
             meilleur = null;
@@ -582,8 +582,8 @@ public class JoueurIA extends AbstractJoueur {
                     recommence = true;
                     break;
                 } else
-                    if ((analyseur.positionDe(c)>analyseur.positionDe(meilleur)) &&
-                        (analyseur.positionDe(c)<analyseur.positionDe(ok)))
+                    if ((gestionnaireCarte.positionDe(c)>gestionnaireCarte.positionDe(meilleur)) &&
+                        (gestionnaireCarte.positionDe(c)<gestionnaireCarte.positionDe(ok)))
                         meilleur = c;
             
         } while ( recommence);
@@ -592,30 +592,22 @@ public class JoueurIA extends AbstractJoueur {
         else return ok;
     }
 
-    private int nombreDeCartesNonJoueesPlusForteQue(Carte carte) {
-
-        int n = 0;
-        for ( Carte c : analyseur.cartesNonJouees)
-            if ( c.estCouleur(carte))
-                if ( analyseur.positionDe(c)>analyseur.positionDe(carte))
-                    n++;
-
-        return n;
-    }
+ 
 
     private Carte donneUneQuiFaitUneCoupe() {
         Carte c, c2;
         int nbDe = 10;
         CouleurCarte atout = regle.getCouleurAtout();
 
-        // Cherche une carte non maitre unique √† la couleur
+        // Cherche une carte non maitre unique ‡ la couleur
         for ( CouleurCarte col : CouleurCarte.COULEURS) {
 
             if ( ! col.equals(atout) && (carteEnMain.nombreDe(col)>0) && (carteEnMain.nombreDe(col)<nbDe)) {
                     c = donneUnePetiteCarteA(col);
                     c2 = donneUneGrosseCarteA(col);
-                    if ( ! analyseur.estMaitrePourPlusTard(c) && (regle.pointsDe(c)<10) &&
-                            (analyseur.nombreRestantePlusForteQue(c2) >1) || (carteEnMain.nombreDe(col)>2))
+                    if ( ! gestionnaireCarte.estMaitrePourPlusTard(c) && (regle.pointsDe(c)<10) &&
+                            (gestionnaireCarte.nombreDeCartesNonJoueesPlusForteQue(c2) >1)
+                            	|| (carteEnMain.nombreDe(col)>2))
                                 return c;
             }
         }
@@ -659,12 +651,12 @@ public class JoueurIA extends AbstractJoueur {
 
         for ( Carte c : carteEnMain)
             if ( ! c.getCouleur().equals(regle.getCouleurAtout()) &&
-                 (analyseur.nombreRestantePlusForteQue(c)==1) &&
+                 (gestionnaireCarte.nombreDeCartesNonJoueesPlusForteQue(c)==1) &&
                  (carteEnMain.nombreDe(c.getCouleur())>1) && ((carte == null) ||
                  (regle.pointsDe(donneUnePetiteCarteA(c.getCouleur())) < point) ||
-                 (nbJouees > analyseur.nombreDeCartesJoueesA(c.getCouleur())))) {
+                 (nbJouees > gestionnaireCarte.nombreDeCartesJoueesA(c.getCouleur())))) {
 
-                nbJouees = analyseur.nombreDeCartesJoueesA(c.getCouleur());
+                nbJouees = gestionnaireCarte.nombreDeCartesJoueesA(c.getCouleur());
                 point = regle.pointsDe(carte = donneUnePetiteCarteA(c.getCouleur()));
             }
 
@@ -679,9 +671,9 @@ public class JoueurIA extends AbstractJoueur {
 
             Carte aPrendre = null;
             int nombre = 0;
-            for ( Carte c : analyseur.cartesNonJouees)
+            for ( Carte c : gestionnaireCarte.cartesNonJouees)
                 if ( c.estCouleur(atout) && ! carteEnMain.contains(c) &&
-                     (analyseur.positionDe(c)<analyseur.positionDe(meilleur)) &&
+                     (gestionnaireCarte.positionDe(c)<gestionnaireCarte.positionDe(meilleur)) &&
                      (regle.pointsDe(c) >= 10)) {
 
                     aPrendre = c;
