@@ -1,7 +1,7 @@
 /*
   A Belote game
 
-  Copyright (C) 2012 ClÃ©ment GERARDIN.
+  Copyright (C) 2012 Clément GERARDIN.
 
   This file is part of Belote.
 
@@ -28,7 +28,7 @@ import javax.swing.JOptionPane;
 
 /**
  * GÃ¨re une suite de partie de belote
- * @author ClÃ©ment
+ * @author Clément
  */
 public class RegleBelote implements Runnable {
 
@@ -60,10 +60,10 @@ public class RegleBelote implements Runnable {
     public static final int JOUEUR_OUEST = 3;
     public static final String POSITIONS[] = { "NORD", "EST", "SUD", "OUEST" };
 
-    /* Le dÃ©lai d'attente pour rÃ¨gler la vitesse du jeu */
+    /* Le délai d'attente pour rÃ¨gler la vitesse du jeu */
     private int gameDelay = 1400;
 
-    /** Le nombre de points par manches par dÃ©faut */
+    /** Le nombre de points par manches par défaut */
     public static int POINTS_MANCHE = 1000;
 
     RegleBeloteInterfaceGraphique graphic_listener;
@@ -97,7 +97,7 @@ public class RegleBelote implements Runnable {
     /** Pour les statistiques */
     public int nbParties, nbManches, nbRefus, maxManches = 10000;
 
-    /* CrÃ©e une partie rÃ©seau avec ces quatre joueurs placÃ© dans le sens horaire en commencant par le Nord. */
+    /* Crée une partie réseau avec ces quatre joueurs placé dans le sens horaire en commencant par le Nord. */
     public RegleBelote( PileDeCarte avecCeJeu, JoueurBelote[] quatre_joueurs, int quiCommence) {
         int i;
 
@@ -126,7 +126,7 @@ public class RegleBelote implements Runnable {
         try { changeEtat(ETAT_RIEN); } catch (Exception ex) { }
     }
 
-    /* CrÃ©e une partie locale composÃ© de 3 joueur ordinateurs et d'un 'humain' placÃ© au SUD du tapis */
+    /* Crée une partie locale composé de 3 joueur ordinateurs et d'un 'humain' placé au SUD du tapis */
     public RegleBelote( PileDeCarte avecCeJeu, JoueurBelote humain) {
         int i;
 
@@ -201,12 +201,12 @@ public class RegleBelote implements Runnable {
         return joueurs.get( position);
     }
 
-    /** SpÃ©cifie le nouveau 'listener' graphique pour cette partie */
+    /** Spécifie le nouveau 'listener' graphique pour cette partie */
     public void setGraphicListener(RegleBeloteInterfaceGraphique listener0) {
         graphic_listener = listener0;
     }
 
-    /** SpÃ©cifie le nouveau 'listener' pour cette partie */
+    /** Spécifie le nouveau 'listener' pour cette partie */
     public void setBeloteListener( RegleBeloteListener l) {
         listener = l;
     }
@@ -223,7 +223,7 @@ public class RegleBelote implements Runnable {
         graphic_listener.lockRead();
     }
 
-    /** Fait jouer les quatre participants des parties, jusqu'Ã  ce que l'on demande le fin dÃ©finitive du jeu */
+    /** Fait jouer les quatre participants des parties, jusqu'Ã  ce que l'on demande le fin définitive du jeu */
     @Override
     public void run() {
 
@@ -299,7 +299,7 @@ public class RegleBelote implements Runnable {
                             if ( a.equals(tapis.get(0).getCouleur())) {
                                 graphic_listener.unlockRead();
                                 JOptionPane.showMessageDialog(graphic_listener.getComponent(), "Le joueur "+ joueurCourant.nom + " ne peut choisir " +
-                                        a + " au deuxiÃ¨me tour d'atout.", "DÃ©solÃ© ...", JOptionPane.ERROR_MESSAGE);
+                                        a + " au deuxiÃ¨me tour d'atout.", "Désolé ...", JOptionPane.ERROR_MESSAGE);
                                 graphic_listener.lockRead();
                                 a = null;
                             } else
@@ -430,9 +430,9 @@ public class RegleBelote implements Runnable {
                     if ( (joueurQuiPrend.tas.size()==0) && (joueurQuiPrend.suivant.suivant.tas.size()==0) ) {
                         if ( confirmJeu) { int i =
                             JOptionPane.showConfirmDialog(graphic_listener.getComponent(),
-                                    "L'Ã©quipe " + joueurQuiPrend.suivant.nom + "," + joueurQuiPrend.precedent.nom +
+                                    "L'équipe " + joueurQuiPrend.suivant.nom + "," + joueurQuiPrend.precedent.nom +
                                     ", Ã  fait un capot !\nElle gagne " + (total + 90) + " points.",
-                                    "RÃ©sultats de la partie", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
+                                    "Résultats de la partie", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
                         if ( i == JOptionPane.CANCEL_OPTION ) demandeLaFinDeLaPartie(true);
                             }
 
@@ -444,9 +444,9 @@ public class RegleBelote implements Runnable {
                     } else if ( (joueurQuiPrend.suivant.tas.size()==0) && (joueurQuiPrend.precedent.tas.size()==0)) {
                         if ( confirmJeu) { int i =
                             JOptionPane.showConfirmDialog(graphic_listener.getComponent(),
-                                    "L'Ã©quipe " + joueurQuiPrend.nom +","+ joueurQuiPrend.suivant.suivant.nom +
+                                    "L'équipe " + joueurQuiPrend.nom +","+ joueurQuiPrend.suivant.suivant.nom +
                                     ", Ã  fait un capot !\nElle gagne " + (points + 90) + " points.",
-                                    "RÃ©sultats de la partie", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
+                                    "Résultats de la partie", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
                         if ( i == JOptionPane.CANCEL_OPTION ) demandeLaFinDeLaPartie(true);
                             }
 
@@ -460,9 +460,9 @@ public class RegleBelote implements Runnable {
                         if ( confirmJeu) { int i =
                             JOptionPane.showConfirmDialog(graphic_listener.getComponent(),
                                 "Il y a litige !\nLes deux camps on autant de points ("+
-                                points+").\nL'Ã©quipe " + joueurQuiPrend.suivant.nom + "," + joueurQuiPrend.precedent.nom +
+                                points+").\nL'équipe " + joueurQuiPrend.suivant.nom + "," + joueurQuiPrend.precedent.nom +
                                 ", gagne tout de suite " + points + ".\nLe reste est remis en jeu.",
-                                "RÃ©sultats de la partie", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
+                                "Résultats de la partie", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
                         if ( i == JOptionPane.CANCEL_OPTION ) demandeLaFinDeLaPartie(true);
                             }
 
@@ -472,10 +472,10 @@ public class RegleBelote implements Runnable {
 
                     } else if ( points > leurPoints) {
                         if ( confirmJeu) { int i =
-                            JOptionPane.showConfirmDialog(graphic_listener.getComponent(), "L'Ã©quipe " +
+                            JOptionPane.showConfirmDialog(graphic_listener.getComponent(), "L'équipe " +
                                 joueurQuiPrend.nom + "," + joueurQuiPrend.suivant.suivant.nom +" gagne la partie avec " +
                                 points + " points contre " + leurPoints + ", sur un total de " + total + ".",
-                                "RÃ©sultats de la partie", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
+                                "Résultats de la partie", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
                         if ( i == JOptionPane.CANCEL_OPTION ) demandeLaFinDeLaPartie(true);
                             }
                         
@@ -486,10 +486,10 @@ public class RegleBelote implements Runnable {
 
                     } else {
                         if ( confirmJeu) { int i=
-                            JOptionPane.showConfirmDialog(graphic_listener.getComponent(), "L'Ã©quipe " +
+                            JOptionPane.showConfirmDialog(graphic_listener.getComponent(), "L'équipe " +
                             joueurQuiPrend.nom + "," + joueurQuiPrend.suivant.suivant.nom + " est \"dedans\" avec seulement " +
                                 points + " points contre " + leurPoints + ", sur un total de " + total + ".",
-                                "RÃ©sultats de la partie", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
+                                "Résultats de la partie", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
                         if ( i == JOptionPane.CANCEL_OPTION ) demandeLaFinDeLaPartie(true);
                             }
 
@@ -499,7 +499,7 @@ public class RegleBelote implements Runnable {
                         joueurQuiPrend.nbPerdues++;
                     }
 
-                    /* VÃ©rfication de la fin d'une manche */
+                    /* Vérfication de la fin d'une manche */
                     int tN = joueurs.get(JOUEUR_NORD).pointsTotaux + joueurs.get(JOUEUR_SUD).pointsTotaux;
                     int tE = joueurs.get(JOUEUR_OUEST).pointsTotaux  + joueurs.get(JOUEUR_EST).pointsTotaux;
 
@@ -509,8 +509,8 @@ public class RegleBelote implements Runnable {
                         if ( tN > tE) {
 
                             if ( avecHumain) {
-                             int i =JOptionPane.showConfirmDialog(graphic_listener.getComponent(), "L'Ã©quipe " +
-                                     getJoueur(RegleBelote.JOUEUR_NORD).nom + "," + getJoueur(RegleBelote.JOUEUR_SUD).nom + " Ã  gagnÃ©e la manche avec " +
+                             int i =JOptionPane.showConfirmDialog(graphic_listener.getComponent(), "L'équipe " +
+                                     getJoueur(RegleBelote.JOUEUR_NORD).nom + "," + getJoueur(RegleBelote.JOUEUR_SUD).nom + " Ã  gagnée la manche avec " +
                                 tN + " points contre " + tE + ".",
                                 "Fin de manche", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
                             if ( i == JOptionPane.CANCEL_OPTION ) demandeLaFinDeLaPartie(true);
@@ -522,9 +522,9 @@ public class RegleBelote implements Runnable {
 
                             if ( avecHumain) {
                                 
-                                int i = JOptionPane.showConfirmDialog(graphic_listener.getComponent(), "L'Ã©quipe " +
+                                int i = JOptionPane.showConfirmDialog(graphic_listener.getComponent(), "L'équipe " +
                                         getJoueur(RegleBelote.JOUEUR_EST).nom + "," + getJoueur(RegleBelote.JOUEUR_OUEST).nom + 
-                                        " Ã  gagnÃ©e la manche avec " + tE + " points contre " + tN + ".",
+                                        " Ã  gagnée la manche avec " + tE + " points contre " + tN + ".",
                                     "Fin de manche", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
                                 if ( i == JOptionPane.CANCEL_OPTION ) demandeLaFinDeLaPartie(true);
                             }
@@ -559,7 +559,7 @@ public class RegleBelote implements Runnable {
                 
             } while ( intEtatDuJeu != ETAT_FINJEU );
 
-        } catch (Exception ex) {  // fin de partie immÃ©diate
+        } catch (Exception ex) {  // fin de partie immédiate
 
             if ( ex.getMessage() == null) ex.printStackTrace();
             else if ( ! ex.getMessage().equals("Fin de partie")) {
@@ -583,7 +583,7 @@ public class RegleBelote implements Runnable {
                 listener.newBeloteEvent( new BeloteEvent(BeloteEvent.EV_QUIT, null, 0, null, null));
     }
 
-    /** Pour dÃ©boggage programmeur */
+    /** Pour déboggage programmeur */
     boolean tourDebug;
 
     /* Fait jouer une carte Ã  chaque joueur */
@@ -595,7 +595,7 @@ public class RegleBelote implements Runnable {
         for ( int j = 0; j < 4; j++) {
             do {
                 changeEtat( ETAT_JOUE);
-                /* Pour le dÃ©bogage */
+                /* Pour le débogage */
                 if ( tourDebug )
                     tourDebug = false;
 
@@ -608,7 +608,7 @@ public class RegleBelote implements Runnable {
                         graphic_listener.unlockRead();
 
                         JOptionPane.showMessageDialog(graphic_listener.getComponent(), "Le joueur "+ joueurCourant.nom + " ne peut jouer " +
-                                c, "DÃ©solÃ© ...", JOptionPane.ERROR_MESSAGE);
+                                c, "Désolé ...", JOptionPane.ERROR_MESSAGE);
                         graphic_listener.lockRead();
                         c = null;
                     }
@@ -649,7 +649,7 @@ public class RegleBelote implements Runnable {
         }
     }
 
-    /** VÃ©rifie que le joueur 'lui' peut jouer cette atout 'carte' */
+    /** Vérifie que le joueur 'lui' peut jouer cette atout 'carte' */
     private boolean verifieAtoutJouePar( JoueurBelote lui, Carte carte) {
         Carte m = analyseur.meilleurCarteDansA(tapis, atout);
 
@@ -662,7 +662,7 @@ public class RegleBelote implements Runnable {
         return false;
     }
 
-    /** VÃ©rifie que le joueur 'lui' peut jouer cette 'carte' */
+    /** Vérifie que le joueur 'lui' peut jouer cette 'carte' */
     public boolean ilPeutJouerCetteCarte( JoueurBelote lui, Carte carte) {
 
         Carte p, c;
@@ -670,15 +670,15 @@ public class RegleBelote implements Runnable {
         p = tapis.get(0);
 
         if (carte.estCouleur(p)) { // si mÃªme couleur
-            if ( p.estCouleur(atout)) { // si atout demandÃ©
+            if ( p.estCouleur(atout)) { // si atout demandé
                 return verifieAtoutJouePar( lui, carte);
             } else return true;
 
         } else { // ! mÃªme couleur
-            if ( p.estCouleur(atout)) { // si atout demandÃ©
+            if ( p.estCouleur(atout)) { // si atout demandé
                     if (  lui.main.contient(atout)) return false;
                     else return verifieDefausse(lui, carte);
-            } else { // ! mÃªme couleur, ! atout demandÃ©
+            } else { // ! mÃªme couleur, ! atout demandé
                 if ( lui.main.contient(p.getCouleur())) return false;
 
                 if ( carte.estCouleur(atout)) {
@@ -692,7 +692,7 @@ public class RegleBelote implements Runnable {
         }
     }
 
-    /** VÃ©rifie que le joueur a le droit de ne pas couper */
+    /** Vérifie que le joueur a le droit de ne pas couper */
     private boolean verifieDefausse( JoueurBelote lui, Carte carte) {
 
          if ( ! lui.main.contient(atout)) return true;
@@ -745,7 +745,7 @@ public class RegleBelote implements Runnable {
         return true;
     }
 
-    /** Change l'Ã©tat de la partie */
+    /** Change l'état de la partie */
     private void changeEtat(int etat0) throws Exception {
 
         intEtatDuJeu = etat0;
@@ -785,12 +785,12 @@ public class RegleBelote implements Runnable {
         return joueurCourant;
     }
 
-    /* Retourne les cartes jouÃ©es Ã  ce tour sur le tapis */
+    /* Retourne les cartes jouées Ã  ce tour sur le tapis */
     public PileDeCarte getTapis() {
         return tapis;
     }
 
-    /** Retourne le joueur qui Ã  distribuÃ© les carte de la partie en cours */
+    /** Retourne le joueur qui Ã  distribué les carte de la partie en cours */
     public JoueurBelote getJoueurQuiDistribue() {
         return joueurQuiDistribue;
     }
@@ -811,7 +811,7 @@ public class RegleBelote implements Runnable {
         return atout;
     }
 
-    /** Retourne la couleur demandÃ©e au 1er tour d'atout */
+    /** Retourne la couleur demandée au 1er tour d'atout */
     public CouleurCarte getCouleurDemandee() {
         if ( tapis.isEmpty() ) return null;
         else return tapis.get(0).getCouleur();
@@ -823,7 +823,7 @@ public class RegleBelote implements Runnable {
         return analyseur;
     }
 
-    /** Retourne le joueur qui a commencÃ© le premier Ã  ce tour */
+    /** Retourne le joueur qui a commencé le premier Ã  ce tour */
     public JoueurBelote getJoueurQuiCommence() {
         return joueurQuiCommence;
     }
@@ -866,7 +866,7 @@ public class RegleBelote implements Runnable {
         return p;
     }
 
-    /** Renvoie l'Ã©tat du jeu */
+    /** Renvoie l'état du jeu */
     public int getEtatDuJeu() {
         return intEtatDuJeu;
     }
@@ -876,7 +876,7 @@ public class RegleBelote implements Runnable {
         return joueurQuiDistribue.nom;
     }
 
-    /** Renvoie le jeu de carte utilisÃ© dans cette partie */
+    /** Renvoie le jeu de carte utilisé dans cette partie */
     public PileDeCarte getJeu() {
         return jeu;
     }
@@ -893,8 +893,8 @@ public class RegleBelote implements Runnable {
         return;
 
         // TODO: voir si il faut finir le mode avec les annonces...
-        /* seul l'annonce la plus forte peut Ãªtre annoncÃ©e.
-           elle peut Ãªtre dÃ©couverte au deuxiÃ¨me tour si un des adversaires le demandent
+        /* seul l'annonce la plus forte peut Ãªtre annoncée.
+           elle peut Ãªtre découverte au deuxiÃ¨me tour si un des adversaires le demandent
          * l'annonce se rajoute au total des points de la partie donc au 152+10
          
         boolean cartes[][];
@@ -904,7 +904,7 @@ public class RegleBelote implements Runnable {
             for ( Carte c :j.getMain())
                 cartes[c.getCouleur().toInt()][c.getValeur().toInt()] = true;
 
-            // VÃ©rifie les carrÃ©s de 9, V D, R
+            // Vérifie les carrés de 9, V D, R
             for ( int v = ValeureCarte.NCARD_9; v < ValeureCarte.NCARD_R; v++) {
 
                 int n = 0;
@@ -933,7 +933,7 @@ public class RegleBelote implements Runnable {
                 }
             }
 
-            // VÃ©rifie les suites
+            // Vérifie les suites
             for ( int v = ValeureCarte.NCARD_7; v < ValeureCarte.NCARD_AS; v++) {
 
                 int n = 0;
@@ -965,7 +965,7 @@ public class RegleBelote implements Runnable {
 */
     }
 
-    /** Renvoie le 'listener' graphique associÃ© Ã  cette partie */
+    /** Renvoie le 'listener' graphique associé Ã  cette partie */
     public RegleBeloteInterfaceGraphique getGraphicListener() {
         return graphic_listener;
     }
@@ -993,7 +993,7 @@ public class RegleBelote implements Runnable {
         if ( joueurQuiCommence == j ) joueurQuiCommence = remplacant;
         if ( joueurQuiDistribue == j ) joueurQuiDistribue = remplacant;
         if ( joueurQuiPrend == j ) joueurQuiPrend = remplacant;
-        // TODO: vÃ©rifier oÃ¹ en est la partie cas lÃ  c'est quand mÃªme pas cool...
+        // TODO: vérifier oÃ¹ en est la partie cas lÃ  c'est quand mÃªme pas cool...
     }
 
     boolean synchroReseauOk;
@@ -1031,8 +1031,8 @@ public class RegleBelote implements Runnable {
                 @Override
                 public void run() {
                     JOptionPane.showMessageDialog(null, "Le joueur " + j.nom + 
-                            " annonce un carrÃ© de " + valeurCarre.toString() + ".\n" +
-                            "Ajoutant " + pointsAnnonces + " Ã  son Ã©quipe.");
+                            " annonce un carré de " + valeurCarre.toString() + ".\n" +
+                            "Ajoutant " + pointsAnnonces + " Ã  son équipe.");
                 }
             });
         } catch (InterruptedException ex) {
