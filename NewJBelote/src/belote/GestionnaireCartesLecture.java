@@ -7,7 +7,7 @@ import cartes.ValeureCarte;
 
 public class GestionnaireCartesLecture {
 
-	RegleTemp regle;
+	static RegleTemp regle;
 	/* Les cartes jouées dans la partie */
 	protected PileDeCarte carteJouees, cartesNonJouees, copieJeuDeCarte;
 	protected PileDeCarte tapis;
@@ -88,7 +88,7 @@ public class GestionnaireCartesLecture {
 	}
 
 	/** Renvoie la meilleur carte du plis en tenant compte de l'atout */
-	public Carte meilleurCarte(PileDeCarte pile) {
+	static public Carte meilleurCarte(PileDeCarte pile) {
 		Carte meilleur = null;
 
 		for ( Carte c : pile) {
@@ -129,7 +129,7 @@ public class GestionnaireCartesLecture {
 
 	/** Renvoie la position (mini 1) de la carte dans la couleur
 	 *  en tenant compte de celle d'atout */
-	public int positionDe(Carte c) {
+	static public int positionDe(Carte c) {
 
 		if ( c == null) return -1;
 
@@ -140,7 +140,7 @@ public class GestionnaireCartesLecture {
 		return i;
 	}
 
-	public Carte meilleurCarteDansA(PileDeCarte pile, CouleurCarte couleur) {
+	static public Carte meilleurCarteDansA(PileDeCarte pile, CouleurCarte couleur) {
 		Carte meilleur = null;
 
 		for ( Carte c : pile)

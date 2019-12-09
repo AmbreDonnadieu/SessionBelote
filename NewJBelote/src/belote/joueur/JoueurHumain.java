@@ -6,7 +6,6 @@ import java.lang.reflect.InvocationTargetException;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
-import belote.JoueurHumain;
 import belote.RegleBelote;
 import cartes.Carte;
 import cartes.CouleurCarte;
@@ -68,7 +67,7 @@ public class JoueurHumain extends AbstractJoueur {
 
         tapis.playWithMouse = ancien;
         carteEnMain.remove(c);
-        carteEnMain.sort(analyseur);
+        carteEnMain.sort(gestionnaireCarte);
         tapis.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         return c;
     }
@@ -88,8 +87,8 @@ public class JoueurHumain extends AbstractJoueur {
         tapis.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         regle.graphic_listener.unlockRead();
         if ( tapis.playWithMouse) {
-            PileDeCarte p = carteEnMain.deCouleur(regle.getTapis().get(0).getCouleur());
-            p.add( regle.getTapis().get(0));
+            PileDeCarte p = carteEnMain.deCouleur(gestionnaireCarte.getTapis().get(0).getCouleur());
+            p.add( gestionnaireCarte.getTapis().get(0));
             Carte c = tapis.joueCarte(p);
             tapis.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             return (c!= null);

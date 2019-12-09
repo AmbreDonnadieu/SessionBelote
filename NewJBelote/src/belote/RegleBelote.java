@@ -708,7 +708,7 @@ public class RegleBelote implements Runnable {
 
     /** Donne les cartes au joueur, et compte les points */
     private boolean faitGagnerLeTour() {
-
+    	
         Carte gagnante = analyseur.meilleurCarte(tapis);
         JoueurBelote j = joueurQuiCommence;
 

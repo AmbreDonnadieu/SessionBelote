@@ -63,7 +63,7 @@ public class RegleTemp {
     }
 	
     /** Vérifie que le joueur 'lui' peut jouer cette 'carte' */
-    public boolean ilPeutJouerCetteCarte( JoueurBelote lui, Carte carte) {
+    public boolean ilPeutJouerCetteCarte(PileDeCarte tapis, JoueurBelote lui, Carte carte) {
 
         Carte p, c;
         if (tapis.size()==0) return true;
@@ -71,24 +71,50 @@ public class RegleTemp {
 
         if (carte.estCouleur(p)) { // si même couleur
             if ( p.estCouleur(couleurAtout)) { // si atout demandé
-                return verifieAtoutJouePar( lui, carte);
+                return verifieAtoutJouePar(tapis, lui, carte);
             } else return true;
 
         } else { // ! même couleur
-            if ( p.estCouleur(atout)) { // si atout demandé
-                    if (  lui.main.contient(atout)) return false;
-                    else return verifieDefausse(lui, carte);
+            if ( p.estCouleur(couleurAtout)) { // si atout demandé
+                    if (  lui.main.contient(couleurAtout)) return false;
+                    else return verifieDefausse(tapis, lui, carte);
             } else { // ! même couleur, ! atout demandé
                 if ( lui.main.contient(p.getCouleur())) return false;
 
-                if ( carte.estCouleur(atout)) {
+                if ( carte.estCouleur(couleurAtout)) {
                     if ( lui.main.contient(p.getCouleur())) return false;
-                    else return verifieAtoutJouePar(lui, carte);
+                    else return verifieAtoutJouePar(tapis, lui, carte);
                 } else { // il devrait couper mais ne l'a pas fait
 
-                   return verifieDefausse( lui, carte);
+                   return verifieDefausse(tapis, lui, carte);
                 }
             }
         }
+    }
+    
+    /** Vérifie que le joueur 'lui' peut jouer cette atout 'carte' */
+    private boolean verifieAtoutJouePar(PileDeCarte tapis, JoueurBelote lui, Carte carte) {
+        Carte m = GestionnaireCartesLecture.meilleurCarteDansA(tapis, couleurAtout);
+
+        if ( GestionnaireCartesLecture.positionDe(carte) > GestionnaireCartesLecture.positionDe(m)) return true;
+        else {
+            carte = GestionnaireCartesLecture.meilleurCarteDansA(lui.main, couleurAtout);
+            if ( carte == null) return true;
+            if ( GestionnaireCartesLecture.positionDe(carte) < GestionnaireCartesLecture.positionDe(m)) return true;
+        }
+        return false;
+    }
+    
+    /** Vérifie que le joueur a le droit de ne pas couper */
+    private boolean verifieDefausse(PileDeCarte tapis, JoueurBelote lui, Carte carte) {
+
+         if ( ! lui.main.contient(couleurAtout)) return true;
+        // son partenaire est il maitre ?
+        if ( tapis.size()>=2)
+            if ( GestionnaireCartesLecture.meilleurCarte(tapis).equals(tapis.get(tapis.size()-2)))
+                return true;
+
+        if ( ! lui.main.contient(couleurAtout)) return true;
+        return false;
     }
 }

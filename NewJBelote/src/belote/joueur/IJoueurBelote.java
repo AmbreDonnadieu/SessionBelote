@@ -8,6 +8,7 @@ import belote.JoueurBelote;
 import belote.RegleBelote;
 import belote.RegleTemp;
 import cartes.Carte;
+import cartes.CouleurCarte;
 import cartes.PileDeCarte;
 
 public interface IJoueurBelote {
@@ -72,4 +73,8 @@ public interface IJoueurBelote {
 	int getNbPlis();
 
 	int cut();
+	
+	public boolean getChoixAtout1(Carte atout0);
+	public CouleurCarte getChoixAtout2(CouleurCarte sauf);
+	public Carte joueUneCarte();
 }
