@@ -1,7 +1,7 @@
 /*
   A Belote game
 
-  Copyright (C) 2012 ClÃ©ment GERARDIN.
+  Copyright (C) 2012 Clément GERARDIN.
 
   This file is part of Belote.
 
@@ -30,20 +30,20 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * Analyse et compte les cartes, rÃ©ponds aux questions des joueurs IA sans tricher.
- * @author ClÃ©ment
+ * Analyse et compte les cartes, réponds aux questions des joueurs IA sans tricher.
+ * @author Clément
  */
 public class AnalyseurDeJeu {
 
     RegleBelote regle;
 
-    /* Les cartes jouÃ©es dans la partie */
+    /* Les cartes jouées dans la partie */
     PileDeCarte carteJouees, cartesNonJouees, copieJeuDeCarte;
 
-    /* Nombre de cartes jouÃ©es par couleur */
+    /* Nombre de cartes jouées par couleur */
     int[] nombreJouees;
 
-    /* Liste des joueurs qui coupent Ã  la couleur */
+    /* Liste des joueurs qui coupent à la couleur */
     HashMap<CouleurCarte,ArrayList<JoueurBelote>> naPlusDe, aCouleur;
 
     /* Liste des joueurs qui n'ont plus d'atout */
@@ -70,14 +70,13 @@ public class AnalyseurDeJeu {
             return ! (nAPlusDAtout[moi.suivant.ordre] && nAPlusDAtout[moi.precedent.ordre]);
         else
             return ! (naPlusDe.get(couleur).contains(moi.suivant) || naPlusDe.get(couleur).contains(moi.precedent));
-
     }
 
     public int combienIlResteDeCartesNonJoueesA(CouleurCarte couleur) {
         return 8 - carteJouees.nombreDe( couleur);
     }
 
-    /** Renvoie vraie si toutes les cartes > sont dÃ©jÃ  tombÃ©es */
+    /** Renvoie vraie si toutes les cartes > sont déjà tombées */
     public boolean estMaitrePourPlusTard(Carte carte) {
 
         if ( carte == null) return false;
@@ -91,15 +90,15 @@ public class AnalyseurDeJeu {
         return true;
     }
 
-    /** Renvoie vraie si toutes les cartes > sont dÃ©jÃ  tombÃ©es en tenant compte
-     *  des cartes dÃ©jÃ  jouÃ©es du tapis */
+    /** Renvoie vraie si toutes les cartes > sont déjà tombées en tenant compte
+     *  des cartes déjà jouées du tapis */
     public boolean estMaitreTapis(Carte carte) {
 
         if ( carte == null) return false;
 
         if ( ! estMeilleurQue(carte, regle.tapis)) return false;
 
-        if ( regle.tapis.size() == 3) return true; // c'est le dernier Ã  jouer
+        if ( regle.tapis.size() == 3) return true; // c'est le dernier à jouer
         
         int pos = positionDe(carte);
         int nb_cartesPlusFortes = 8 - pos;
@@ -132,13 +131,13 @@ public class AnalyseurDeJeu {
         return meilleur;
     }
 
-    /** Renvoie vrai si il reste des cartes Ã  la couleur qui ne sont pas dans 
+    /** Renvoie vrai si il reste des cartes à la couleur qui ne sont pas dans 
      *  la main du joueur */
     boolean resteCartesNonTombeesAPour(CouleurCarte c, JoueurBelote j ) {
         return ! (( nombreJouees[c.toInt()]+j.main.nombreDe(c)) == 8);
     }
 
-    /** Renvoie le nombre de cartes dÃ©jÃ  jouÃ©es Ã  la couleur */
+    /** Renvoie le nombre de cartes déjà jouées à la couleur */
     int nombreDeCartesJoueesA( CouleurCarte c) {
         return nombreJouees[ c.toInt()];
     }
@@ -150,7 +149,7 @@ public class AnalyseurDeJeu {
         
         nombreJouees[ c.getCouleur().toInt()]++;
 
-        // VÃ©rifie qui devait fournir mais ne l'a pas fait
+        // Vérifie qui devait fournir mais ne l'a pas fait
         if ( !  c.getCouleur().equals(regle.getCouleurDemandee()))
             if ( ! regle.getCouleurDemandee().equals(regle.getCouleurAtout())) {
                 naPlusDe.get(regle.getCouleurDemandee()).add(regle.joueurCourant);
@@ -165,13 +164,13 @@ public class AnalyseurDeJeu {
                                 else
                                     setNaPlusDatout(regle.joueurCourant);
                     }
-            } else // il n'a pas fourni Ã  la couleur qui Ã©tait l'atout
+            } else // il n'a pas fourni à la couleur qui était l'atout
                 setNaPlusDatout(regle.joueurCourant);
 
 
         if ( c.getCouleur().equals(regle.getCouleurAtout()) && 
              (nombreJouees[ regle.getCouleurAtout().toInt()] == 8)) {
-            // Les 8 atouts sont tombÃ©s, plus personne ne coupe
+            // Les 8 atouts sont tombés, plus personne ne coupe
             for ( int i = 0; i < 4; i ++)
                 nAPlusDAtout[i] = true;
         }

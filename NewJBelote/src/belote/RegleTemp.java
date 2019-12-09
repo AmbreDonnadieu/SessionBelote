@@ -62,4 +62,33 @@ public class RegleTemp {
         return p;
     }
 	
+    /** Vérifie que le joueur 'lui' peut jouer cette 'carte' */
+    public boolean ilPeutJouerCetteCarte( JoueurBelote lui, Carte carte) {
+
+        Carte p, c;
+        if (tapis.size()==0) return true;
+        p = tapis.get(0);
+
+        if (carte.estCouleur(p)) { // si même couleur
+            if ( p.estCouleur(couleurAtout)) { // si atout demandé
+                return verifieAtoutJouePar( lui, carte);
+            } else return true;
+
+        } else { // ! même couleur
+            if ( p.estCouleur(atout)) { // si atout demandé
+                    if (  lui.main.contient(atout)) return false;
+                    else return verifieDefausse(lui, carte);
+            } else { // ! même couleur, ! atout demandé
+                if ( lui.main.contient(p.getCouleur())) return false;
+
+                if ( carte.estCouleur(atout)) {
+                    if ( lui.main.contient(p.getCouleur())) return false;
+                    else return verifieAtoutJouePar(lui, carte);
+                } else { // il devrait couper mais ne l'a pas fait
+
+                   return verifieDefausse( lui, carte);
+                }
+            }
+        }
+    }
 }

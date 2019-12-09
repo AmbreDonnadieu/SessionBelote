@@ -9,7 +9,6 @@ public class GestionnaireCartesEcriture extends GestionnaireCartesLecture {
 		super(regle0, jeuCarte);
 		// TODO Auto-generated constructor stub
 	}
-
 	
 	void addCartesJouee(Carte c) {
 		carteJouees.add(c);
@@ -17,5 +16,8 @@ public class GestionnaireCartesEcriture extends GestionnaireCartesLecture {
 		
 		nombreJouees[ c.getCouleur().toInt()]++;
 	}
-
+	
+	public void setTapis(PileDeCarte tapis) {
+		this.tapis = tapis;
+	}
 }

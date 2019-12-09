@@ -23,6 +23,8 @@
 package cartes;
 
 import belote.AnalyseurDeJeu;
+import belote.GestionnaireCartesLecture;
+
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Random;
@@ -71,7 +73,7 @@ public class PileDeCarte extends ArrayList<Carte> {
         return remove(0);
     }
 
-    /* Retourne une pile de carte pour jouer Ã  la belote */
+    /* Retourne une pile de carte pour jouer à la belote */
     public static PileDeCarte getJeuBelote() {
         PileDeCarte cp = new PileDeCarte();
 
@@ -161,8 +163,8 @@ public class PileDeCarte extends ArrayList<Carte> {
     static final int triNormal[] =  { 0, 1, 3, 2 };
     
     /** Trie cette pile de cartes */
-    public void sort( AnalyseurDeJeu a) {
-        // Tri Ã  bule
+    public void sort( GestionnaireCartesLecture gestionnaireCartes) {
+        // Tri à bule
         boolean ok;
         Carte c1, c2;
         if ( ! contient( CouleurCarte.CARREAU) && contient( CouleurCarte.PIQUE) && contient( CouleurCarte.TREFLE)) {
@@ -179,7 +181,37 @@ public class PileDeCarte extends ArrayList<Carte> {
                 c1=get(i);
                 c2=get(i+1);
                 if (((c1.col == c2.col) &&
-                     (a.positionDe(c1)>a.positionDe( c2))) ||
+                     (gestionnaireCartes.positionDe(c1)>gestionnaireCartes.positionDe( c2))) ||
+                     (c1.col!=c2.col) && (c1.compareTo(c2)>0)) {
+                    ok = false;
+                    set(i, c2);
+                    set(i+1, c1);
+                    break;
+                }
+            }
+        } while ( ! ok);
+    }
+    
+    /** Trie cette pile de cartes */
+    public void sort( AnalyseurDeJeu gestionnaireCartes) {
+        // Tri à bule
+        boolean ok;
+        Carte c1, c2;
+        if ( ! contient( CouleurCarte.CARREAU) && contient( CouleurCarte.PIQUE) && contient( CouleurCarte.TREFLE)) {
+            CouleurCarte.positionTrie = triSansCarreau;
+        } else if ( ! contient( CouleurCarte.PIQUE) && contient( CouleurCarte.COEUR) && contient( CouleurCarte.CARREAU)) {
+            CouleurCarte.positionTrie = triSansPique;
+        } else {
+            CouleurCarte.positionTrie = triNormal;
+        }
+
+        do {
+            ok = true;
+            for ( int i = 0; i < size()-1; i++) {
+                c1=get(i);
+                c2=get(i+1);
+                if (((c1.col == c2.col) &&
+                     (gestionnaireCartes.positionDe(c1)>gestionnaireCartes.positionDe( c2))) ||
                      (c1.col!=c2.col) && (c1.compareTo(c2)>0)) {
                     ok = false;
                     set(i, c2);

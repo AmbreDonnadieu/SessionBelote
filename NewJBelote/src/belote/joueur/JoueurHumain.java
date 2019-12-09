@@ -172,7 +172,7 @@ public class JoueurHumain extends AbstractJoueur {
     public void ajoutATaMain(PileDeCarte cartes) {
         if ( carteEnMain.size()==0) nonTriees.clear();
         super.ajoutATaMain(cartes);
-        carteEnMain.sort(analyseur);
+        carteEnMain.sort(gestionnaireCarte);
         nonTriees.addAll(cartes);
     }
 

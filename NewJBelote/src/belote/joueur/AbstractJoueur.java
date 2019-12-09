@@ -202,6 +202,10 @@ public abstract class AbstractJoueur implements IJoueurBelote {
         return (int) ((tas.size() + suivant.suivant.tas.size())/4);
     }
 
-	
+    /** Renvoie un nombre entre 3 et 29 pour couper le jeu. */
+    @Override
+    public int cut() {
+        return 3 + (int)(Math.random()*29);
+    }
 	
 }

@@ -16,10 +16,6 @@ public class GestionnaireCartesLecture {
 		return tapis;
 	}
 
-	public void setTapis(PileDeCarte tapis) {
-		this.tapis = tapis;
-	}
-
 	/* Nombre de cartes jouées par couleur */
 	int[] nombreJouees;
 
@@ -39,14 +35,12 @@ public class GestionnaireCartesLecture {
 
 	/** Renvoie vraie si toutes les cartes > sont déjà tombées */
 	public boolean estMaitrePourPlusTard(Carte carte) {
-
 		if ( carte == null) return false;
 
 		for ( Carte c : cartesNonJouees)
 			if ( c.estCouleur(carte))
 				if ( positionDe(c)>positionDe(carte))
 					return false;
-
 
 		return true;
 	}
@@ -189,5 +183,37 @@ public class GestionnaireCartesLecture {
 					n++;
 
 		return n;
+	}
+	
+	public CouleurCarte getCouleurDemandee() {
+		return regle.getCouleurDemandee(tapis);
+	}
+	
+	/* Doit retourner une grosse carte qui n'est pas maitre */
+	public Carte donnePlusGrosseCarteA(PileDeCarte cartes, CouleurCarte couleur) {
+		Carte meilleur = null;
+
+		for ( Carte c : cartes)
+			if ( c.estCouleur(couleur))
+				if (meilleur != null) {
+					if (positionDe(meilleur)<positionDe(c)) meilleur = c;
+				} else
+					meilleur = c;
+
+		return meilleur;
+	}
+	
+	public int resteCarteHautesValeursBatable(CouleurCarte couleur, PileDeCarte carteEnMain) {
+		int nombre = 0;
+		Carte meilleur = donnePlusGrosseCarteA(carteEnMain, couleur);
+		
+		for ( Carte c : cartesNonJouees) {
+			if ( c.estCouleur(couleur) && ! carteEnMain.contains(c) &&
+					(positionDe(c)<positionDe(meilleur)) &&
+					(regle.pointsDe(c) >= 10)) {
+				nombre++;
+			}
+		}
+		return nombre;
 	}
 }

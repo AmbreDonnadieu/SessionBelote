@@ -70,4 +70,6 @@ public interface IJoueurBelote {
 	void setNom(String nom);
 
 	int getNbPlis();
+
+	int cut();
 }
