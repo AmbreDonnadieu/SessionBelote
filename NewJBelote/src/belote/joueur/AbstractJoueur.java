@@ -19,7 +19,7 @@ public abstract class AbstractJoueur implements IJoueurBelote {
     protected PileDeCarte carteEnMain;
     /** Le tas du joueur pour la partie en cours */
     protected PileDeCarte tas;
-    private String nom;
+    protected String nom;
     protected AbstractJoueur precedent;
     protected AbstractJoueur suivant;
     /** La position du joueur autour du tapis */
