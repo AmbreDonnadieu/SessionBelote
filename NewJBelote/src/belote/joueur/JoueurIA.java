@@ -270,9 +270,9 @@ public class JoueurIA extends AbstractJoueur {
 	}
 
 	private boolean estMaitrePourPlusTard( Carte c) {
-		if ( (regle.getCarteJoueePar(quiAPris) == null) &&
+		if ( (getCarteJoueePar(quiAPris) == null) &&
 				(!ceJoueurNaPlusDe(quiAPris, regle.getCouleurAtout()) ) &&
-				ceJoueurNaPlusDe(quiAPris, c.getCouleur()) );
+				ceJoueurNaPlusDe(quiAPris, c.getCouleur()) )
 			return false;
 
 		return ! lesToursProchainsSerontPourEux() && gestionnaireCarte.estMaitrePourPlusTard(c);
@@ -380,7 +380,7 @@ public class JoueurIA extends AbstractJoueur {
 
 	/** Dit si le joueur coupe à la couleur */
 	private boolean ceJoueurCoupeA(IJoueurBelote j, CouleurCarte couleur) {
-		return (regle.getCarteJoueePar(j)!=null) && 
+		return (getCarteJoueePar(j)!=null) && 
 				gestionnaireCarte.resteCartesNonTombeesAPour(couleur,j) &&
 				! ceJoueurNaPlusDe((AbstractJoueur) j, regle.getCouleurAtout()) &&
 				ceJoueurNaPlusDe((AbstractJoueur) j, couleur);

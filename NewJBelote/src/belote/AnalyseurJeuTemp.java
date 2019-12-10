@@ -280,7 +280,8 @@ public class AnalyseurJeuTemp implements Runnable {
 									coupe_a, null, null));
 
 				gestionnaireCartes.coupeJeuA(coupe_a);
-				joueurCourant = joueurQuiCommence = joueurQuiDistribue.getSuivant();
+				joueurCourant = joueurQuiDistribue.getSuivant();
+				setJoueurQuiCommence(joueurCourant);
 				doSynchroReseau(joueurCourant);
 
 				changeEtat( ETAT_DISTRIBUE1);
@@ -428,7 +429,7 @@ public class AnalyseurJeuTemp implements Runnable {
 				if ( avecAnnonces) verifieLesAnnonces();
 
 				if ( atout != null ) {
-					joueurQuiCommence = joueurQuiDistribue.getSuivant();
+					this.setJoueurQuiCommence(joueurQuiDistribue.getSuivant());
 					for (int tour = 1; tour <= 8; tour++) {
 						joueUnTour();
 						changeEtat(ETAT_FINTOUR);
@@ -771,7 +772,7 @@ public class AnalyseurJeuTemp implements Runnable {
 
 		dernierPli = (PileDeCarte)gestionnaireCartes.getTapis().clone();
 		j.ajoutATonTas( gestionnaireCartes.getTapis());
-		joueurQuiCommence = j;
+		setJoueurQuiCommence(j);
 		gestionnaireCartes.getTapis().clear();
 		return true;
 	}
@@ -930,7 +931,7 @@ public class AnalyseurJeuTemp implements Runnable {
 		return ! partieEnCours || arretPartieDemande;
 	}
 
-	/*public void changeJoueurPar(IJoueurBelote remplacant) {
+	public void changeJoueurPar(IJoueurBelote remplacant) {
 		IJoueurBelote j = joueurs.get(remplacant.getOrdre());
 		joueurs.set(remplacant.getOrdre(), remplacant);
 		remplacant.getSuivant().precedent = remplacant;
@@ -940,7 +941,14 @@ public class AnalyseurJeuTemp implements Runnable {
 		if ( joueurQuiDistribue == j ) joueurQuiDistribue = remplacant;
 		if ( joueurQuiPrend == j ) joueurQuiPrend = remplacant;
 		// TODO: vérifier où en est la partie cas là c'est quand même pas cool...
-	}*/
+	}
+	
+	private void setJoueurQuiCommence(IJoueurBelote joueurQuiCommence) {
+		this.joueurQuiCommence = joueurQuiCommence;
+		for(IJoueurBelote j : joueurs) {
+			j.setJoueurQuiCommence(joueurQuiCommence);
+		}
+	}
 
 	boolean synchroReseauOk;
 	private void doSynchroReseau(IJoueurBelote j) {

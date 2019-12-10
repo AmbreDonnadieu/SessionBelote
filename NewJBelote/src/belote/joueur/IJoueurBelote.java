@@ -107,4 +107,6 @@ public interface IJoueurBelote {
 	public IJoueurBelote createClone();
 
 	int getSizeTas();
+
+	void setJoueurQuiCommence(IJoueurBelote joueurQuiCommence);
 }

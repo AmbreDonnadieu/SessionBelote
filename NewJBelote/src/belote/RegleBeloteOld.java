@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
- * GÃ¨re une suite de partie de belote
+ * Gére une suite de partie de belote
  * @author Clément
  */
 public class RegleBeloteOld implements Runnable {
@@ -45,9 +45,9 @@ public class RegleBeloteOld implements Runnable {
     public static final int ETAT_COUPEJEU = 10;
     public static final String[] stringEtats = {
                             "Aucune partie en cours",
-                            "PremiÃ¨re distribution",
+                            "Premiére distribution",
                             "Premier tour d'atout",
-                            "DeuxiÃ¨me tour d'atout",
+                            "Deuxiéme tour d'atout",
                             "Distribution du restant des cartes",
                             "Personne ne veut prendre",
                             "Partie en cours", "Fin du tour",
@@ -60,7 +60,7 @@ public class RegleBeloteOld implements Runnable {
     public static final int JOUEUR_OUEST = 3;
     public static final String POSITIONS[] = { "NORD", "EST", "SUD", "OUEST" };
 
-    /* Le délai d'attente pour rÃ¨gler la vitesse du jeu */
+    /* Le délai d'attente pour régler la vitesse du jeu */
     private int gameDelay = 1400;
 
     /** Le nombre de points par manches par défaut */
@@ -174,7 +174,7 @@ public class RegleBeloteOld implements Runnable {
         try { changeEtat(ETAT_RIEN); } catch (Exception ex) { }
     }
 
-    /* Change la vitesse de 0 Ã  20 (20=max) */;
+    /* Change la vitesse de 0 à 20 (20=max) */;
     public void setGameSpeed(int speed) {
         if ( speed < 0) speed = 0;
         if ( speed > 20) speed = 20;
@@ -196,7 +196,7 @@ public class RegleBeloteOld implements Runnable {
         confirmBelote = mode;
     }
 
-    /** Renvoie le joueur Ã  la 'position' */
+    /** Renvoie le joueur à la 'position' */
     public JoueurBelote getJoueur( int position) {
         return joueurs.get( position);
     }
@@ -223,7 +223,7 @@ public class RegleBeloteOld implements Runnable {
         graphic_listener.lockRead();
     }
 
-    /** Fait jouer les quatre participants des parties, jusqu'Ã  ce que l'on demande le fin définitive du jeu */
+    /** Fait jouer les quatre participants des parties, jusqu'à ce que l'on demande le fin définitive du jeu */
     @Override
     public void run() {
 
@@ -299,7 +299,7 @@ public class RegleBeloteOld implements Runnable {
                             if ( a.equals(tapis.get(0).getCouleur())) {
                                 graphic_listener.unlockRead();
                                 JOptionPane.showMessageDialog(graphic_listener.getComponent(), "Le joueur "+ joueurCourant.nom + " ne peut choisir " +
-                                        a + " au deuxiÃ¨me tour d'atout.", "Désolé ...", JOptionPane.ERROR_MESSAGE);
+                                        a + " au deuxiéme tour d'atout.", "Désolé ...", JOptionPane.ERROR_MESSAGE);
                                 graphic_listener.lockRead();
                                 a = null;
                             } else
@@ -350,10 +350,10 @@ public class RegleBeloteOld implements Runnable {
                     if ( confirmPlis) {
                         graphic_listener.unlockRead();
                         JOptionPane.showMessageDialog(graphic_listener.getComponent(),
-                                "Le joueur " + joueurQuiPrend.nom + " a pris Ã  " +
+                                "Le joueur " + joueurQuiPrend.nom + " a pris à " +
                                 atout, "Info", JOptionPane.INFORMATION_MESSAGE);
                    /*     int r =  JOptionPane.showConfirmDialog(graphic_listener.getComponent(),
-                                "Le joueur " + joueurQuiPrend.nom + " a pris Ã  " +
+                                "Le joueur " + joueurQuiPrend.nom + " a pris à " +
                                 atout, "Info", JOptionPane.INFORMATION_MESSAGE);
 */
                         graphic_listener.lockRead();
@@ -431,7 +431,7 @@ public class RegleBeloteOld implements Runnable {
                         if ( confirmJeu) { int i =
                             JOptionPane.showConfirmDialog(graphic_listener.getComponent(),
                                     "L'équipe " + joueurQuiPrend.suivant.nom + "," + joueurQuiPrend.precedent.nom +
-                                    ", Ã  fait un capot !\nElle gagne " + (total + 90) + " points.",
+                                    ", à fait un capot !\nElle gagne " + (total + 90) + " points.",
                                     "Résultats de la partie", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
                         if ( i == JOptionPane.CANCEL_OPTION ) demandeLaFinDeLaPartie(true);
                             }
@@ -445,7 +445,7 @@ public class RegleBeloteOld implements Runnable {
                         if ( confirmJeu) { int i =
                             JOptionPane.showConfirmDialog(graphic_listener.getComponent(),
                                     "L'équipe " + joueurQuiPrend.nom +","+ joueurQuiPrend.suivant.suivant.nom +
-                                    ", Ã  fait un capot !\nElle gagne " + (points + 90) + " points.",
+                                    ", à fait un capot !\nElle gagne " + (points + 90) + " points.",
                                     "Résultats de la partie", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
                         if ( i == JOptionPane.CANCEL_OPTION ) demandeLaFinDeLaPartie(true);
                             }
@@ -510,7 +510,7 @@ public class RegleBeloteOld implements Runnable {
 
                             if ( avecHumain) {
                              int i =JOptionPane.showConfirmDialog(graphic_listener.getComponent(), "L'équipe " +
-                                     getJoueur(RegleBelote.JOUEUR_NORD).nom + "," + getJoueur(RegleBelote.JOUEUR_SUD).nom + " Ã  gagnée la manche avec " +
+                                     getJoueur(RegleBelote.JOUEUR_NORD).nom + "," + getJoueur(RegleBelote.JOUEUR_SUD).nom + " à gagnée la manche avec " +
                                 tN + " points contre " + tE + ".",
                                 "Fin de manche", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
                             if ( i == JOptionPane.CANCEL_OPTION ) demandeLaFinDeLaPartie(true);
@@ -524,7 +524,7 @@ public class RegleBeloteOld implements Runnable {
                                 
                                 int i = JOptionPane.showConfirmDialog(graphic_listener.getComponent(), "L'équipe " +
                                         getJoueur(RegleBelote.JOUEUR_EST).nom + "," + getJoueur(RegleBelote.JOUEUR_OUEST).nom + 
-                                        " Ã  gagnée la manche avec " + tE + " points contre " + tN + ".",
+                                        " à gagnée la manche avec " + tE + " points contre " + tN + ".",
                                     "Fin de manche", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
                                 if ( i == JOptionPane.CANCEL_OPTION ) demandeLaFinDeLaPartie(true);
                             }
@@ -586,7 +586,7 @@ public class RegleBeloteOld implements Runnable {
     /** Pour déboggage programmeur */
     boolean tourDebug;
 
-    /* Fait jouer une carte Ã  chaque joueur */
+    /* Fait jouer une carte à chaque joueur */
     public void joueUnTour() throws Exception {
 
         Carte c;
@@ -669,16 +669,16 @@ public class RegleBeloteOld implements Runnable {
         if (tapis.size()==0) return true;
         p = tapis.get(0);
 
-        if (carte.estCouleur(p)) { // si mÃªme couleur
+        if (carte.estCouleur(p)) { // si même couleur
             if ( p.estCouleur(atout)) { // si atout demandé
                 return verifieAtoutJouePar( lui, carte);
             } else return true;
 
-        } else { // ! mÃªme couleur
+        } else { // ! même couleur
             if ( p.estCouleur(atout)) { // si atout demandé
                     if (  lui.main.contient(atout)) return false;
                     else return verifieDefausse(lui, carte);
-            } else { // ! mÃªme couleur, ! atout demandé
+            } else { // ! même couleur, ! atout demandé
                 if ( lui.main.contient(p.getCouleur())) return false;
 
                 if ( carte.estCouleur(atout)) {
@@ -770,7 +770,7 @@ public class RegleBeloteOld implements Runnable {
         graphic_listener.lockRead();
     }
 
-    /** Demande la fin de la partie, en demandant aussi Ã  l'utilisateur si 'verif' */
+    /** Demande la fin de la partie, en demandant aussi à l'utilisateur si 'verif' */
     public void demandeLaFinDeLaPartie(boolean verif) {
         if ( verif )
             if ((graphic_listener != null) && graphic_listener.verifyEndOfGame())
@@ -785,17 +785,17 @@ public class RegleBeloteOld implements Runnable {
         return joueurCourant;
     }
 
-    /* Retourne les cartes jouées Ã  ce tour sur le tapis */
+    /* Retourne les cartes jouées à ce tour sur le tapis */
     public PileDeCarte getTapis() {
         return tapis;
     }
 
-    /** Retourne le joueur qui Ã  distribué les carte de la partie en cours */
+    /** Retourne le joueur qui à distribué les carte de la partie en cours */
     public JoueurBelote getJoueurQuiDistribue() {
         return joueurQuiDistribue;
     }
 
-    /** Retourne le joueur qui Ã  pris au cours de la partie actuelle */
+    /** Retourne le joueur qui à pris au cours de la partie actuelle */
     public JoueurBelote getQuiAPris() {
         if ( (intEtatDuJeu == ETAT_FINPARTIE ) ||
              (intEtatDuJeu == ETAT_JOUE ) ||
@@ -805,7 +805,7 @@ public class RegleBeloteOld implements Runnable {
         else return null;
     }
 
-    /** Retourne la couleur choisie Ã  l'atout pour cette partie */
+    /** Retourne la couleur choisie à l'atout pour cette partie */
     public CouleurCarte getCouleurAtout() {
         if ((intEtatDuJeu == ETAT_ATOUT1) || (intEtatDuJeu == ETAT_ATOUT2)) return null;
         return atout;
@@ -823,7 +823,7 @@ public class RegleBeloteOld implements Runnable {
         return analyseur;
     }
 
-    /** Retourne le joueur qui a commencé le premier Ã  ce tour */
+    /** Retourne le joueur qui a commencé le premier à ce tour */
     public JoueurBelote getJoueurQuiCommence() {
         return joueurQuiCommence;
     }
@@ -887,14 +887,14 @@ public class RegleBeloteOld implements Runnable {
     }
 
 
-    /** Pour gÃ¨rer les annonces */
+    /** Pour gérer les annonces */
     private void verifieLesAnnonces() {
 
         return;
 
         // TODO: voir si il faut finir le mode avec les annonces...
-        /* seul l'annonce la plus forte peut Ãªtre annoncée.
-           elle peut Ãªtre découverte au deuxiÃ¨me tour si un des adversaires le demandent
+        /* seul l'annonce la plus forte peut être annoncée.
+           elle peut être découverte au deuxiéme tour si un des adversaires le demandent
          * l'annonce se rajoute au total des points de la partie donc au 152+10
          
         boolean cartes[][];
@@ -965,7 +965,7 @@ public class RegleBeloteOld implements Runnable {
 */
     }
 
-    /** Renvoie le 'listener' graphique associé Ã  cette partie */
+    /** Renvoie le 'listener' graphique associé à cette partie */
     public AnalyseurInterfaceGraphique getGraphicListener() {
         return graphic_listener;
     }
@@ -993,7 +993,7 @@ public class RegleBeloteOld implements Runnable {
         if ( joueurQuiCommence == j ) joueurQuiCommence = remplacant;
         if ( joueurQuiDistribue == j ) joueurQuiDistribue = remplacant;
         if ( joueurQuiPrend == j ) joueurQuiPrend = remplacant;
-        // TODO: vérifier oÃ¹ en est la partie cas lÃ  c'est quand mÃªme pas cool...
+        // TODO: vérifier où en est la partie cas là c'est quand même pas cool...
     }
 
     boolean synchroReseauOk;
@@ -1032,7 +1032,7 @@ public class RegleBeloteOld implements Runnable {
                 public void run() {
                     JOptionPane.showMessageDialog(null, "Le joueur " + j.nom + 
                             " annonce un carré de " + valeurCarre.toString() + ".\n" +
-                            "Ajoutant " + pointsAnnonces + " Ã  son équipe.");
+                            "Ajoutant " + pointsAnnonces + " à son équipe.");
                 }
             });
         } catch (InterruptedException ex) {

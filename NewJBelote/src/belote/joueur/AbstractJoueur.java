@@ -307,4 +307,21 @@ public abstract class AbstractJoueur implements IJoueurBelote {
 	public int getSizeTas() {
 		return tas.size();
 	}
+	@Override
+	public void setJoueurQuiCommence(IJoueurBelote joueurQuiCommence) {
+		this.joueurQuiCommence = joueurQuiCommence;
+	}
+	
+	protected Carte getCarteJoueePar(IJoueurBelote j) {
+		AbstractJoueur temp = this;
+		while(temp != j && temp != joueurQuiCommence) {
+			temp = temp.precedent;
+		}
+		if(temp == j) {
+			return temp.dernierCarteJoue;
+		}
+		else {
+			return null;
+		}
+	}
 }
