@@ -33,7 +33,7 @@ import java.util.HashMap;
  * Analyse et compte les cartes, réponds aux questions des joueurs IA sans tricher.
  * @author Clément
  */
-public class AnalyseurDeJeu {
+public class AnalyseurDeJeuOld {
 
     RegleBelote regle;
 
@@ -49,7 +49,7 @@ public class AnalyseurDeJeu {
     /* Liste des joueurs qui n'ont plus d'atout */
     boolean[] nAPlusDAtout;
 
-    public AnalyseurDeJeu( RegleBelote regle0) {
+    public AnalyseurDeJeuOld( RegleBelote regle0) {
         regle = regle0;
 
         copieJeuDeCarte = (PileDeCarte)regle.jeu.clone();

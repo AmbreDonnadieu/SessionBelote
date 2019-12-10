@@ -22,6 +22,7 @@
 
 package belote;
 
+import belote.joueur.IJoueurBelote;
 import cartes.Carte;
 import cartes.CouleurCarte;
 
@@ -48,9 +49,9 @@ public class BeloteEvent {
     public int value;
     public Carte card;
     public CouleurCarte color;
-    public JoueurBelote from;
+    public IJoueurBelote from;
 
-    public BeloteEvent(int type, JoueurBelote from, int value, CouleurCarte vCouleur, Carte vCarte) {
+    public BeloteEvent(int type, IJoueurBelote from, int value, CouleurCarte vCouleur, Carte vCarte) {
         this.value = value;
         this.type  = type;
         this.from  = from;

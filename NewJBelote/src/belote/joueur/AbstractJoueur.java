@@ -29,6 +29,9 @@ public abstract class AbstractJoueur implements IJoueurBelote {
     protected int ordre;
     /** Utilisé par la REgleBelote pour savoir qui a gagné la partie et la manche */
     public int pointsTotaux, nbPerdues, nbPrises, nbCapot, pointsTotaux2;
+    protected IJoueurBelote quiAPris;
+    protected Carte dernierCarteJoue;
+    protected IJoueurBelote joueurQuiCommence;
 
     /*@Override
     public IJoueurBelote clone() {

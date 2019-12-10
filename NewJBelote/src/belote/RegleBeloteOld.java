@@ -30,7 +30,7 @@ import javax.swing.JOptionPane;
  * GÃ¨re une suite de partie de belote
  * @author Clément
  */
-public class RegleBelote implements Runnable {
+public class RegleBeloteOld implements Runnable {
 
     public static final int ETAT_RIEN = 0;
     public static final int ETAT_DISTRIBUE1 = 1;
@@ -98,7 +98,7 @@ public class RegleBelote implements Runnable {
     public int nbParties, nbManches, nbRefus, maxManches = 10000;
 
     /* Crée une partie réseau avec ces quatre joueurs placé dans le sens horaire en commencant par le Nord. */
-    public RegleBelote( PileDeCarte avecCeJeu, JoueurBelote[] quatre_joueurs, int quiCommence) {
+    public RegleBeloteOld( PileDeCarte avecCeJeu, JoueurBelote[] quatre_joueurs, int quiCommence) {
         int i;
 
         jeu = avecCeJeu;
@@ -127,7 +127,7 @@ public class RegleBelote implements Runnable {
     }
 
     /* Crée une partie locale composé de 3 joueur ordinateurs et d'un 'humain' placé au SUD du tapis */
-    public RegleBelote( PileDeCarte avecCeJeu, JoueurBelote humain) {
+    public RegleBeloteOld( PileDeCarte avecCeJeu, JoueurBelote humain) {
         int i;
 
         jeu = avecCeJeu;

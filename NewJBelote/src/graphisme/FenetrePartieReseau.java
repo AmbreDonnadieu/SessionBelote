@@ -29,6 +29,7 @@ import belote.JoueurReseau;
 import belote.RegleBelote;
 import belote.BeloteEvent;
 import belote.RegleBeloteListener;
+import belote.joueur.IJoueurBelote;
 import cartes.PileDeCarte;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -739,7 +740,7 @@ public class FenetrePartieReseau extends javax.swing.JFrame implements TableMode
         return PileDeCarte.decode( r);
     }
 
-    public String getActionOf(JoueurBelote me, int phaseDeJeu) {
+    public String getActionOf(IJoueurBelote me, int phaseDeJeu) {
         String r;
         String[] l;
         int pos = getJoueurReseau(me);
@@ -774,7 +775,7 @@ public class FenetrePartieReseau extends javax.swing.JFrame implements TableMode
         } while ( (pasDePartie || partieEnCours) && ((l.length==0) || (l[0].length() == 0) || l[0].startsWith("ERROR")));
 
         if ( ! partieEnCours ) return null;
-        if ( l.length > 1 ) fenetreDeChat.addChat( "<" + me.nom + "> dit : " + l[1]);
+        if ( l.length > 1 ) fenetreDeChat.addChat( "<" + me.getNom() + "> dit : " + l[1]);
         return l[0];
     }
 
@@ -913,7 +914,7 @@ public class FenetrePartieReseau extends javax.swing.JFrame implements TableMode
 
 
     /** Retourne le joueurReseau correspondant au joueur belote */
-    int getJoueurReseau( JoueurBelote j) {
+    int getJoueurReseau( IJoueurBelote j) {
         for ( int i = 0; i < 4; i ++)
             if ( ( joueurs[i] != null ) && (joueurs[i].joueur == j))
                 return i;

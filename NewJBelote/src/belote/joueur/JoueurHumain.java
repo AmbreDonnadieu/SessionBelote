@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 import belote.RegleBelote;
+import belote.RegleBeloteInterfaceGraphique;
 import cartes.Carte;
 import cartes.CouleurCarte;
 import cartes.PileDeCarte;
@@ -16,6 +17,8 @@ import graphisme.TapisDeBelote;
 public class JoueurHumain extends AbstractJoueur {
 
 	TapisDeBelote tapis;
+	RegleBeloteInterfaceGraphique graphic_listener;
+	
 	public JoueurHumain(String nom0, int ordre0) {
 		super(nom0, ordre0);
 		// TODO Auto-generated constructor stub
@@ -23,10 +26,11 @@ public class JoueurHumain extends AbstractJoueur {
 	
     PileDeCarte nonTriees;
 
-    public JoueurHumain(RegleBelote regle, String nom, int ordre, TapisDeBelote tapis0) {
+    public JoueurHumain(RegleBelote regle, String nom, int ordre, TapisDeBelote tapis0, RegleBeloteInterfaceGraphique graphic_listener) {
         super(nom, ordre);
         tapis = tapis0;
         nonTriees = new PileDeCarte();
+        this.graphic_listener=graphic_listener;
     }
 
     public void setTapis( TapisDeBelote t) {
@@ -43,7 +47,7 @@ public class JoueurHumain extends AbstractJoueur {
         do {
             if ( tapis.playWithMouse) c = tapis.joueCarte(carteEnMain);
             else {
-                regle.graphic_listener.unlockRead();
+                graphic_listener.unlockRead();
                 try {
                     SwingUtilities.invokeAndWait(new Runnable() {
                         @Override
@@ -58,7 +62,7 @@ public class JoueurHumain extends AbstractJoueur {
                 } catch (InterruptedException ex) { }
                 catch (InvocationTargetException ex) { }
                 tapis.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                regle.graphic_listener.lockRead();
+                graphic_listener.lockRead();
                 if ( carteAJouer == null) tapis.playWithMouse = true;
                 c = carteAJouer;
             }
@@ -85,7 +89,7 @@ public class JoueurHumain extends AbstractJoueur {
         moi = this;
 
         tapis.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        regle.graphic_listener.unlockRead();
+        graphic_listener.unlockRead();
         if ( tapis.playWithMouse) {
             PileDeCarte p = carteEnMain.deCouleur(gestionnaireCarte.getTapis().get(0).getCouleur());
             p.add( gestionnaireCarte.getTapis().get(0));
@@ -99,8 +103,8 @@ public class JoueurHumain extends AbstractJoueur {
                 @Override
                 public void run() {
                     retourDialog = JOptionPane.showConfirmDialog(tapis,
-                        ((regle.getJoueurQuiCommence()==moi)?"Vous allez commencer.\n":
-                        "Le joueur "+regle.getJoueurQuiCommence().getNom()+" commencera.\n") +
+                        ((joueurQuiCommence==moi)?"Vous allez commencer.\n":
+                        "Le joueur "+joueurQuiCommence.getNom()+" commencera.\n") +
                         "Voulez-vous prendre " + (atout.getValeur().equals(ValeureCarte.CARD_D) ? "la " :
                             atout.getValeur().equals(ValeureCarte.CARD_AS) ? "l'" : "le ") +
                             atout.getValeur().toLongString() + " de " + atout.getCouleur().toString() +
@@ -110,7 +114,7 @@ public class JoueurHumain extends AbstractJoueur {
         } catch (InterruptedException ex) { } 
           catch (InvocationTargetException ex) { }
         
-        regle.graphic_listener.lockRead();
+        graphic_listener.lockRead();
         tapis.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         return retourDialog == JOptionPane.YES_OPTION;
     }
@@ -120,11 +124,11 @@ public class JoueurHumain extends AbstractJoueur {
     @Override
     public CouleurCarte getChoixAtout2(CouleurCarte sauf) {
 
-        regle.graphic_listener.unlockRead();
+        graphic_listener.unlockRead();
         tapis.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         if ( tapis.playWithMouse) {
-            Carte c = tapis.joueCarte(carteEnMain.saufCouleur(regle.getTapis().get(0).getCouleur()));
-            regle.graphic_listener.lockRead();
+            Carte c = tapis.joueCarte(carteEnMain.saufCouleur(gestionnaireCarte.getTapis().get(0).getCouleur()));
+            graphic_listener.lockRead();
             tapis.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             return c==null ? null : c.getCouleur();
         } else {
@@ -134,8 +138,8 @@ public class JoueurHumain extends AbstractJoueur {
                     public void run() {
                         retourCouleurDialog =
                                 (CouleurCarte)JOptionPane.showInputDialog(tapis,
-                                        ((regle.getJoueurQuiCommence()==moi)?"Vous allez commencer.\n":
-                                            "Le joueur "+regle.getJoueurQuiCommence().getNom()+
+                                        ((joueurQuiCommence==moi)?"Vous allez commencer.\n":
+                                            "Le joueur "+joueurQuiCommence.getNom()+
                                             " commencera.\n") + "Voulez-vous choisir une autre couleur ?",
                                             "Votre choix ?", JOptionPane.QUESTION_MESSAGE,
                                             null, CouleurCarte.COULEURS, null);
@@ -144,7 +148,7 @@ public class JoueurHumain extends AbstractJoueur {
             } catch (InterruptedException ex) { }
             catch (InvocationTargetException ex) { }
             tapis.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            regle.graphic_listener.lockRead();
+            graphic_listener.lockRead();
             return retourCouleurDialog;
 
         }

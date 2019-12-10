@@ -1,5 +1,6 @@
 package belote;
 
+import belote.joueur.IJoueurBelote;
 import cartes.Carte;
 import cartes.CouleurCarte;
 import cartes.PileDeCarte;
@@ -63,9 +64,10 @@ public class RegleTemp {
     }
 	
     /** Vérifie que le joueur 'lui' peut jouer cette 'carte' */
-    public boolean ilPeutJouerCetteCarte(PileDeCarte tapis, JoueurBelote lui, Carte carte) {
+    public boolean ilPeutJouerCetteCarte(PileDeCarte tapis, IJoueurBelote lui, Carte carte) {
 
         Carte p, c;
+        PileDeCarte saMain = lui.getMain();
         if (tapis.size()==0) return true;
         p = tapis.get(0);
 
@@ -76,13 +78,13 @@ public class RegleTemp {
 
         } else { // ! même couleur
             if ( p.estCouleur(couleurAtout)) { // si atout demandé
-                    if (  lui.main.contient(couleurAtout)) return false;
+                    if (  lui.getMain().contient(couleurAtout)) return false;
                     else return verifieDefausse(tapis, lui, carte);
             } else { // ! même couleur, ! atout demandé
-                if ( lui.main.contient(p.getCouleur())) return false;
+                if ( saMain.contient(p.getCouleur())) return false;
 
                 if ( carte.estCouleur(couleurAtout)) {
-                    if ( lui.main.contient(p.getCouleur())) return false;
+                    if ( saMain.contient(p.getCouleur())) return false;
                     else return verifieAtoutJouePar(tapis, lui, carte);
                 } else { // il devrait couper mais ne l'a pas fait
 
@@ -93,12 +95,12 @@ public class RegleTemp {
     }
     
     /** Vérifie que le joueur 'lui' peut jouer cette atout 'carte' */
-    private boolean verifieAtoutJouePar(PileDeCarte tapis, JoueurBelote lui, Carte carte) {
+    private boolean verifieAtoutJouePar(PileDeCarte tapis, IJoueurBelote lui, Carte carte) {
         Carte m = GestionnaireCartesLecture.meilleurCarteDansA(tapis, couleurAtout);
 
         if ( GestionnaireCartesLecture.positionDe(carte) > GestionnaireCartesLecture.positionDe(m)) return true;
         else {
-            carte = GestionnaireCartesLecture.meilleurCarteDansA(lui.main, couleurAtout);
+            carte = GestionnaireCartesLecture.meilleurCarteDansA(lui.getMain(), couleurAtout);
             if ( carte == null) return true;
             if ( GestionnaireCartesLecture.positionDe(carte) < GestionnaireCartesLecture.positionDe(m)) return true;
         }
@@ -106,15 +108,15 @@ public class RegleTemp {
     }
     
     /** Vérifie que le joueur a le droit de ne pas couper */
-    private boolean verifieDefausse(PileDeCarte tapis, JoueurBelote lui, Carte carte) {
-
-         if ( ! lui.main.contient(couleurAtout)) return true;
+    private boolean verifieDefausse(PileDeCarte tapis, IJoueurBelote lui, Carte carte) {
+    	PileDeCarte saMain = lui.getMain();
+         if ( ! saMain.contient(couleurAtout)) return true;
         // son partenaire est il maitre ?
         if ( tapis.size()>=2)
             if ( GestionnaireCartesLecture.meilleurCarte(tapis).equals(tapis.get(tapis.size()-2)))
                 return true;
 
-        if ( ! lui.main.contient(couleurAtout)) return true;
+        if ( ! saMain.contient(couleurAtout)) return true;
         return false;
     }
 }

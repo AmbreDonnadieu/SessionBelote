@@ -4,7 +4,7 @@ import cartes.Carte;
 import cartes.CouleurCarte;
 import graphisme.FenetrePartieReseau;
 
-public class JoueurReseau extends AbstractJoueur {
+public class JoueurReseau extends JoueurIA {
 	
     FenetrePartieReseau reseau;
 
@@ -75,11 +75,11 @@ public class JoueurReseau extends AbstractJoueur {
     Carte getCarte( int face, int color) {
         Carte r = null;
         
-        for ( Carte c : main)
+        for ( Carte c : carteEnMain)
             if ( (c.getCouleur().toInt()==color) && (c.getValeur().toInt()==face)) 
                 r = c;
 
-        main.remove(r);
+        carteEnMain.remove(r);
         return r;
     }
 

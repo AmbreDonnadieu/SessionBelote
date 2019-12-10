@@ -72,7 +72,7 @@ public class JoueurIA extends AbstractJoueur {
 		}
 
 		if ( (RegleBelote.JOUEUR_EST == ordre) || (RegleBelote.JOUEUR_OUEST == ordre))
-			if ( (regle.getJoueurQuiCommence() == this) && (tour==1) )
+			if ( (joueurQuiCommence == this) && (tour==1) )
 				force += 1;
 
 		if ( aRoi && aDame)
@@ -140,7 +140,7 @@ public class JoueurIA extends AbstractJoueur {
 					if ( ! gestionnaireCarte.estMaitrePourPlusTard(carte))
 
 						// Cherche ‡ ne pas se faire manger un gros atout, mais ‡ faire tomber les autres
-						if ((regle.getQuiAPris()==this) &&
+						if ((quiAPris==this) &&
 								(gestionnaireCarte.nombreDeCartesNonJoueesPlusForteQue(carte)>0) &&
 								(regle.pointsDe(carte)>=10))
 							if ( donneUneCarteMaitre() != null)
@@ -164,7 +164,7 @@ public class JoueurIA extends AbstractJoueur {
 					if ( jAiUneCarteMaitreA( couleurDemandee))
 						carte = donneUneCarteMaitreA( couleurDemandee);
 					else
-						if ( gestionnaireCarte.estMaitreTapis(regle.getCarteJoueePar(suivant.suivant)))
+						if ( gestionnaireCarte.estMaitreTapis(suivant.suivant.dernierCarteJoue))
 							carte = donneUneGrosseCarteA(couleurDemandee);
 						else
 							carte = donneUnePetiteCarteA( couleurDemandee);
@@ -172,20 +172,20 @@ public class JoueurIA extends AbstractJoueur {
 					if ( onEstMaitre() ) {
 
 						if ( ((combienOntJoues()==2) && ! ceJoueurCoupeA(suivant, couleurDemandee) &&
-								gestionnaireCarte.estMaitreTapis(regle.getCarteJoueePar(precedent.precedent))) ||
+								gestionnaireCarte.estMaitreTapis(precedent.precedent.dernierCarteJoue)) ||
 								(combienOntJoues()==3))
 							carte = donneLaGrosseDefausse();
 						else
 							if ( onAPris()) carte = donneUneQuiFaitUneCoupe();
 							else
 								if ( monPartenaireSeraMaitre() && ! ceJoueurCoupeA(suivant, couleurDemandee) &&
-										(gestionnaireCarte.nombreDeCartesJoueesA(couleurDemandee)==regle.tapis.nombreDe(couleurDemandee)))
+										(gestionnaireCarte.nombreDeCartesJoueesA(couleurDemandee)==gestionnaireCarte.getTapis().nombreDe(couleurDemandee)))
 									carte = donneLaGrosseDefausse();
 								else
 									carte = donneUneQuiFaitUneCoupe(); // Joue la petite d√©fausse
 					} else
 						if ( jAiDeLaCouleur(couleurAtout))
-							if ( regle.getQuiAPris()==this)
+							if ( quiAPris==this)
 								carte = donneMeilleurAtoutNonMaitre(); // il faut couper petit si pas sur
 								else
 									if ( monPartenaireSeraMaitre() && ! ceJoueurCoupeA(suivant, couleurDemandee))
@@ -253,8 +253,8 @@ public class JoueurIA extends AbstractJoueur {
 	}
 
 	private boolean onAPris() {
-		return regle.getQuiAPris().equals(this) ||
-				regle.getQuiAPris().getSuivant().getSuivant().equals(this);
+		return quiAPris.equals(this) ||
+				quiAPris.getSuivant().getSuivant().equals(this);
 	}
 
 	private boolean ilOntDesAtouts() {
@@ -396,12 +396,12 @@ public class JoueurIA extends AbstractJoueur {
 	}
 
 	private int combienOntJoues() {
-		return regle.getTapis().size();
+		return gestionnaireCarte.getTapis().size();
 	}
 
 	private Carte donneMiniAtout() {
 		Carte ok = null, pire = null;
-		Carte mini = gestionnaireCarte.meilleurCarteDansA(regle.getTapis(), regle.atout);
+		Carte mini = gestionnaireCarte.meilleurCarteDansA(gestionnaireCarte.getTapis(),atout);
 
 		for ( Carte c : carteEnMain)
 			if ( c.getCouleur().equals(regle.getCouleurAtout())) {
@@ -465,7 +465,7 @@ public class JoueurIA extends AbstractJoueur {
 
 	/** Retourne true si la carte jouee par mon partenaire sera maitre */
 	private boolean monPartenaireSeraMaitre() {
-		Carte c = regle.getCarteJoueePar(suivant.suivant);
+		Carte c = suivant.suivant.dernierCarteJoue;
 		if ( c == null) return false;
 
 		if ( gestionnaireCarte.estMaitreTapis(c))
@@ -475,9 +475,9 @@ public class JoueurIA extends AbstractJoueur {
 				if ( c.getCouleur().equals(gestionnaireCarte.getCouleurDemandee())) {
 					switch ( combienOntJoues()) {
 					case 3: return true;
-					case 2: return onEstMaitre() && (gestionnaireCarte.estMaitrePourPlusTard(
-							regle.getCarteJoueePar(suivant.suivant)) &&
-							! analyseur.nAPlusDAtout[suivant.ordre]);
+					case 2: return onEstMaitre() 
+							&& (gestionnaireCarte.estMaitrePourPlusTard(suivant.suivant.dernierCarteJoue) 
+							&& !analyseur.nAPlusDAtout[suivant.ordre]);
 					default: return false;
 					}
 				} else return false;
@@ -560,7 +560,7 @@ public class JoueurIA extends AbstractJoueur {
 			meilleur = null;
 			recommence = false;
 			for ( Carte c : carteEnMain.deCouleur(regle.getCouleurAtout()))
-				if ( (c == donneCarteJusteDessous(ok, false) && regle.ilPeutJouerCetteCarte(this, c))) {
+				if ( (c == donneCarteJusteDessous(ok, false) && regle.ilPeutJouerCetteCarte(gestionnaireCarte.getTapis(),this, c))) {
 					ok = c;
 					recommence = true;
 					break;
