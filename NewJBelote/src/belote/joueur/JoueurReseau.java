@@ -89,5 +89,5 @@ public class JoueurReseau extends JoueurIA {
         carteEnMain.remove(r);
         return r;
     }
-
+    
 }

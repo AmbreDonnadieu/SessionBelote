@@ -9,6 +9,21 @@ import cartes.ValeureCarte;
 public class RegleTemp {
 
 	CouleurCarte couleurAtout;
+	private boolean partieEnCours;
+	private boolean arretPartieDemande;
+
+	public void setPartieEnCours(boolean partieEnCours) {
+		this.partieEnCours = partieEnCours;
+	}
+
+	public void setArretPartieDemande(boolean arretPartieDemande) {
+		this.arretPartieDemande = arretPartieDemande;
+	}
+	
+	/** Est-ce la fin de la partie ? */
+	public boolean getEndOfGame() {
+		return ! partieEnCours || arretPartieDemande;
+	}
 
 	public CouleurCarte getCouleurAtout() {
 		return couleurAtout;

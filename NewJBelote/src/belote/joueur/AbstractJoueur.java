@@ -27,7 +27,7 @@ public abstract class AbstractJoueur implements IJoueurBelote {
 	protected int ordre;
 	/** Utilisé par la REgleBelote pour savoir qui a gagné la partie et la manche */
 	public int pointsTotaux, nbPerdues, nbPrises, nbCapot, pointsTotaux2;
-	protected AbstractJoueur quiAPris;
+	protected IJoueurBelote quiAPris;
 	protected Carte dernierCarteJoue;
 	protected IJoueurBelote joueurQuiCommence;
 	private Set<CouleurCarte> naPlusDe, aCouleur;
@@ -62,8 +62,14 @@ public abstract class AbstractJoueur implements IJoueurBelote {
 	/** Donne les joueurs précédent et suivant */
 	@Override
 	public void setEntreLesJoueurs( IJoueurBelote precedent0, IJoueurBelote suivant0 ) {
-		if ( precedent0 != null )  precedent = (AbstractJoueur) precedent0;
-		if ( suivant0 != null )  suivant = (AbstractJoueur) suivant0;
+		if ( precedent0 != null ) {
+			precedent = (AbstractJoueur) precedent0;
+			precedent.suivant = this;
+		}
+		if ( suivant0 != null ) {
+			suivant = (AbstractJoueur) suivant0;
+			suivant.precedent = this;
+		}
 	}
 
 	/** Définit la règle avec laquelle il va jouer */
@@ -219,8 +225,9 @@ public abstract class AbstractJoueur implements IJoueurBelote {
 		return ! (suivant.naPlusDe.contains(couleur) || precedent.naPlusDe.contains(couleur));
 	}
 
-	protected boolean ceJoueurNaPlusDe(AbstractJoueur j, CouleurCarte couleur) {
-		return j.naPlusDe.contains(couleur);
+	protected boolean ceJoueurNaPlusDe(IJoueurBelote j, CouleurCarte couleur) {
+		AbstractJoueur temp = (AbstractJoueur) j;
+		return temp.naPlusDe.contains(couleur);
 	}
 
 	@Override
@@ -323,5 +330,13 @@ public abstract class AbstractJoueur implements IJoueurBelote {
 		else {
 			return null;
 		}
+	}
+	@Override
+	public void setQuiAPris(IJoueurBelote quiAPris) {
+		this.quiAPris = quiAPris;
+	}
+	@Override
+	public void setDernierCarteJoue(Carte dernierCarteJoue) {
+		this.dernierCarteJoue = dernierCarteJoue;
 	}
 }

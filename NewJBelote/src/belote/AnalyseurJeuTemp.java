@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import javax.swing.JOptionPane;
 
+import belote.joueur.AbstractJoueur;
 import belote.joueur.IJoueurBelote;
 import belote.joueur.JoueurHumain;
 import belote.joueur.JoueurIA;
@@ -91,6 +92,8 @@ public class AnalyseurJeuTemp implements Runnable {
 			naPlusDe.put(c, new ArrayList<IJoueurBelote>());
 	}
 
+
+	
 	void nouvellePartie() {
 		for ( int i = 0; i < 4; i++) {
 			nAPlusDAtout[i] = false;
@@ -151,12 +154,11 @@ public class AnalyseurJeuTemp implements Runnable {
 		}
 
 		for ( i = 0; i< 4 ; i++)
-			joueurs.get(i).setEntreLesJoueurs(
-					joueurs.get((i+3)%4), joueurs.get((i+1)%4));
+			joueurs.get(i).setEntreLesJoueurs(joueurs.get((i+3)%4), joueurs.get((i+1)%4));
 
 		joueurQuiDistribue = joueurs.get(quiCommence).getPrecedent(); // pour distribuer
 		joueurCourant = joueurQuiDistribue.getPrecedent(); // pour couper le jeu
-		partieEnCours = false;
+		setPartieEnCours(false);
 		setGameSpeed(15);
 		try { changeEtat(ETAT_RIEN); } catch (Exception ex) { }
 	}
@@ -187,8 +189,7 @@ public class AnalyseurJeuTemp implements Runnable {
 
 
 		for ( i = 0; i< 4 ; i++)
-			joueurs.get(i).setEntreLesJoueurs(
-					joueurs.get((i+3)%4), joueurs.get((i+1)%4));
+			joueurs.get(i).setEntreLesJoueurs(joueurs.get((i+3)%4), joueurs.get((i+1)%4));
 
 		joueurQuiDistribue = joueurCourant = joueurs.get(JOUEUR_EST);
 		joueurCourant = joueurQuiDistribue.getPrecedent();
@@ -202,7 +203,7 @@ public class AnalyseurJeuTemp implements Runnable {
 	        joueurs.get(3).setTas(p2);*/
 		for ( i = 0; i < 4; i++) joueurs.get(i).setTas(new PileDeCarte());
 
-		partieEnCours = false;
+		setPartieEnCours(false);
 		try { changeEtat(ETAT_RIEN); } catch (Exception ex) { }
 	}
 
@@ -259,8 +260,8 @@ public class AnalyseurJeuTemp implements Runnable {
 	@Override
 	public void run() {
 
-		arretPartieDemande = false;
-		partieEnCours = true;
+		setArretPartieDemande(false);
+		setPartieEnCours(true);
 		synchroReseau( joueurCourant);
 		graphic_listener.lockRead();
 
@@ -269,7 +270,8 @@ public class AnalyseurJeuTemp implements Runnable {
 			do {
 				nbParties++;
 				changeEtat(ETAT_COUPEJEU);
-				joueurQuiPrend = beloteEtRe = null;
+				beloteEtRe = null;
+				setJoueurQuiPrend(null);
 				nouvellePartie();
 
 
@@ -307,7 +309,7 @@ public class AnalyseurJeuTemp implements Runnable {
 					do {
 						if ( joueurCourant.getChoixAtout1( gestionnaireCartes.getTapis().get(0))) {
 							a = gestionnaireCartes.getTapis().get(0).getCouleur();
-							joueurQuiPrend = joueurCourant;
+							setJoueurQuiPrend(joueurCourant);
 
 						} else {
 							joueurCourant = joueurCourant.getSuivant();
@@ -336,7 +338,7 @@ public class AnalyseurJeuTemp implements Runnable {
 									graphic_listener.lockRead();
 									a = null;
 								} else
-									joueurQuiPrend = joueurCourant;
+									setJoueurQuiPrend(joueurCourant);
 							} else {
 
 								joueurCourant = joueurCourant.getSuivant();
@@ -574,7 +576,7 @@ public class AnalyseurJeuTemp implements Runnable {
 					graphic_listener.lockRead();
 					if ( ! confirmPlis && avecHumain) waitClick();
 
-					joueurQuiPrend = null;
+					setJoueurQuiPrend(null);
 
 					for (int i = 0; i < 4; i++) {
 						gestionnaireCartes.remettreCartesDansJeu(joueurCourant.rendTonTas());
@@ -609,7 +611,8 @@ public class AnalyseurJeuTemp implements Runnable {
 		}
 		gestionnaireCartes.remettreCartesDansJeu(gestionnaireCartes.getTapis()); gestionnaireCartes.getTapis().clear();
 
-		arretPartieDemande = partieEnCours = false;
+		setArretPartieDemande(false);
+		setPartieEnCours(false);
 		graphic_listener.endOfGame();
 		if ( listener != null)
 			listener.newBeloteEvent( new BeloteEvent(BeloteEvent.EV_QUIT, null, 0, null, null));
@@ -804,12 +807,9 @@ public class AnalyseurJeuTemp implements Runnable {
 
 	/** Demande la fin de la partie, en demandant aussi à l'utilisateur si 'verif' */
 	public void demandeLaFinDeLaPartie(boolean verif) {
-		if ( verif )
-			if ((graphic_listener != null) && graphic_listener.verifyEndOfGame())
-				arretPartieDemande = true;
-			else
+		if ( verif && !((graphic_listener != null) && graphic_listener.verifyEndOfGame()))
 				return;
-		arretPartieDemande = true;
+		setArretPartieDemande(true);
 	}
 
 	/** Retourne le joueur qui doit joueur maintenant */
@@ -934,12 +934,11 @@ public class AnalyseurJeuTemp implements Runnable {
 	public void changeJoueurPar(IJoueurBelote remplacant) {
 		IJoueurBelote j = joueurs.get(remplacant.getOrdre());
 		joueurs.set(remplacant.getOrdre(), remplacant);
-		remplacant.getSuivant().precedent = remplacant;
-		remplacant.precedent.suivant = remplacant;
+		remplacant.setEntreLesJoueurs(remplacant.getPrecedent(), remplacant.getSuivant());
 		if ( joueurCourant == j ) joueurCourant = remplacant;
 		if ( joueurQuiCommence == j ) joueurQuiCommence = remplacant;
 		if ( joueurQuiDistribue == j ) joueurQuiDistribue = remplacant;
-		if ( joueurQuiPrend == j ) joueurQuiPrend = remplacant;
+		if ( joueurQuiPrend == j ) setJoueurQuiPrend(remplacant);
 		// TODO: vérifier où en est la partie cas là c'est quand même pas cool...
 	}
 	
@@ -947,6 +946,13 @@ public class AnalyseurJeuTemp implements Runnable {
 		this.joueurQuiCommence = joueurQuiCommence;
 		for(IJoueurBelote j : joueurs) {
 			j.setJoueurQuiCommence(joueurQuiCommence);
+		}
+	}
+	
+	private void setJoueurQuiPrend(IJoueurBelote joueurQuiPrend) {
+		this.joueurQuiPrend = joueurQuiPrend;
+		for(IJoueurBelote j : joueurs) {
+			j.setQuiAPris(joueurQuiPrend);
 		}
 	}
 
@@ -978,6 +984,16 @@ public class AnalyseurJeuTemp implements Runnable {
 	public RegleTemp getRegle() {
 		// TODO Auto-generated method stub
 		return regle;
+	}
+	
+	public void setPartieEnCours(boolean partieEnCours) {
+		this.partieEnCours = partieEnCours;
+		regle.setPartieEnCours(partieEnCours);
+	}
+
+	public void setArretPartieDemande(boolean arretPartieDemande) {
+		this.arretPartieDemande = arretPartieDemande;
+		regle.setArretPartieDemande(arretPartieDemande);
 	}
 
 }

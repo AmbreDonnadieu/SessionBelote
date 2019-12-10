@@ -109,4 +109,8 @@ public interface IJoueurBelote {
 	int getSizeTas();
 
 	void setJoueurQuiCommence(IJoueurBelote joueurQuiCommence);
+
+	void setQuiAPris(IJoueurBelote quiAPris);
+
+	void setDernierCarteJoue(Carte dernierCarteJoue);
 }
