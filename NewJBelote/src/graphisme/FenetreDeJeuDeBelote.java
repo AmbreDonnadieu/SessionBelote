@@ -23,7 +23,8 @@
 package graphisme;
 
 import audio.JOrbisPlayer;
-import belote.JoueurBelote;
+import belote.joueur.IJoueurBelote;
+
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 /* Pour les sons Wav
@@ -394,12 +395,12 @@ public class FenetreDeJeuDeBelote extends javax.swing.JFrame {
         if ( jMenuItemNouveau.getText().startsWith("N"))
             tapis.nouvellePartie(null);
         else
-            tapis.getRegle().demandeLaFinDeLaPartie(true);
+            tapis.analyseur.demandeLaFinDeLaPartie(true);
     }//GEN-LAST:event_jMenuItemNouveauActionPerformed
 
     private void jMenuItemAfficheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAfficheActionPerformed
         if ( fenScore == null) {
-            fenScore = new FenetreScores( tapis.regle.statistique);
+            fenScore = new FenetreScores( tapis.analyseur.statistique);
         }
         
         fenScore.setVisible(false);
@@ -413,11 +414,11 @@ public class FenetreDeJeuDeBelote extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemQuitterActionPerformed
 
     private void jCheckBoxMenuItemConfirmPlisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItemConfirmPlisActionPerformed
-        tapis.regle.setConfirmMode( jCheckBoxMenuItemConfirmPlis.isSelected());
+        tapis.analyseur.setConfirmMode( jCheckBoxMenuItemConfirmPlis.isSelected());
     }//GEN-LAST:event_jCheckBoxMenuItemConfirmPlisActionPerformed
 
     private void jCheckBoxMenuItemConfirmBeloteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItemConfirmBeloteActionPerformed
-        tapis.regle.setConfirmBelote( jCheckBoxMenuItemConfirmBelote.isSelected());
+        tapis.analyseur.setConfirmBelote( jCheckBoxMenuItemConfirmBelote.isSelected());
     }//GEN-LAST:event_jCheckBoxMenuItemConfirmBeloteActionPerformed
 
     private void jCheckBoxMenuItemViewCardsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItemViewCardsActionPerformed
@@ -445,15 +446,15 @@ public class FenetreDeJeuDeBelote extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemCBig2ActionPerformed
 
     private void jMenuItemShowTakenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemShowTakenActionPerformed
-        if ( tapis.regle.cartePrise != null)
-            JOptionPane.showMessageDialog(this, "La carte prise était : " + tapis.regle.cartePrise.toLongString() +
-                                                "\n\nL'atout est : " + tapis.regle.getCouleurAtout() + "\n");
+        if ( tapis.analyseur.cartePrise != null)
+            JOptionPane.showMessageDialog(this, "La carte prise était : " + tapis.analyseur.cartePrise.toLongString() +
+                                                "\n\nL'atout est : " + tapis.analyseur.getCouleurAtout() + "\n");
     }//GEN-LAST:event_jMenuItemShowTakenActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        if ( tapis.regle.dernierPli != null) {
+        if ( tapis.analyseur.dernierPli != null) {
             String s = "";
-            for ( cartes.Carte c : tapis.regle.dernierPli)
+            for ( cartes.Carte c : tapis.analyseur.dernierPli)
                 s += c.toString() + "\n";
 
             JOptionPane.showMessageDialog(this, "Le dernier pli était : \n\n" + s + "\n");
@@ -461,7 +462,7 @@ public class FenetreDeJeuDeBelote extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jCheckBoxMenuItemWithAnnoncesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItemWithAnnoncesActionPerformed
-        tapis.regle.setAvecAnnonces( jCheckBoxMenuItemWithAnnonces.isSelected());
+        tapis.analyseur.setAvecAnnonces( jCheckBoxMenuItemWithAnnonces.isSelected());
     }//GEN-LAST:event_jCheckBoxMenuItemWithAnnoncesActionPerformed
 
     boolean audioFini = true;
@@ -527,30 +528,31 @@ public class FenetreDeJeuDeBelote extends javax.swing.JFrame {
     }
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        if ( tapis.regle.nbManches == 0) {
+        if ( tapis.analyseur.nbManches == 0) {
             JOptionPane.showMessageDialog(this, "Les statistiques sont disponibles à l'issue d'au moins une manche complète.", "Statistiques",
                     JOptionPane.INFORMATION_MESSAGE);
             return;
         }
 
-        String s = "Nombre de Manches : " + tapis.regle.nbManches +
-                   "\nNombre de parties : " + tapis.regle.nbParties +
-                   " (" + (tapis.regle.nbParties-tapis.regle.nbRefus) / tapis.regle.nbManches + " par manches" +
-                   ")\nNombre de parties non jouées : " + tapis.regle.nbRefus +
-                   " (" + prct(tapis.regle.nbParties, tapis.regle.nbRefus) + ")\n\n";
+        String s = "Nombre de Manches : " + tapis.analyseur.nbManches +
+                   "\nNombre de parties : " + tapis.analyseur.nbParties +
+                   " (" + (tapis.analyseur.nbParties-tapis.analyseur.nbRefus) / tapis.analyseur.nbManches + " par manches" +
+                   ")\nNombre de parties non jouées : " + tapis.analyseur.nbRefus +
+                   " (" + prct(tapis.analyseur.nbParties, tapis.analyseur.nbRefus) + ")\n\n";
         for ( int i = 0; i < 4; i++) {
-            JoueurBelote j = tapis.regle.getJoueur(i);
-            s += j.nom + ((j.nom.length()==3)?"    ":"") + " Total " + j.pointsTotaux2 +
-                        " Prise " + j.nbPrises + " (" +
-                            prct(tapis.regle.nbParties, j.nbPrises) +
-                         ") Perdues " + j.nbPerdues + "(" + prct(j.nbPrises, j.nbPerdues) +
-                         ") Capots " + j.nbCapot + " (" + prct(j.nbPrises, j.nbCapot) + ")\n";
+            IJoueurBelote j = tapis.analyseur.getJoueur(i);
+            String nom = j.getNom();
+            s += nom + ((nom.length()==3)?"    ":"") + " Total " + j.getPointsTotaux2() +
+                        " Prise " + j.getNbPrises() + " (" +
+                            prct(tapis.analyseur.nbParties, j.getNbPrises()) +
+                         ") Perdues " + j.getNbPerdues() + "(" + prct(j.getNbPrises(), j.getNbPerdues()) +
+                         ") Capots " + j.getNbCapot() + " (" + prct(j.getNbPrises(), j.getNbCapot()) + ")\n";
         }
         JOptionPane.showMessageDialog(this, s, "Statistiques des parties", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jCheckBoxMenuItemConfirmJeuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItemConfirmJeuActionPerformed
-        tapis.regle.setConfirmModeJeu( jCheckBoxMenuItemConfirmJeu.isSelected());
+        tapis.analyseur.setConfirmModeJeu( jCheckBoxMenuItemConfirmJeu.isSelected());
     }//GEN-LAST:event_jCheckBoxMenuItemConfirmJeuActionPerformed
 
     private void jMenuItemNetworkGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemNetworkGameActionPerformed
@@ -569,7 +571,7 @@ public class FenetreDeJeuDeBelote extends javax.swing.JFrame {
 
     private void jMenuItemGameSpeedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemGameSpeedActionPerformed
         String r = JOptionPane.showInputDialog(this, "Vitesse du jeu : ( 0=lent, 20=vitesse MAX )", "10");
-        tapis.regle.setGameSpeed(Integer.valueOf(r));
+        tapis.analyseur.setGameSpeed(Integer.valueOf(r));
     }//GEN-LAST:event_jMenuItemGameSpeedActionPerformed
 
     private void jCheckBoxMenuItemChatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItemChatActionPerformed
@@ -581,7 +583,7 @@ public class FenetreDeJeuDeBelote extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jCheckBoxMenuItemConfirmRebeloteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItemConfirmRebeloteActionPerformed
-        tapis.regle.setConfirmRebelote( jCheckBoxMenuItemConfirmRebelote.isSelected());
+        tapis.analyseur.setConfirmRebelote( jCheckBoxMenuItemConfirmRebelote.isSelected());
     }//GEN-LAST:event_jCheckBoxMenuItemConfirmRebeloteActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

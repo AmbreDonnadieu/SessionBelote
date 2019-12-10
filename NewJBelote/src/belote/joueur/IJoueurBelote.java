@@ -4,8 +4,6 @@ import java.awt.Component;
 import java.awt.Graphics;
 
 import belote.GestionnaireCartesLecture;
-import belote.JoueurBelote;
-import belote.RegleBelote;
 import belote.RegleTemp;
 import cartes.Carte;
 import cartes.CouleurCarte;
@@ -17,7 +15,7 @@ public interface IJoueurBelote {
 	void setOrdre(int pos);
 
 	/** Donne les joueurs précédent et suivant */
-	void setEntreLesJoueurs(AbstractJoueur precedent0, AbstractJoueur suivant0);
+	void setEntreLesJoueurs(IJoueurBelote precedent0, IJoueurBelote suivant0);
 
 	/** Définit la règle avec laquelle il va jouer */
 	void setRegle(RegleTemp regle0);
@@ -77,4 +75,18 @@ public interface IJoueurBelote {
 	public boolean getChoixAtout1(Carte atout0);
 	public CouleurCarte getChoixAtout2(CouleurCarte sauf);
 	public Carte joueUneCarte();
+	public void setNAPlusDe(CouleurCarte couleur);
+	public void nouvellePartie();
+
+	int getNbreDePoints();
+
+	int getPointsTotaux2();
+
+	int getNbCapot();
+
+	int getNbPrises();
+
+	int getNbPerdues();
+
+	int getPointsTotaux();
 }

@@ -20,4 +20,25 @@ public class GestionnaireCartesEcriture extends GestionnaireCartesLecture {
 	public void setTapis(PileDeCarte tapis) {
 		this.tapis = tapis;
 	}
+	
+	public void coupeJeuA(int pos) {
+		jeuDeCarte.coupeA(pos);
+	}
+	
+	public PileDeCarte distribueCartes(int nb) {
+		return jeuDeCarte.donneDesCartes(nb);
+	}
+	
+	public Carte distribueUneCarte() {
+		return jeuDeCarte.donneUneCarte();
+	}
+	
+	public void remettreCartesDansJeu(PileDeCarte p) {
+		jeuDeCarte.addAll(p);
+	}
+	
+	
+	public void remettreUneCarteDansJeu(Carte c) {
+		jeuDeCarte.add(c);
+	}
 }

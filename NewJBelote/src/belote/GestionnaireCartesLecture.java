@@ -1,5 +1,6 @@
 package belote;
 
+import belote.joueur.IJoueurBelote;
 import cartes.Carte;
 import cartes.CouleurCarte;
 import cartes.PileDeCarte;
@@ -9,7 +10,7 @@ public class GestionnaireCartesLecture {
 
 	static RegleTemp regle;
 	/* Les cartes jouées dans la partie */
-	protected PileDeCarte carteJouees, cartesNonJouees, copieJeuDeCarte;
+	protected PileDeCarte carteJouees, cartesNonJouees, jeuDeCarte;
 	protected PileDeCarte tapis;
 
 	public PileDeCarte getTapis() {
@@ -19,10 +20,14 @@ public class GestionnaireCartesLecture {
 	/* Nombre de cartes jouées par couleur */
 	int[] nombreJouees;
 
+	public PileDeCarte getJeuDeCarte() {
+		return jeuDeCarte;
+	}
+
 	public GestionnaireCartesLecture( RegleTemp regle0, PileDeCarte jeuCarte) {
 		regle = regle0;
 
-		copieJeuDeCarte = (PileDeCarte)jeuCarte.clone();
+		jeuDeCarte = (PileDeCarte)jeuCarte.clone();
 		cartesNonJouees = (PileDeCarte)jeuCarte.clone();
 
 		nombreJouees = new int[4];
@@ -109,8 +114,8 @@ public class GestionnaireCartesLecture {
 
 	/** Renvoie vrai si il reste des cartes à la couleur qui ne sont pas dans 
 	 *  la main du joueur */
-	boolean resteCartesNonTombeesAPour(CouleurCarte c, JoueurBelote j ) {
-		return ! (( nombreJouees[c.toInt()]+j.main.nombreDe(c)) == 8);
+	public boolean resteCartesNonTombeesAPour(CouleurCarte c, IJoueurBelote j ) {
+		return ! (( nombreJouees[c.toInt()]+j.getMain().nombreDe(c)) == 8);
 	}
 
 	/** Renvoie le nombre de cartes déjà jouées à la couleur */
@@ -124,7 +129,7 @@ public class GestionnaireCartesLecture {
 		}
 
 		carteJouees.clear();
-		cartesNonJouees = (PileDeCarte)copieJeuDeCarte.clone();
+		cartesNonJouees = (PileDeCarte)jeuDeCarte.clone();
 	}
 
 	/** Renvoie la position (mini 1) de la carte dans la couleur

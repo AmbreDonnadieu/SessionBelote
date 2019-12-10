@@ -6,8 +6,8 @@ import java.lang.reflect.InvocationTargetException;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
-import belote.RegleBelote;
-import belote.RegleBeloteInterfaceGraphique;
+import belote.AnalyseurInterfaceGraphique;
+import belote.RegleTemp;
 import cartes.Carte;
 import cartes.CouleurCarte;
 import cartes.PileDeCarte;
@@ -17,7 +17,7 @@ import graphisme.TapisDeBelote;
 public class JoueurHumain extends AbstractJoueur {
 
 	TapisDeBelote tapis;
-	RegleBeloteInterfaceGraphique graphic_listener;
+	AnalyseurInterfaceGraphique graphic_listener;
 	
 	public JoueurHumain(String nom0, int ordre0) {
 		super(nom0, ordre0);
@@ -26,7 +26,7 @@ public class JoueurHumain extends AbstractJoueur {
 	
     PileDeCarte nonTriees;
 
-    public JoueurHumain(RegleBelote regle, String nom, int ordre, TapisDeBelote tapis0, RegleBeloteInterfaceGraphique graphic_listener) {
+    public JoueurHumain(RegleTemp regle, String nom, int ordre, TapisDeBelote tapis0, AnalyseurInterfaceGraphique graphic_listener) {
         super(nom, ordre);
         tapis = tapis0;
         nonTriees = new PileDeCarte();
@@ -161,7 +161,7 @@ public class JoueurHumain extends AbstractJoueur {
         tapis.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         if ( tapis.playWithMouse) {
             do {
-                i = tapis.getRegle().getJeu().indexOf(tapis.joueCarte(tapis.getRegle().getJeu()));
+                i = gestionnaireCarte.getJeuDeCarte().indexOf(tapis.joueCarte(gestionnaireCarte.getJeuDeCarte()));
             } while ((i < 3) || (i>28));
             tapis.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             return i;

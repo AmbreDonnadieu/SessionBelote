@@ -4,8 +4,6 @@ import java.awt.Component;
 import java.awt.Graphics;
 
 import belote.GestionnaireCartesLecture;
-import belote.JoueurBelote;
-import belote.RegleBelote;
 import cartes.Carte;
 import cartes.CouleurCarte;
 import cartes.PileDeCarte;
@@ -258,8 +256,8 @@ public class JoueurIA extends AbstractJoueur {
 	}
 
 	private boolean ilOntDesAtouts() {
-		return analyseur.mesAdversairesOntEncoreDu(regle.getCouleurAtout(), this) &&
-				analyseur.resteCartesNonTombeesAPour(regle.getCouleurAtout(), this);
+		return mesAdversairesOntEncoreDu(regle.getCouleurAtout()) &&
+				resteCartesNonTombeesAPour(regle.getCouleurAtout());
 
 	}
 
@@ -279,9 +277,9 @@ public class JoueurIA extends AbstractJoueur {
 	}
 
 	private boolean estMaitrePourPlusTard( Carte c) {
-		if ( (regle.getCarteJoueePar(regle.joueurQuiPrend) == null) &&
-				(!analyseur.nAPlusDAtout[regle.joueurQuiPrend.getOrdre()]) &&
-				analyseur.naPlusDe.get(c.getCouleur()).contains(regle.joueurQuiPrend))
+		if ( (regle.getCarteJoueePar(quiAPris) == null) &&
+				(!ceJoueurNaPlusDe(quiAPris, regle.getCouleurAtout()) ) &&
+				ceJoueurNaPlusDe(quiAPris, c.getCouleur()) );
 			return false;
 
 		return ! lesToursProchainsSerontPourEux() && gestionnaireCarte.estMaitrePourPlusTard(c);
@@ -388,11 +386,11 @@ public class JoueurIA extends AbstractJoueur {
 	}
 
 	/** Dit si le joueur coupe à la couleur */
-	private boolean ceJoueurCoupeA(JoueurBelote j, CouleurCarte c) {
+	private boolean ceJoueurCoupeA(IJoueurBelote j, CouleurCarte couleur) {
 		return (regle.getCarteJoueePar(j)!=null) && 
-				gestionnaireCarte.resteCartesNonTombeesAPour(c,j) &&
-				! analyseur.nAPlusDAtout[j.ordre] &&
-				analyseur.naPlusDe.get(c).contains(j);
+				gestionnaireCarte.resteCartesNonTombeesAPour(couleur,j) &&
+				! ceJoueurNaPlusDe((AbstractJoueur) j, regle.getCouleurAtout()) &&
+				ceJoueurNaPlusDe((AbstractJoueur) j, couleur);
 	}
 
 	private int combienOntJoues() {
@@ -401,7 +399,7 @@ public class JoueurIA extends AbstractJoueur {
 
 	private Carte donneMiniAtout() {
 		Carte ok = null, pire = null;
-		Carte mini = gestionnaireCarte.meilleurCarteDansA(gestionnaireCarte.getTapis(),atout);
+		Carte mini = GestionnaireCartesLecture.meilleurCarteDansA(gestionnaireCarte.getTapis(),regle.getCouleurAtout());
 
 		for ( Carte c : carteEnMain)
 			if ( c.getCouleur().equals(regle.getCouleurAtout())) {
@@ -476,8 +474,8 @@ public class JoueurIA extends AbstractJoueur {
 					switch ( combienOntJoues()) {
 					case 3: return true;
 					case 2: return onEstMaitre() 
-							&& (gestionnaireCarte.estMaitrePourPlusTard(suivant.suivant.dernierCarteJoue) 
-							&& !analyseur.nAPlusDAtout[suivant.ordre]);
+							&& gestionnaireCarte.estMaitrePourPlusTard(suivant.suivant.dernierCarteJoue) 
+							&& !ceJoueurNaPlusDe(suivant, regle.getCouleurAtout());
 					default: return false;
 					}
 				} else return false;
@@ -540,8 +538,8 @@ public class JoueurIA extends AbstractJoueur {
 	/** Retourne VRAI si seulement un des deux adversaires possède autant
 	 *  d'atout que le nombre de tours restants */
 	private boolean lesToursProchainsSerontPourEux() {
-		return ((! analyseur.nAPlusDAtout[suivant.ordre])
-				^ (! analyseur.nAPlusDAtout[precedent.ordre]))
+		return ((!   ceJoueurNaPlusDe(suivant, regle.getCouleurAtout()) )
+				^ (!  ceJoueurNaPlusDe(suivant, regle.getCouleurAtout()) ))
 				&&
 				((carteEnMain.size()-1) <= gestionnaireCarte.combienIlResteDeCartesNonJoueesA(regle.getCouleurAtout()));
 	}

@@ -22,7 +22,6 @@
 
 package cartes;
 
-import belote.AnalyseurDeJeu;
 import belote.GestionnaireCartesLecture;
 
 import java.awt.Graphics;
@@ -192,36 +191,6 @@ public class PileDeCarte extends ArrayList<Carte> {
         } while ( ! ok);
     }
     
-    /** Trie cette pile de cartes */
-    public void sort( AnalyseurDeJeu gestionnaireCartes) {
-        // Tri à bule
-        boolean ok;
-        Carte c1, c2;
-        if ( ! contient( CouleurCarte.CARREAU) && contient( CouleurCarte.PIQUE) && contient( CouleurCarte.TREFLE)) {
-            CouleurCarte.positionTrie = triSansCarreau;
-        } else if ( ! contient( CouleurCarte.PIQUE) && contient( CouleurCarte.COEUR) && contient( CouleurCarte.CARREAU)) {
-            CouleurCarte.positionTrie = triSansPique;
-        } else {
-            CouleurCarte.positionTrie = triNormal;
-        }
-
-        do {
-            ok = true;
-            for ( int i = 0; i < size()-1; i++) {
-                c1=get(i);
-                c2=get(i+1);
-                if (((c1.col == c2.col) &&
-                     (gestionnaireCartes.positionDe(c1)>gestionnaireCartes.positionDe( c2))) ||
-                     (c1.col!=c2.col) && (c1.compareTo(c2)>0)) {
-                    ok = false;
-                    set(i, c2);
-                    set(i+1, c1);
-                    break;
-                }
-            }
-        } while ( ! ok);
-    }
-
     /** Renvoie une copie des cartes de 'couleur' contenus dans cette pile */
     public PileDeCarte deCouleur(CouleurCarte couleur) {
         PileDeCarte p = new PileDeCarte();

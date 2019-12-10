@@ -30,12 +30,12 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 
-public class JoueurHumain extends JoueurBelote {
+public class JoueurHumainOld extends JoueurBelote {
 
     TapisDeBelote tapis;
     PileDeCarte nonTriees;
 
-    public JoueurHumain(RegleBelote regle, String nom, int ordre, TapisDeBelote tapis0) {
+    public JoueurHumainOld(RegleBelote regle, String nom, int ordre, TapisDeBelote tapis0) {
         super(nom, ordre);
         tapis = tapis0;
         nonTriees = new PileDeCarte();

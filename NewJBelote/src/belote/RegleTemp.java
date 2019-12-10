@@ -57,7 +57,7 @@ public class RegleTemp {
         return p;
     }
 
-    private int compteLesPointsDe(PileDeCarte tas) {
+    public int compteLesPointsDe(PileDeCarte tas) {
         int p = 0;
         for ( Carte c : tas) p += pointsDe(c);
         return p;
@@ -66,7 +66,7 @@ public class RegleTemp {
     /** Vérifie que le joueur 'lui' peut jouer cette 'carte' */
     public boolean ilPeutJouerCetteCarte(PileDeCarte tapis, IJoueurBelote lui, Carte carte) {
 
-        Carte p, c;
+        Carte p;
         PileDeCarte saMain = lui.getMain();
         if (tapis.size()==0) return true;
         p = tapis.get(0);
@@ -119,4 +119,5 @@ public class RegleTemp {
         if ( ! saMain.contient(couleurAtout)) return true;
         return false;
     }
+    
 }

@@ -66,8 +66,8 @@ public class RegleBeloteOld implements Runnable {
     /** Le nombre de points par manches par défaut */
     public static int POINTS_MANCHE = 1000;
 
-    RegleBeloteInterfaceGraphique graphic_listener;
-    RegleBeloteListener listener;
+    AnalyseurInterfaceGraphique graphic_listener;
+    AnalyseurListener listener;
 
     ArrayList<JoueurBelote> joueurs;
     JoueurBelote joueurQuiDistribue;
@@ -202,17 +202,17 @@ public class RegleBeloteOld implements Runnable {
     }
 
     /** Spécifie le nouveau 'listener' graphique pour cette partie */
-    public void setGraphicListener(RegleBeloteInterfaceGraphique listener0) {
+    public void setGraphicListener(AnalyseurInterfaceGraphique listener0) {
         graphic_listener = listener0;
     }
 
     /** Spécifie le nouveau 'listener' pour cette partie */
-    public void setBeloteListener( RegleBeloteListener l) {
+    public void setBeloteListener( AnalyseurListener l) {
         listener = l;
     }
 
     /** Renvoie le 'listener' actuel pour cette partie */
-    public RegleBeloteListener getBeloteListener() {
+    public AnalyseurListener getBeloteListener() {
         return listener;
     }
 
@@ -966,7 +966,7 @@ public class RegleBeloteOld implements Runnable {
     }
 
     /** Renvoie le 'listener' graphique associé Ã  cette partie */
-    public RegleBeloteInterfaceGraphique getGraphicListener() {
+    public AnalyseurInterfaceGraphique getGraphicListener() {
         return graphic_listener;
     }
 

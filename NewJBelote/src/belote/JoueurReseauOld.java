@@ -27,11 +27,11 @@ import cartes.CouleurCarte;
 import graphisme.FenetrePartieReseau;
 
 
-public class JoueurReseau extends JoueurBelote {
+public class JoueurReseauOld extends JoueurBelote {
 
     FenetrePartieReseau reseau;
 
-    public JoueurReseau(String nom0, int ordre0, FenetrePartieReseau reseau0) {
+    public JoueurReseauOld(String nom0, int ordre0, FenetrePartieReseau reseau0) {
         super(nom0, ordre0);
         reseau = reseau0;
     }

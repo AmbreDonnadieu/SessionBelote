@@ -3,16 +3,15 @@ package belote.joueur;
 import java.awt.Component;
 import java.awt.Graphics;
 
-import belote.AnalyseurDeJeu;
 import belote.GestionnaireCartesLecture;
-import belote.JoueurBelote;
-import belote.RegleBelote;
 import belote.RegleTemp;
 import cartes.Carte;
 import cartes.CouleurCarte;
 import cartes.PileDeCarte;
 import cartes.ValeureCarte;
 import java.lang.String;
+
+import java.util.Set;
 
 public abstract class AbstractJoueur implements IJoueurBelote {
 
@@ -29,9 +28,10 @@ public abstract class AbstractJoueur implements IJoueurBelote {
     protected int ordre;
     /** Utilisé par la REgleBelote pour savoir qui a gagné la partie et la manche */
     public int pointsTotaux, nbPerdues, nbPrises, nbCapot, pointsTotaux2;
-    protected IJoueurBelote quiAPris;
+	protected AbstractJoueur quiAPris;
     protected Carte dernierCarteJoue;
     protected IJoueurBelote joueurQuiCommence;
+    private Set<CouleurCarte> naPlusDe, aCouleur;
 
     /*@Override
     public IJoueurBelote clone() {
@@ -62,9 +62,9 @@ public abstract class AbstractJoueur implements IJoueurBelote {
 
     /** Donne les joueurs précédent et suivant */
     @Override
-	public void setEntreLesJoueurs( AbstractJoueur precedent0, AbstractJoueur suivant0 ) {
-        if ( precedent0 != null )  precedent = precedent0;
-        if ( suivant0 != null )  suivant = suivant0;
+	public void setEntreLesJoueurs( IJoueurBelote precedent0, IJoueurBelote suivant0 ) {
+        if ( precedent0 != null )  precedent = (AbstractJoueur) precedent0;
+        if ( suivant0 != null )  suivant = (AbstractJoueur) suivant0;
     }
 
     /** Définit la règle avec laquelle il va jouer */
@@ -192,8 +192,7 @@ public abstract class AbstractJoueur implements IJoueurBelote {
         }
 
     }
-
-
+    
     @Override
 	public void setNom(String nom) {
         this.nom = nom;
@@ -211,4 +210,56 @@ public abstract class AbstractJoueur implements IJoueurBelote {
         return 3 + (int)(Math.random()*29);
     }
 	
+    @Override
+    public void setNAPlusDe(CouleurCarte couleur) {
+    	naPlusDe.add(couleur);
+    	aCouleur.remove(couleur);
+    }
+    
+    protected boolean mesAdversairesOntEncoreDu(CouleurCarte couleur) {
+        return ! (suivant.naPlusDe.contains(couleur) || precedent.naPlusDe.contains(couleur));
+    }
+    
+    protected boolean ceJoueurNaPlusDe(AbstractJoueur j, CouleurCarte couleur) {
+    	return j.naPlusDe.contains(couleur);
+    }
+    
+    @Override
+    public void nouvellePartie(){
+    	for(CouleurCarte c : CouleurCarte.COULEURS) {
+    		aCouleur.add(c);
+    	}
+    	naPlusDe.clear();
+    }
+    
+    /** Renvoie vrai si il reste des cartes à la couleur qui ne sont pas dans 
+     *  la main du joueur */
+    protected boolean resteCartesNonTombeesAPour(CouleurCarte c) {
+        return ! (( gestionnaireCarte.nombreDeCartesJoueesA(c)+carteEnMain.nombreDe(c)) == 8);
+    }
+    
+    @Override
+    public int getNbreDePoints() {
+    	return regle.compteLesPointsDe(tas);
+    }
+    @Override
+    public int getPointsTotaux() {
+		return pointsTotaux;
+	}
+    @Override
+	public int getNbPerdues() {
+		return nbPerdues;
+	}
+    @Override
+	public int getNbPrises() {
+		return nbPrises;
+	}
+    @Override
+	public int getNbCapot() {
+		return nbCapot;
+	}
+    @Override
+	public int getPointsTotaux2() {
+		return pointsTotaux2;
+	}
 }

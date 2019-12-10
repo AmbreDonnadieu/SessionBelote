@@ -1,7 +1,7 @@
 /*
   A Belote game
 
-  Copyright (C) 2012 ClÃ©ment GERARDIN.
+  Copyright (C) 2012 Clément GERARDIN.
 
   This file is part of Belote.
 
@@ -23,9 +23,10 @@
 package graphisme;
 
 
-import belote.JoueurHumain;
-import belote.RegleBelote;
-import belote.RegleBeloteInterfaceGraphique;
+import belote.AnalyseurJeuTemp;
+import belote.GestionnaireCartesLecture;
+import belote.joueur.JoueurHumain;
+import belote.AnalyseurInterfaceGraphique;
 import cartes.Carte;
 import cartes.CouleurCarte;
 import cartes.PileDeCarte;
@@ -55,12 +56,13 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 /**
- * ReprÃ©seante graphiquement les joueurs et les cartes sur un tapis
- * @author ClÃ©ment
+ * Représeante graphiquement les joueurs et les cartes sur un tapis
+ * @author Clément
  */
-public class TapisDeBelote extends JPanel implements RegleBeloteInterfaceGraphique, MouseListener, MouseMotionListener {
+public class TapisDeBelote extends JPanel implements AnalyseurInterfaceGraphique, MouseListener, MouseMotionListener {
 
-    RegleBelote regle;
+    GestionnaireCartesLecture gestionnaireCarte;
+    AnalyseurJeuTemp analyseur;
     private Thread partieEnCours;
     private Carte carteSelectionnee;
     private boolean demandeUneNouvelleCarte;
@@ -68,7 +70,7 @@ public class TapisDeBelote extends JPanel implements RegleBeloteInterfaceGraphiq
     Image[] imgCouleurs = { null, null, null, null };
     java.awt.Font font;
 
-    /** Couleur utilisÃ©e pour dessiner le tapis */
+    /** Couleur utilisée pour dessiner le tapis */
     private final Color couleurFondTapis;
     private JLabel labelEtat, labelDistribution;
     private PileDeCarte pileDansLaquelleChoisir;
@@ -133,14 +135,14 @@ public class TapisDeBelote extends JPanel implements RegleBeloteInterfaceGraphiq
         couleurFondTapis = new Color(0, 128, 0);
 
         /* Ordinateur Seul 
-        regle = new RegleBelote( construitNouveauJeu(), null);
+        analyseur = new AnalyseurJeuTemp( construitNouveauJeu(), null);
         /* */
         /* Avec un humain */
-        regle = new RegleBelote( decoreJeuDeCarte(PileDeCarte.getJeuBelote()),
-                    new JoueurHumain(null, "SUD", RegleBelote.JOUEUR_SUD, this));
+        analyseur = new AnalyseurJeuTemp( decoreJeuDeCarte(PileDeCarte.getJeuBelote()),
+                    new JoueurHumain(null, "SUD", AnalyseurJeuTemp.JOUEUR_SUD, this));
         /* */
         
-        regle.setGraphicListener(this);
+        analyseur.setGraphicListener(this);
     }
 
     boolean imageOK = false;
@@ -171,7 +173,7 @@ public class TapisDeBelote extends JPanel implements RegleBeloteInterfaceGraphiq
         cardsH = GCarte.gHeight;
         /*
           //      if ( imagesChargees)
-                    for ( Carte carte : regle.getCopieJeu() ) {
+                    for ( Carte carte : analyseur.getCopieJeu() ) {
                         GCarte gc = carte.getRepresentationGraphique();
                         gc.imgCartes = imgCartes;
                         gc.width = cardsW;
@@ -229,16 +231,16 @@ public class TapisDeBelote extends JPanel implements RegleBeloteInterfaceGraphiq
             g.fillRect(0, 0, getWidth(), getHeight());
             g.setFont(font);
             
-            if ( regle.getQuiAPris() != null) {
+            if ( analyseur.getQuiAPris() != null) {
                 g.setColor( Color.BLACK);
-                g.drawString( regle.getQuiAPris().nom + " a pris Ã  " + regle.getCouleurAtout() + " (" +
-                              regle.getQuiAPris().getNbPlis() + "|" + regle.getQuiAPris().getSuivant().getNbPlis() + ')', 5, 20);
+                g.drawString( analyseur.getQuiAPris().nom + " a pris à " + analyseur.getCouleurAtout() + " (" +
+                              analyseur.getQuiAPris().getNbPlis() + "|" + analyseur.getQuiAPris().getSuivant().getNbPlis() + ')', 5, 20);
             }
 
             // Affiche les cartes des joueurs
-            belote.JoueurBelote j = regle.getJoueurQuiDistribue().getSuivant();
-            if ( (regle.getEtatDuJeu() != RegleBelote.ETAT_RIEN) &&
-                 ( regle.getEtatDuJeu() != RegleBelote.ETAT_FINPARTIE))
+            belote.JoueurBelote j = analyseur.getJoueurQuiDistribue().getSuivant();
+            if ( (analyseur.getEtatDuJeu() != AnalyseurJeuTemp.ETAT_RIEN) &&
+                 ( analyseur.getEtatDuJeu() != AnalyseurJeuTemp.ETAT_FINPARTIE))
                 for ( int i = 0; i < 4; i++) {
                     int nbc = j.getMain().size();
 
@@ -256,32 +258,32 @@ public class TapisDeBelote extends JPanel implements RegleBeloteInterfaceGraphiq
 
                         g.setColor(Color.BLACK);
                         switch ( j.getOrdre()) {
-                            case RegleBelote.JOUEUR_NORD :
+                            case AnalyseurJeuTemp.JOUEUR_NORD :
                                     g.drawString( j.nom, getWidth()/2, BORDER);
-                                    if (( j == regle.getQuiAPris()) && ( regle.getCouleurAtout() != null))
-                                        if ( regle.getCouleurAtout() != null)
-                                            paintChoosedColor(g, ox + cardsW, BORDER + cardsH, regle.getCouleurAtout().toInt() );
+                                    if (( j == analyseur.getQuiAPris()) && ( analyseur.getCouleurAtout() != null))
+                                        if ( analyseur.getCouleurAtout() != null)
+                                            paintChoosedColor(g, ox + cardsW, BORDER + cardsH, analyseur.getCouleurAtout().toInt() );
                                     
                                     j.dessineMain(g, ox, BORDER, dx, 3, (!(j instanceof JoueurHumain)) && cartesTournees, this);
                                     break;
-                            case RegleBelote.JOUEUR_EST :
+                            case AnalyseurJeuTemp.JOUEUR_EST :
                                     g.drawString( j.nom, getWidth() - cardsW - BORDER, oy - 10);
-                                    if (( j == regle.getQuiAPris())&& ( regle.getCouleurAtout() != null))
-                                            paintChoosedColor(g, getWidth() - cardsW * 2, oy + cardsH, regle.getCouleurAtout().toInt() );
+                                    if (( j == analyseur.getQuiAPris())&& ( analyseur.getCouleurAtout() != null))
+                                            paintChoosedColor(g, getWidth() - cardsW * 2, oy + cardsH, analyseur.getCouleurAtout().toInt() );
                                     
                                     j.dessineMain(g, getWidth() - cardsW - BORDER, oy, 3, dy,  (!(j instanceof JoueurHumain)) && cartesTournees, this);
                                     break;
-                            case RegleBelote.JOUEUR_SUD :
-                                    if ( (j == regle.getQuiAPris()) && ( regle.getCouleurAtout() != null)) {
-                                            Image img = imgCouleurs[regle.getCouleurAtout().toInt()];
-                                            paintChoosedColor(g, ox + cardsW,getHeight() -BORDER - cardsH - img.getHeight(this), regle.getCouleurAtout().toInt() );
+                            case AnalyseurJeuTemp.JOUEUR_SUD :
+                                    if ( (j == analyseur.getQuiAPris()) && ( analyseur.getCouleurAtout() != null)) {
+                                            Image img = imgCouleurs[analyseur.getCouleurAtout().toInt()];
+                                            paintChoosedColor(g, ox + cardsW,getHeight() -BORDER - cardsH - img.getHeight(this), analyseur.getCouleurAtout().toInt() );
                                     }
                                     j.dessineMain(g, ox, getHeight() - cardsH - BORDER, dx, 3,  (!(j instanceof JoueurHumain)) && cartesTournees, this);
                                     break;
-                            case RegleBelote.JOUEUR_OUEST :
+                            case AnalyseurJeuTemp.JOUEUR_OUEST :
                                     g.drawString( j.nom, 5, oy - 10);
-                                    if ( (j == regle.getQuiAPris()) && ( regle.getCouleurAtout() != null))
-                                            paintChoosedColor(g, cardsW + BORDER, oy + cardsH, regle.getCouleurAtout().toInt() );
+                                    if ( (j == analyseur.getQuiAPris()) && ( analyseur.getCouleurAtout() != null))
+                                            paintChoosedColor(g, cardsW + BORDER, oy + cardsH, analyseur.getCouleurAtout().toInt() );
                                     
                                     j.dessineMain(g, BORDER/2, oy, 3, dy,  (!(j instanceof JoueurHumain)) && cartesTournees, this);
                                     break;
@@ -292,53 +294,53 @@ public class TapisDeBelote extends JPanel implements RegleBeloteInterfaceGraphiq
             int ox = getWidth() / 2;
             int oy = getHeight() / 2;
             // affiche le tas du milieu ?
-            if ( regle.getTapis().size()>0) {
-                //GCarte c;// = regle.getTapis().get(0).getRepresentationGraphique();
+            if ( analyseur.getTapis().size()>0) {
+                //GCarte c;// = analyseur.getTapis().get(0).getRepresentationGraphique();
 
-                if ( regle.getCouleurAtout() != null) {
-                    Image img = imgCouleurs[regle.getCouleurDemandee().toInt()];
+                if ( analyseur.getCouleurAtout() != null) {
+                    Image img = imgCouleurs[analyseur.getCouleurDemandee().toInt()];
                     int dx1=ox-(int)(img.getWidth(this)/4), dy1=oy-(int)(img.getHeight(this)/4);
                     g.drawImage(img, dx1, dy1, dx1+(int)(img.getWidth(this)/2), dy1+(int)(img.getHeight(this)/2),
                             0, 0, img.getWidth(this), img.getHeight(this),  this);
                 } else {
                     g.setColor( new Color(100, 255, 100));
-                    if ( regle.getJoueurCourrant() instanceof JoueurHumain ) {
-                        if ( regle.getEtatDuJeu() == RegleBelote.ETAT_ATOUT2)
+                    if ( analyseur.getJoueurCourrant() instanceof JoueurHumain ) {
+                        if ( analyseur.getEtatDuJeu() == AnalyseurJeuTemp.ETAT_ATOUT2)
                             g.drawString("??", ox-15, oy+5);
                         else g.drawString("?", ox-5, oy+5);
                     }
                 }
 
-                j = regle.getJoueurQuiCommence();
-                for ( int i = 0; i < regle.getTapis().size(); i++) {
-                    GCarte c = regle.getTapis().get(i).getRepresentationGraphique();
-                    boolean win = (afficheCarteGagnante||((!regle.confirmPlis)&&(regle.getTapis().size()==4))) &&
-                                    ((regle.getEtatDuJeu() == RegleBelote.ETAT_FINTOUR) || (regle.getEtatDuJeu() == RegleBelote.ETAT_JOUE)) &&
-                                    (c.carte == regle.getAnalyseur().meilleurCarte(regle.getTapis()));
+                j = analyseur.getJoueurQuiCommence();
+                for ( int i = 0; i < analyseur.getTapis().size(); i++) {
+                    GCarte c = analyseur.getTapis().get(i).getRepresentationGraphique();
+                    boolean win = (afficheCarteGagnante||((!analyseur.confirmPlis)&&(analyseur.getTapis().size()==4))) &&
+                                    ((analyseur.getEtatDuJeu() == AnalyseurJeuTemp.ETAT_FINTOUR) || (analyseur.getEtatDuJeu() == AnalyseurJeuTemp.ETAT_JOUE)) &&
+                                    (c.carte == analyseur.getAnalyseur().meilleurCarte(analyseur.getTapis()));
 
                     switch ( j.getOrdre()) {
-                        case RegleBelote.JOUEUR_NORD:
+                        case AnalyseurJeuTemp.JOUEUR_NORD:
                                 if ( win) {
                                     g.setColor(Color.YELLOW);
                                     g.drawRoundRect(ox-cardsW/2-5, oy-(int)(cardsH*1.25)-5, cardsW + 10, cardsH + 10, 5, 5);
                                 }
                                 c.paint( g, ox-cardsW/2, oy-(int)(cardsH*1.25), false);
                                 break;
-                        case RegleBelote.JOUEUR_EST:
+                        case AnalyseurJeuTemp.JOUEUR_EST:
                                 c.paint( g, ox+cardsW/3, oy-cardsH/2, false);
                                 if ( win) {
                                     g.setColor(Color.YELLOW);
                                     g.drawRoundRect(ox+cardsW/3-5, oy-cardsH/2-5, cardsW + 10, cardsH + 10, 5, 5);
                                 }
                                 break;
-                        case RegleBelote.JOUEUR_SUD:
+                        case AnalyseurJeuTemp.JOUEUR_SUD:
                                 c.paint( g, ox-cardsW/2, oy+(int)(cardsH*0.25), false);
                                 if ( win) {
                                     g.setColor(Color.YELLOW);
                                     g.drawRoundRect(ox-cardsW/2-5, oy+(int)(cardsH*0.25)-5,cardsW + 10, cardsH + 10, 5, 5);
                                 }
                                 break;
-                        case RegleBelote.JOUEUR_OUEST:
+                        case AnalyseurJeuTemp.JOUEUR_OUEST:
                                 c.paint( g, ox-(int)(cardsW*1.33), oy-cardsH/2, false);
                                if ( win) {
                                     g.setColor(Color.YELLOW);
@@ -351,20 +353,20 @@ public class TapisDeBelote extends JPanel implements RegleBeloteInterfaceGraphiq
             }
 
             // Affiche les plis en fin de partie ?
-            if ( (regle.getEtatDuJeu() == RegleBelote.ETAT_FINPARTIE) &&
-                    (regle.getQuiAPris()!=null) ) {
-                regle.getQuiAPris().dessinePlis2(g, 10, 30, 25, 3, this);
-                regle.getQuiAPris().getSuivant().getSuivant().dessinePlis2(g, 10, (int)(cardsH*0.75), 25, 3, this);
+            if ( (analyseur.getEtatDuJeu() == AnalyseurJeuTemp.ETAT_FINPARTIE) &&
+                    (analyseur.getQuiAPris()!=null) ) {
+                analyseur.getQuiAPris().dessinePlis2(g, 10, 30, 25, 3, this);
+                analyseur.getQuiAPris().getSuivant().getSuivant().dessinePlis2(g, 10, (int)(cardsH*0.75), 25, 3, this);
 
-                regle.getQuiAPris().getSuivant().dessinePlis2(g, 10, getHeight()/2, 25, 3, this);
-                regle.getQuiAPris().getPrecedent().dessinePlis2(g, 10, getHeight()/2 + (int)(cardsH*0.75), 25, 3, this);
+                analyseur.getQuiAPris().getSuivant().dessinePlis2(g, 10, getHeight()/2, 25, 3, this);
+                analyseur.getQuiAPris().getPrecedent().dessinePlis2(g, 10, getHeight()/2 + (int)(cardsH*0.75), 25, 3, this);
             }
 
             // Affiche le jeu de cartes pour couper ou pour faire beau
-            if ( (regle.getEtatDuJeu() == RegleBelote.ETAT_COUPEJEU) ||
-                 (regle.getEtatDuJeu() == RegleBelote.ETAT_RIEN)) {
+            if ( (analyseur.getEtatDuJeu() == AnalyseurJeuTemp.ETAT_COUPEJEU) ||
+                 (analyseur.getEtatDuJeu() == AnalyseurJeuTemp.ETAT_RIEN)) {
 
-                regle.getJeu().paint( g, 10, 10, (int)((getWidth()-cardsW)/33), (int)((getHeight()-cardsH)/33),
+                analyseur.getJeu().paint( g, 10, 10, (int)((getWidth()-cardsW)/33), (int)((getHeight()-cardsH)/33),
                                         cartesTournees);
             }
 
@@ -404,7 +406,7 @@ public class TapisDeBelote extends JPanel implements RegleBeloteInterfaceGraphiq
             int res = JOptionPane.showConfirmDialog(this, "Voulez-vous vraiment abandonner cette partie ?", "Fin de la partie ?", JOptionPane.YES_NO_OPTION);
             if ( res == JOptionPane.YES_OPTION) {
                 demandeUneNouvelleCarte = false;
-                regle.demandeLaFinDeLaPartie(false);
+                analyseur.demandeLaFinDeLaPartie(false);
                 return true;
             }
             else return false;
@@ -412,22 +414,22 @@ public class TapisDeBelote extends JPanel implements RegleBeloteInterfaceGraphiq
         return true;
     }
 
-    /** Commence une nouvelle partie (Ã©ventuellement demande la fin de la partie courante) */
-    public boolean nouvellePartie( RegleBelote avec_cette_regle) {
+    /** Commence une nouvelle partie (éventuellement demande la fin de la partie courante) */
+    public boolean nouvellePartie( AnalyseurJeuTemp avec_cette_analyseur) {
 
         if ( ! verifyEndOfGame()) return false;
 
-        if ( avec_cette_regle != null ) {
-            regle = avec_cette_regle;
+        if ( avec_cette_analyseur != null ) {
+            analyseur = avec_cette_analyseur;
         } else {
             PileDeCarte p = decoreJeuDeCarte(PileDeCarte.getJeuBelote());
             p.melange();
-            regle = new RegleBelote( p,
-                            new JoueurHumain(null, "SUD", RegleBelote.JOUEUR_SUD, this));
+            analyseur = new AnalyseurJeuTemp( p,
+                            new JoueurHumain(null, "SUD", AnalyseurJeuTemp.JOUEUR_SUD, this));
         }
-        regle.setGraphicListener(this);
+        analyseur.setGraphicListener(this);
 
-        if ( avec_cette_regle == null) {
+        if ( avec_cette_analyseur == null) {
             int i = 0;
             do {
                 String res = (String)JOptionPane.showInputDialog(this, "Manche en combien de points ?\n(162 points mini)\n", "1000");
@@ -438,19 +440,19 @@ public class TapisDeBelote extends JPanel implements RegleBeloteInterfaceGraphiq
                 } catch ( Exception ex) { }
 
             } while ( i < 162);
-            RegleBelote.POINTS_MANCHE = i;
+            AnalyseurJeuTemp.POINTS_MANCHE = i;
         } else
-            RegleBelote.POINTS_MANCHE = 1000;
+            AnalyseurJeuTemp.POINTS_MANCHE = 1000;
 
         setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        partieEnCours = new Thread( regle);
+        partieEnCours = new Thread( analyseur);
         partieEnCours.start();
         partieVerrouillee = 0;
         jMenuItemNouveau.setText("ArrÃªter la partie");
         return true;
     }
 
-    /** DÃ©core les carte de la pile p pour qu'il puisse Ãªtre affichÃ© avec ce tapis */
+    /** Décore les carte de la pile p pour qu'il puisse Ãªtre affiché avec ce tapis */
     public PileDeCarte decoreJeuDeCarte( PileDeCarte p) {
 
         int W = imgCartes.getWidth(null)/13;
@@ -505,12 +507,12 @@ public class TapisDeBelote extends JPanel implements RegleBeloteInterfaceGraphiq
         }
     }
 
-    /** SpÃ©cifie le JLabel qui doit afficher l'Ã©tat de la partie en cours */
+    /** Spécifie le JLabel qui doit afficher l'état de la partie en cours */
     public void setLabelEtat(JLabel jLabelEtat) {
         labelEtat = jLabelEtat;
     }
 
-    /** SpÃ©cifie le label qui doit afficher le joueur qui distribue */
+    /** Spécifie le label qui doit afficher le joueur qui distribue */
     public void setLabelDistribution( JLabel jlabelDistribution) {
         labelDistribution = jlabelDistribution;
     }
@@ -521,7 +523,7 @@ public class TapisDeBelote extends JPanel implements RegleBeloteInterfaceGraphiq
         return this;
     }
 
-    /** Demande Ã  l'utilisateur de choisir une carte parmi celles de la 'pile' */
+    /** Demande à l'utilisateur de choisir une carte parmi celles de la 'pile' */
     public Carte joueCarte( PileDeCarte pile) {
         Carte c;
 
@@ -530,7 +532,7 @@ public class TapisDeBelote extends JPanel implements RegleBeloteInterfaceGraphiq
         
         pileDansLaquelleChoisir = pile;
         demandeUneNouvelleCarte = true;
-        regle.getGraphicListener().unlockRead();
+        analyseur.getGraphicListener().unlockRead();
         while ( demandeUneNouvelleCarte)
             try {
             Thread.sleep(100);
@@ -538,17 +540,17 @@ public class TapisDeBelote extends JPanel implements RegleBeloteInterfaceGraphiq
 
         c = carteSelectionnee;
         carteSelectionnee = null;
-        regle.getGraphicListener().lockRead();
+        analyseur.getGraphicListener().lockRead();
 
         return c;
     }
 
-    /** Mise Ã  jour du nouvel Ã©tat de la partie */
+    /** Mise à jour du nouvel état de la partie */
     @Override
     public void setStatus(String status) {
 
-        if ( ! regle.getEndOfGame() )
-            labelDistribution.setText("Distribution: " + regle.getQuiDistribue());
+        if ( ! analyseur.getEndOfGame() )
+            labelDistribution.setText("Distribution: " + analyseur.getQuiDistribue());
         else
             labelDistribution.setText("");
         labelEtat.setText(status);
@@ -558,16 +560,16 @@ public class TapisDeBelote extends JPanel implements RegleBeloteInterfaceGraphiq
     /** Termmine proprement la parte */
     void dispose() {
         if ( partieEnCours != null )
-            while ( partieEnCours.isAlive()) regle.demandeLaFinDeLaPartie(false);
+            while ( partieEnCours.isAlive()) analyseur.demandeLaFinDeLaPartie(false);
     }
 
-    /** Autorise la lecture des donnÃ©es de la partie */
+    /** Autorise la lecture des données de la partie */
     @Override
     public void unlockRead() {
         partieVerrouillee--;
     }
 
-    /** Interdit la lecture des donnÃ©es de la partie (bloque le rafraichissement de ce composant) */
+    /** Interdit la lecture des données de la partie (bloque le rafraichissement de ce composant) */
     @Override
     public void lockRead() {
         if ( partieVerrouillee <= 0)
@@ -612,20 +614,20 @@ public class TapisDeBelote extends JPanel implements RegleBeloteInterfaceGraphiq
 
     }*/
 
-    /** Pour jouer avec la souris ou par l'intermÃ©diaire de fenÃªtres de dialogues */
+    /** Pour jouer avec la souris ou par l'intermédiaire de fenÃªtres de dialogues */
     void setPlayWithMouse(boolean selected) {
         playWithMouse = selected;
     }
 
-    /** SpÃ©cifie au tapis quel JMenuItem il devra modifier pour qu'il corresponde
+    /** Spécifie au tapis quel JMenuItem il devra modifier pour qu'il corresponde
      * au fait qu'il y ait une partie en cours ou non */
     void setJMenuItemStart(JMenuItem jMenuItemNouveau0) {
         jMenuItemNouveau = jMenuItemNouveau0;
     }
 
-    /** Retourne la rÃ¨gle en cours d'execution 'sur' ce tapis */
-    public RegleBelote getRegle() {
-        return regle;
+    /** Retourne la règle en cours d'execution 'sur' ce tapis */
+    public AnalyseurJeuTemp getRegle() {
+        return analyseur;
     }
 
 }

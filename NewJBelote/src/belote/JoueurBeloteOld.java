@@ -26,7 +26,7 @@ import java.awt.Component;
 import java.awt.Graphics;
 
 
-public class JoueurBelote {
+public class JoueurBeloteOld {
 
     /** La règle avec laquel il joue */
     protected RegleBelote regle;
@@ -44,7 +44,7 @@ public class JoueurBelote {
     public int pointsTotaux, nbPerdues, nbPrises, nbCapot, pointsTotaux2;
 
     @Override
-    public JoueurBelote clone() {
+    public JoueurBeloteOld clone() {
         JoueurBelote j = new JoueurBelote(nom, ordre);
         j.regle = regle;
         j.main = main;

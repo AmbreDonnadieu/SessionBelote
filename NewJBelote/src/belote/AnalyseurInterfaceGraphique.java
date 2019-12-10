@@ -25,7 +25,7 @@ package belote;
 import java.awt.Component;
 
 
-public interface RegleBeloteInterfaceGraphique {
+public interface AnalyseurInterfaceGraphique {
 
     public void repaint();
 

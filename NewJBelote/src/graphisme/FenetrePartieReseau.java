@@ -28,7 +28,7 @@ import belote.JoueurHumain;
 import belote.JoueurReseau;
 import belote.RegleBelote;
 import belote.BeloteEvent;
-import belote.RegleBeloteListener;
+import belote.AnalyseurListener;
 import belote.joueur.IJoueurBelote;
 import cartes.PileDeCarte;
 import java.io.BufferedReader;
@@ -53,7 +53,7 @@ import javax.swing.table.TableModel;
  * Gestionnaire de parties réseau
  * @author Clément
  */
-public class FenetrePartieReseau extends javax.swing.JFrame implements TableModel, RegleBeloteListener {
+public class FenetrePartieReseau extends javax.swing.JFrame implements TableModel, AnalyseurListener {
 
     /* Action des joueurs envoyés et reçus par le server */
     public static final int T_COUPE  = 1;

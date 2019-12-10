@@ -26,7 +26,7 @@ package belote;
  * Pour suivre une partie de belote (qui à fait quoi)
  * @author Clément
  */
-public interface RegleBeloteListener {
+public interface AnalyseurListener {
 
     /** Reçoit un évenement survenu pendant la partie.
      *  En fonction du type d'évenement, vInt, vColor ou vCard sont renseignés */
