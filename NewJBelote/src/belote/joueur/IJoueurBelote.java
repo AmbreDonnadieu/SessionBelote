@@ -89,4 +89,22 @@ public interface IJoueurBelote {
 	int getNbPerdues();
 
 	int getPointsTotaux();
+
+	void sortCartesEnMain();
+
+	void nbCapotPlusUn();
+
+	void nbPrisePlusUn();
+
+	void nbPerdusPlusUn();
+
+	void addPointsTotaux(int nb);
+
+	void trieTaMain();
+
+	void ptTotauxVersTotaux2();
+
+	public IJoueurBelote createClone();
+
+	int getSizeTas();
 }

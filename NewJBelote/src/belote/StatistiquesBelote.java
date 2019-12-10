@@ -32,14 +32,16 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableCellRenderer;
 
+import belote.joueur.IJoueurBelote;
+
 public class StatistiquesBelote implements javax.swing.table.TableModel, TableCellRenderer {
 
     class UnePartie {
-        JoueurBelote qui_prend, qui_belote;
+        IJoueurBelote qui_prend, qui_belote;
         boolean partie_gagnee;
         int sesPoints, leurPoints, totalNord, totalEst;
 
-        UnePartie(JoueurBelote joueurQuiPrend, boolean gagne, JoueurBelote beloteEtRe, int ses_points, int leur_points, int total_nord, int total_est ) {
+        UnePartie(IJoueurBelote joueurQuiPrend, boolean gagne, IJoueurBelote beloteEtRe, int ses_points, int leur_points, int total_nord, int total_est ) {
             qui_belote = beloteEtRe;
             qui_prend = joueurQuiPrend;
             partie_gagnee = gagne;
@@ -79,8 +81,8 @@ public class StatistiquesBelote implements javax.swing.table.TableModel, TableCe
             });
     }
 
-    void ajoutManche(JoueurBelote j) {
-        if ( (j.getOrdre() == RegleBelote.JOUEUR_OUEST) || (j.getOrdre()==RegleBelote.JOUEUR_EST)) nbManchesE++;
+    void ajoutManche(IJoueurBelote j) {
+        if ( (j.getOrdre() == AnalyseurJeuTemp.JOUEUR_OUEST) || (j.getOrdre()==AnalyseurJeuTemp.JOUEUR_EST)) nbManchesE++;
         else nbManchesN++;
         
         parties.add(new UnePartie(null, false, null, 0, 0, 0, 0));
@@ -88,7 +90,7 @@ public class StatistiquesBelote implements javax.swing.table.TableModel, TableCe
             l.tableChanged( new TableModelEvent(this));
     }
 
-    public void ajoutPartie(JoueurBelote joueurQuiPrend, boolean gagne, JoueurBelote beloteEtRe, int sesPoints, int leurPoints) {
+    public void ajoutPartie(IJoueurBelote joueurQuiPrend, boolean gagne, IJoueurBelote beloteEtRe, int sesPoints, int leurPoints) {
         int totalN = 0, totalE = 0;
 
         if ( parties.size() != 0) {
@@ -97,7 +99,7 @@ public class StatistiquesBelote implements javax.swing.table.TableModel, TableCe
             totalE = p.totalEst;
         }
 
-        if ((joueurQuiPrend.getOrdre() == RegleBelote.JOUEUR_NORD) || (joueurQuiPrend.getOrdre() == RegleBelote.JOUEUR_SUD)) {
+        if ((joueurQuiPrend.getOrdre() == AnalyseurJeuTemp.JOUEUR_NORD) || (joueurQuiPrend.getOrdre() == AnalyseurJeuTemp.JOUEUR_SUD)) {
             if (sesPoints >0) totalN += sesPoints;
             totalE += leurPoints;
         } else {
@@ -142,10 +144,10 @@ public class StatistiquesBelote implements javax.swing.table.TableModel, TableCe
         if ( p.qui_prend == null) return "";
 
          switch ( columnIndex) {
-            case 0: return p.qui_prend.nom;
+            case 0: return p.qui_prend.getNom();
             case 1: if ( p.sesPoints >= 0) return "" + p.sesPoints; else return "(" + -p.sesPoints + ")";
             case 2: return "" + p.leurPoints;
-            case 3: if ( p.qui_belote != null) return "" + p.qui_belote.nom; else return "";
+            case 3: if ( p.qui_belote != null) return "" + p.qui_belote.getNom(); else return "";
             case 4: return "" + p.totalNord;
             case 5: return "" + p.totalEst;
             default: return "???";
@@ -172,7 +174,7 @@ public class StatistiquesBelote implements javax.swing.table.TableModel, TableCe
         text.setText(value.toString());
         text.setHorizontalAlignment(SwingConstants.CENTER);
 
-        JoueurBelote j = parties.get(row).qui_prend;
+        IJoueurBelote j = parties.get(row).qui_prend;
         if ( j == null) text.setBackground(Color.DARK_GRAY);
         else if ( ! parties.get(row).partie_gagnee) {
             //text.setForeground(Color.WHITE);

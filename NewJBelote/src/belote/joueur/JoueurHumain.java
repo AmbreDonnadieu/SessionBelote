@@ -32,6 +32,19 @@ public class JoueurHumain extends AbstractJoueur {
         nonTriees = new PileDeCarte();
         this.graphic_listener=graphic_listener;
     }
+    
+    @Override
+    public IJoueurBelote createClone() {
+        JoueurHumain j = new JoueurHumain(nom, ordre);
+        j = (JoueurHumain) initClone((AbstractJoueur) j);
+        return j;
+	}
+    
+    public JoueurHumain(RegleTemp regle, String nom, int ordre, TapisDeBelote tapis0) {
+        super(nom, ordre);
+        tapis = tapis0;
+        nonTriees = new PileDeCarte();
+    }
 
     public void setTapis( TapisDeBelote t) {
         tapis = t;
@@ -67,7 +80,7 @@ public class JoueurHumain extends AbstractJoueur {
                 c = carteAJouer;
             }
         }
-        while ( (c == null) && ! tapis.getRegle().getEndOfGame());
+        while ( (c == null) && ! tapis.getAnalyseur().getEndOfGame());
 
         tapis.playWithMouse = ancien;
         carteEnMain.remove(c);

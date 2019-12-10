@@ -12,6 +12,13 @@ public class JoueurReseau extends JoueurIA {
         super(nom0, ordre0);
         reseau = reseau0;
     }
+    
+    @Override
+    public IJoueurBelote createClone() {
+        JoueurHumain j = new JoueurHumain(nom, ordre);
+        j = (JoueurHumain) initClone((AbstractJoueur) j);
+        return j;
+	}
 
     @Override
     public int cut() {

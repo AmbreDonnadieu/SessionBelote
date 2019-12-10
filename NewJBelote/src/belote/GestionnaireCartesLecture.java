@@ -221,4 +221,8 @@ public class GestionnaireCartesLecture {
 		}
 		return nombre;
 	}
+	
+	public CouleurCarte getColorFirstCarte() {
+		return jeuDeCarte.get(0).getCouleur();
+	}
 }

@@ -326,7 +326,7 @@ public class AnalyseurJeuTemp implements Runnable {
 						changeEtat( ETAT_ATOUT2);
 						n = 0;
 						do {
-							a = joueurCourant.getChoixAtout2(jeu.get(0).getCouleur());
+							a = joueurCourant.getChoixAtout2(gestionnaireCartes.getColorFirstCarte());
 							if ( a != null) {
 								if ( a.equals(gestionnaireCartes.getTapis().get(0).getCouleur())) {
 									graphic_listener.unlockRead();
@@ -415,7 +415,7 @@ public class AnalyseurJeuTemp implements Runnable {
 							else
 								joueurCourant.ajoutATaMain( gestionnaireCartes.distribueCartes(2));
 
-							joueurCourant.main.sort(analyseur);
+							joueurCourant.sortCartesEnMain();
 							joueurCourant = joueurCourant.getSuivant();
 							changeEtat( ETAT_DISTRIBUE2);
 						}
@@ -456,10 +456,10 @@ public class AnalyseurJeuTemp implements Runnable {
 					}
 
 					changeEtat(ETAT_FINPARTIE);
-					joueurQuiPrend.nbPrises++;
+					joueurQuiPrend.nbPrisePlusUn();
 
 					graphic_listener.unlockRead();
-					if ( (joueurQuiPrend.tas.size()==0) && (joueurQuiPrend.getSuivant().getSuivant().tas.size()==0) ) {
+					if ( (joueurQuiPrend.getSizeTas()==0) && (joueurQuiPrend.getSuivant().getSuivant().getSizeTas()==0) ) {
 						if ( confirmJeu) { int i =
 								JOptionPane.showConfirmDialog(graphic_listener.getComponent(),
 										"L'équipe " + joueurQuiPrend.getSuivant().getNom() + "," + joueurQuiPrend.getPrecedent().getNom() +
@@ -468,12 +468,12 @@ public class AnalyseurJeuTemp implements Runnable {
 						if ( i == JOptionPane.CANCEL_OPTION ) demandeLaFinDeLaPartie(true);
 						}
 
-						joueurQuiPrend.getSuivant().pointsTotaux += total + 90 + pointsRemisEnJeux;
+						joueurQuiPrend.getSuivant().addPointsTotaux(total + 90 + pointsRemisEnJeux);
 						statistique.ajoutPartie( joueurQuiPrend, false, beloteEtRe, points, total + 90 + pointsRemisEnJeux);
 						pointsRemisEnJeux = 0;
-						joueurQuiPrend.nbPerdues++;
+						joueurQuiPrend.nbPerdusPlusUn();
 
-					} else if ( (joueurQuiPrend.getSuivant().tas.size()==0) && (joueurQuiPrend.getPrecedent().tas.size()==0)) {
+					} else if ( (joueurQuiPrend.getSuivant().getSizeTas()==0) && (joueurQuiPrend.getPrecedent().getSizeTas()==0)) {
 						if ( confirmJeu) { int i =
 								JOptionPane.showConfirmDialog(graphic_listener.getComponent(),
 										"L'équipe " + joueurQuiPrend.getNom() +","+ joueurQuiPrend.getSuivant().getSuivant().getNom() +
@@ -482,11 +482,11 @@ public class AnalyseurJeuTemp implements Runnable {
 						if ( i == JOptionPane.CANCEL_OPTION ) demandeLaFinDeLaPartie(true);
 						}
 
-						joueurQuiPrend.pointsTotaux += points + 90 + pointsRemisEnJeux;
-						joueurQuiPrend.getSuivant().pointsTotaux += leurPoints;
+						joueurQuiPrend.addPointsTotaux(points + 90 + pointsRemisEnJeux);
+						joueurQuiPrend.getSuivant().addPointsTotaux(leurPoints);
 						statistique.ajoutPartie( joueurQuiPrend, true, beloteEtRe, total + 90 + pointsRemisEnJeux, leurPoints);
 						pointsRemisEnJeux = 0;
-						joueurQuiPrend.nbCapot++;
+						joueurQuiPrend.nbCapotPlusUn();
 
 					} else if ( points == leurPoints) {
 						if ( confirmJeu) { int i =
@@ -498,7 +498,7 @@ public class AnalyseurJeuTemp implements Runnable {
 						if ( i == JOptionPane.CANCEL_OPTION ) demandeLaFinDeLaPartie(true);
 						}
 
-						joueurQuiPrend.getSuivant().pointsTotaux += points;
+						joueurQuiPrend.getSuivant().addPointsTotaux(points);
 						pointsRemisEnJeux += points;
 						statistique.ajoutPartie( joueurQuiPrend, false, beloteEtRe, 0, leurPoints);
 
@@ -511,8 +511,8 @@ public class AnalyseurJeuTemp implements Runnable {
 						if ( i == JOptionPane.CANCEL_OPTION ) demandeLaFinDeLaPartie(true);
 						}
 
-						joueurQuiPrend.getSuivant().pointsTotaux += leurPoints;
-						joueurQuiPrend.pointsTotaux += points+ pointsRemisEnJeux;
+						joueurQuiPrend.getSuivant().addPointsTotaux(leurPoints);
+						joueurQuiPrend.addPointsTotaux(points+ pointsRemisEnJeux);
 						statistique.ajoutPartie( joueurQuiPrend, true, beloteEtRe, points+ pointsRemisEnJeux, leurPoints);
 						pointsRemisEnJeux = 0;
 
@@ -525,24 +525,24 @@ public class AnalyseurJeuTemp implements Runnable {
 						if ( i == JOptionPane.CANCEL_OPTION ) demandeLaFinDeLaPartie(true);
 						}
 
-						joueurQuiPrend.getSuivant().pointsTotaux += total + pointsRemisEnJeux;
+						joueurQuiPrend.getSuivant().addPointsTotaux(total + pointsRemisEnJeux);
 						statistique.ajoutPartie( joueurQuiPrend, false, beloteEtRe, -points, total+ pointsRemisEnJeux);
 						pointsRemisEnJeux = 0;
-						joueurQuiPrend.nbPerdues++;
+						joueurQuiPrend.nbPerdusPlusUn();
 					}
 
 					/* Vérfication de la fin d'une manche */
-					int tN = joueurs.get(JOUEUR_NORD).pointsTotaux + joueurs.get(JOUEUR_SUD).pointsTotaux;
-					int tE = joueurs.get(JOUEUR_OUEST).pointsTotaux  + joueurs.get(JOUEUR_EST).pointsTotaux;
+					int tN = joueurs.get(JOUEUR_NORD).getPointsTotaux() + joueurs.get(JOUEUR_SUD).getPointsTotaux();
+					int tE = joueurs.get(JOUEUR_OUEST).getPointsTotaux()  + joueurs.get(JOUEUR_EST).getPointsTotaux();
 
-					if ( (tN >= RegleBelote.POINTS_MANCHE) || (tE >= RegleBelote.POINTS_MANCHE)) {
+					if ( (tN >= POINTS_MANCHE) || (tE >= POINTS_MANCHE)) {
 						nbManches++;
 
 						if ( tN > tE) {
 
 							if ( avecHumain) {
 								int i =JOptionPane.showConfirmDialog(graphic_listener.getComponent(), "L'équipe " +
-										getJoueur(RegleBelote.JOUEUR_NORD).getNom() + "," + getJoueur(RegleBelote.JOUEUR_SUD).getNom() + " à gagnée la manche avec " +
+										getJoueur(JOUEUR_NORD).getNom() + "," + getJoueur(JOUEUR_SUD).getNom() + " à gagnée la manche avec " +
 										tN + " points contre " + tE + ".",
 										"Fin de manche", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
 								if ( i == JOptionPane.CANCEL_OPTION ) demandeLaFinDeLaPartie(true);
@@ -555,7 +555,7 @@ public class AnalyseurJeuTemp implements Runnable {
 							if ( avecHumain) {
 
 								int i = JOptionPane.showConfirmDialog(graphic_listener.getComponent(), "L'équipe " +
-										getJoueur(RegleBelote.JOUEUR_EST).getNom() + "," + getJoueur(RegleBelote.JOUEUR_OUEST).getNom() + 
+										getJoueur(JOUEUR_EST).getNom() + "," + getJoueur(JOUEUR_OUEST).getNom() + 
 										" à gagnée la manche avec " + tE + " points contre " + tN + ".",
 										"Fin de manche", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
 								if ( i == JOptionPane.CANCEL_OPTION ) demandeLaFinDeLaPartie(true);
@@ -565,8 +565,7 @@ public class AnalyseurJeuTemp implements Runnable {
 						}
 
 						for ( int i = 0; i < 4; i ++) {
-							joueurCourant.pointsTotaux2 += joueurCourant.pointsTotaux;
-							joueurCourant.pointsTotaux = 0;
+							joueurCourant.ptTotauxVersTotaux2();
 							joueurCourant = joueurCourant.getSuivant();
 						}
 
@@ -577,7 +576,7 @@ public class AnalyseurJeuTemp implements Runnable {
 					joueurQuiPrend = null;
 
 					for (int i = 0; i < 4; i++) {
-						jeu.addAll(joueurCourant.rendTonTas());
+						gestionnaireCartes.remettreCartesDansJeu(joueurCourant.rendTonTas());
 						joueurCourant = joueurCourant.getSuivant();
 					}
 
@@ -603,11 +602,11 @@ public class AnalyseurJeuTemp implements Runnable {
 		}
 		try { changeEtat(ETAT_RIEN); } catch (Exception ex) { }
 
-		for ( JoueurBelote j : joueurs) {
-			jeu.addAll(j.rendTonTas());
-			jeu.addAll(j.rendTaMain());
+		for ( IJoueurBelote j : joueurs) {
+			gestionnaireCartes.remettreCartesDansJeu(j.rendTonTas());
+			gestionnaireCartes.remettreCartesDansJeu(j.rendTaMain());
 		}
-		jeu.addAll(gestionnaireCartes.getTapis()); gestionnaireCartes.getTapis().clear();
+		gestionnaireCartes.remettreCartesDansJeu(gestionnaireCartes.getTapis()); gestionnaireCartes.getTapis().clear();
 
 		arretPartieDemande = partieEnCours = false;
 		graphic_listener.endOfGame();
@@ -636,7 +635,7 @@ public class AnalyseurJeuTemp implements Runnable {
 				if ( c != null ) {
 					if ( ! ilPeutJouerCetteCarte( joueurCourant, c) ) {
 						joueurCourant.ajoutATaMain(c);
-						joueurCourant.main.sort(analyseur);
+						joueurCourant.trieTaMain();
 						graphic_listener.unlockRead();
 
 						JOptionPane.showMessageDialog(graphic_listener.getComponent(), "Le joueur "+ joueurCourant.getNom() + " ne peut jouer " +
@@ -646,8 +645,8 @@ public class AnalyseurJeuTemp implements Runnable {
 					}
 					else {
 						if ( c.estCouleur(atout)) {
-							if (((c.getValeur().equals(ValeureCarte.CARD_R)) && joueurCourant.main.contient(atout, ValeureCarte.CARD_D)) ||
-									((c.getValeur().equals(ValeureCarte.CARD_D)) && joueurCourant.main.contient(atout, ValeureCarte.CARD_R))) {
+							if (((c.getValeur().equals(ValeureCarte.CARD_R)) && joueurCourant.getMain().contient(atout, ValeureCarte.CARD_D)) ||
+									((c.getValeur().equals(ValeureCarte.CARD_D)) && joueurCourant.getMain().contient(atout, ValeureCarte.CARD_R))) {
 
 								if ( confirmBelote && avecHumain) {
 									graphic_listener.unlockRead();
@@ -672,7 +671,7 @@ public class AnalyseurJeuTemp implements Runnable {
 									new BeloteEvent(BeloteEvent.EV_CARTE, joueurCourant, 0, null, c));
 
 						gestionnaireCartes.getTapis().add( c);
-						analyseur.addCarteJouee( c);
+						addCarteJouee( c);
 					}
 				}
 
@@ -682,22 +681,22 @@ public class AnalyseurJeuTemp implements Runnable {
 	}
 
 	/** Vérifie que le joueur 'lui' peut jouer cette atout 'carte' */
-	private boolean verifieAtoutJouePar( JoueurBelote lui, Carte carte) {
-		Carte m = analyseur.meilleurCarteDansA(gestionnaireCartes.getTapis(), atout);
+	private boolean verifieAtoutJouePar( IJoueurBelote lui, Carte carte) {
+		Carte m = GestionnaireCartesLecture.meilleurCarteDansA(gestionnaireCartes.getTapis(), atout);
 
-		if ( analyseur.positionDe(carte) > analyseur.positionDe(m)) return true;
+		if ( GestionnaireCartesLecture.positionDe(carte) > GestionnaireCartesLecture.positionDe(m)) return true;
 		else {
-			carte = analyseur.meilleurCarteDansA(lui.main, atout);
+			carte = GestionnaireCartesLecture.meilleurCarteDansA(lui.getMain(), atout);
 			if ( carte == null) return true;
-			if ( analyseur.positionDe(carte) < analyseur.positionDe(m)) return true;
+			if ( GestionnaireCartesLecture.positionDe(carte) < GestionnaireCartesLecture.positionDe(m)) return true;
 		}
 		return false;
 	}
 
 	/** Vérifie que le joueur 'lui' peut jouer cette 'carte' */
-	public boolean ilPeutJouerCetteCarte( JoueurBelote lui, Carte carte) {
+	public boolean ilPeutJouerCetteCarte( IJoueurBelote lui, Carte carte) {
 
-		Carte p, c;
+		Carte p;
 		if (gestionnaireCartes.getTapis().size()==0) return true;
 		p = gestionnaireCartes.getTapis().get(0);
 
@@ -708,13 +707,13 @@ public class AnalyseurJeuTemp implements Runnable {
 
 		} else { // ! même couleur
 			if ( p.estCouleur(atout)) { // si atout demandé
-				if (  lui.main.contient(atout)) return false;
+				if (  lui.getMain().contient(atout)) return false;
 				else return verifieDefausse(lui, carte);
 			} else { // ! même couleur, ! atout demandé
-				if ( lui.main.contient(p.getCouleur())) return false;
+				if ( lui.getMain().contient(p.getCouleur())) return false;
 
 				if ( carte.estCouleur(atout)) {
-					if ( lui.main.contient(p.getCouleur())) return false;
+					if ( lui.getMain().contient(p.getCouleur())) return false;
 					else return verifieAtoutJouePar(lui, carte);
 				} else { // il devrait couper mais ne l'a pas fait
 
@@ -725,24 +724,24 @@ public class AnalyseurJeuTemp implements Runnable {
 	}
 
 	/** Vérifie que le joueur a le droit de ne pas couper */
-	private boolean verifieDefausse( JoueurBelote lui, Carte carte) {
+	private boolean verifieDefausse( IJoueurBelote lui, Carte carte) {
 
-		if ( ! lui.main.contient(atout)) return true;
+		if ( ! lui.getMain().contient(atout)) return true;
 
 		// son partenaire est il maitre ?
 		if ( gestionnaireCartes.getTapis().size()>=2)
-			if ( analyseur.meilleurCarte(gestionnaireCartes.getTapis()).equals(gestionnaireCartes.getTapis().get(gestionnaireCartes.getTapis().size()-2)))
+			if ( GestionnaireCartesLecture.meilleurCarte(gestionnaireCartes.getTapis()).equals(gestionnaireCartes.getTapis().get(gestionnaireCartes.getTapis().size()-2)))
 				return true;
 
-		if ( ! lui.main.contient(atout)) return true;
+		if ( ! lui.getMain().contient(atout)) return true;
 		return false;
 	}
 
 	/** Donne les cartes au joueur, et compte les points */
 	private boolean faitGagnerLeTour() {
 
-		Carte gagnante = analyseur.meilleurCarte(gestionnaireCartes.getTapis());
-		JoueurBelote j = joueurQuiCommence;
+		Carte gagnante = GestionnaireCartesLecture.meilleurCarte(gestionnaireCartes.getTapis());
+		IJoueurBelote j = joueurQuiCommence;
 
 		for ( int i = 0; i < 4 ; i++)
 			if ( gestionnaireCartes.getTapis().get(i) == gagnante)
@@ -931,17 +930,17 @@ public class AnalyseurJeuTemp implements Runnable {
 		return ! partieEnCours || arretPartieDemande;
 	}
 
-	public void changeJoueurPar(IJoueurBelote remplacant) {
+	/*public void changeJoueurPar(IJoueurBelote remplacant) {
 		IJoueurBelote j = joueurs.get(remplacant.getOrdre());
 		joueurs.set(remplacant.getOrdre(), remplacant);
-		remplacant.suivant.precedent = remplacant;
+		remplacant.getSuivant().precedent = remplacant;
 		remplacant.precedent.suivant = remplacant;
 		if ( joueurCourant == j ) joueurCourant = remplacant;
 		if ( joueurQuiCommence == j ) joueurQuiCommence = remplacant;
 		if ( joueurQuiDistribue == j ) joueurQuiDistribue = remplacant;
 		if ( joueurQuiPrend == j ) joueurQuiPrend = remplacant;
 		// TODO: vérifier où en est la partie cas là c'est quand même pas cool...
-	}
+	}*/
 
 	boolean synchroReseauOk;
 	private void doSynchroReseau(IJoueurBelote j) {
@@ -966,6 +965,11 @@ public class AnalyseurJeuTemp implements Runnable {
 
 	public void setConfirmRebelote(boolean armed) {
 		confirmRebelote = armed;
+	}
+
+	public RegleTemp getRegle() {
+		// TODO Auto-generated method stub
+		return regle;
 	}
 
 }

@@ -1,7 +1,7 @@
 /*
   A Belote game
 
-  Copyright (C) 2012 Cl√©ment GERARDIN.
+  Copyright (C) 2012 ClÈment GERARDIN.
 
   This file is part of Belote.
 
@@ -23,13 +23,13 @@
 package graphisme;
 
 
-import belote.JoueurBelote;
-import belote.JoueurHumain;
-import belote.JoueurReseau;
-import belote.RegleBelote;
 import belote.BeloteEvent;
+import belote.AnalyseurJeuTemp;
 import belote.AnalyseurListener;
 import belote.joueur.IJoueurBelote;
+import belote.joueur.JoueurHumain;
+import belote.joueur.JoueurIA;
+import belote.joueur.JoueurReseau;
 import cartes.PileDeCarte;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -50,12 +50,16 @@ import javax.swing.table.TableModel;
 //import sun.misc.Regexp;
 
 /**
- * Gestionnaire de parties r√©seau
- * @author Cl√©ment
+ * Gestionnaire de parties rÈseau
+ * @author ClÈment
  */
 public class FenetrePartieReseau extends javax.swing.JFrame implements TableModel, AnalyseurListener {
 
-    /* Action des joueurs envoy√©s et re√ßus par le server */
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/* Action des joueurs envoyÈs et re√ßus par le server */
     public static final int T_COUPE  = 1;
     public static final int T_ATOUT1 = 2;
     public static final int T_ATOUT2 = 3;
@@ -81,15 +85,15 @@ public class FenetrePartieReseau extends javax.swing.JFrame implements TableMode
                     String j;
                     public Runnable setJ( String j0) { j = j0; return this; }
                     @Override public void run() {
-                        JOptionPane.showMessageDialog(null, "La partie r√©seau √† √©t√© annul√©e c√¥t√© serveur",
-                                "Erreur r√©seau ("+j+")", JOptionPane.ERROR_MESSAGE); }}.setJ(error));
+                        JOptionPane.showMessageDialog(null, "La partie rÈseau √† ÈtÈ annulÈe c√¥tÈ serveur",
+                                "Erreur rÈseau ("+j+")", JOptionPane.ERROR_MESSAGE); }}.setJ(error));
         detruitPartieReseau();
-        tapis.getRegle().demandeLaFinDeLaPartie(false);
+        tapis.getAnalyseur().demandeLaFinDeLaPartie(false);
     }
 
     class Joueur {
 
-        JoueurBelote joueur;    // Je joueur de belote associ√© √† l'ID sur le serveur
+        IJoueurBelote joueur;    // Je joueur de belote associÈ √† l'ID sur le serveur
         String id, nom;
         String value;
         String synchro;
@@ -118,7 +122,7 @@ public class FenetrePartieReseau extends javax.swing.JFrame implements TableMode
         fenetreDeChat.addChat("QUIT");
         destroyThread = true;
 
-        // On quitte la partie r√©seau proprement
+        // On quitte la partie rÈseau proprement
         if ( ! jButtonOpenGame.getText().equals("Ouvrir"))
             jButtonOpenGameActionPerformed(null);
 
@@ -127,7 +131,7 @@ public class FenetrePartieReseau extends javax.swing.JFrame implements TableMode
 
     int dansMAJReseau = 0;
 
-    /** Cr√©e un thread qui appel la m√©thode majJoueursReseau() toute les secondes */
+    /** CrÈe un thread qui appel la mÈthode majJoueursReseau() toute les secondes */
     void startMajJoueursReseau() {
         majJoueursReseau = true;
         new Thread(new Runnable() {
@@ -144,7 +148,7 @@ public class FenetrePartieReseau extends javax.swing.JFrame implements TableMode
         }).start();
     }
 
-    /** Renvoie le composant graphique TapisDeBelote pour d√©bloquer son rafraichissement */
+    /** Renvoie le composant graphique TapisDeBelote pour dÈbloquer son rafraichissement */
     public TapisDeBelote getTapis() {
         return tapis;
     }
@@ -178,7 +182,7 @@ public class FenetrePartieReseau extends javax.swing.JFrame implements TableMode
         jButtonOpenGame = new javax.swing.JButton();
         jToggleButtonMAJ = new javax.swing.JToggleButton();
 
-        setTitle("Gestionnaire de partie en r√©seau");
+        setTitle("Gestionnaire de partie en rÈseau");
 
         jLabel1.setText("Participants : (0 avec 2 et 1 avec 3)");
 
@@ -203,8 +207,8 @@ public class FenetrePartieReseau extends javax.swing.JFrame implements TableMode
             }
         });
 
-        jButtonNewGame.setText("Cr√©er");
-        jButtonNewGame.setToolTipText("Cr√©er une nouvelle partie");
+        jButtonNewGame.setText("CrÈer");
+        jButtonNewGame.setToolTipText("CrÈer une nouvelle partie");
         jButtonNewGame.setEnabled(false);
         jButtonNewGame.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -241,7 +245,7 @@ public class FenetrePartieReseau extends javax.swing.JFrame implements TableMode
         });
 
         jButtonStartGame.setText("Commencer");
-        jButtonStartGame.setToolTipText("D√©marrer la partie (automatique pour les clients)");
+        jButtonStartGame.setToolTipText("DÈmarrer la partie (automatique pour les clients)");
         jButtonStartGame.setEnabled(false);
         jButtonStartGame.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -249,7 +253,7 @@ public class FenetrePartieReseau extends javax.swing.JFrame implements TableMode
             }
         });
 
-        jLabel4.setText("URL du serveur de parties en r√©seau :");
+        jLabel4.setText("URL du serveur de parties en rÈseau :");
 
         jTextFieldURL.setText("http://opentom.free.fr/belote/serveur_belote.php");
         jTextFieldURL.addActionListener(new java.awt.event.ActionListener() {
@@ -266,7 +270,7 @@ public class FenetrePartieReseau extends javax.swing.JFrame implements TableMode
             }
         });
 
-        jLabel5.setText("R√©sultat :");
+        jLabel5.setText("RÈsultat :");
 
         jLabelTestResult.setText("aucun");
 
@@ -282,7 +286,7 @@ public class FenetrePartieReseau extends javax.swing.JFrame implements TableMode
         });
 
         jToggleButtonMAJ.setText("Mise √† jour");
-        jToggleButtonMAJ.setToolTipText("D√©sactivez la mise √† jour automatique de la partie si cela sature le serveur");
+        jToggleButtonMAJ.setToolTipText("DÈsactivez la mise √† jour automatique de la partie si cela sature le serveur");
         jToggleButtonMAJ.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButtonMAJActionPerformed(evt);
@@ -392,7 +396,7 @@ public class FenetrePartieReseau extends javax.swing.JFrame implements TableMode
 
         if ( r.startsWith("ERROR")) {
             nomDePartie = null;
-            JOptionPane.showMessageDialog(this, "Le serveur √† r√©pondu :\n"+r, "Impossible de cr√©er une partie", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Le serveur √† rÈpondu :\n"+r, "Impossible de crÈer une partie", JOptionPane.ERROR_MESSAGE);
             return;
         }
         
@@ -443,7 +447,7 @@ public class FenetrePartieReseau extends javax.swing.JFrame implements TableMode
                     String parties[] = recupereNomsPartiesReseau();
                     if ( parties.length == 0) {
                         JOptionPane.showConfirmDialog(this, "Il n'y a aucune partie disponible sur le serveur.", 
-                                "Liste des parties r√©seau", JOptionPane.CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
+                                "Liste des parties rÈseau", JOptionPane.CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
                         jButtonOpenGame.setEnabled(true);
                         jButtonOpenGame.setText("Ouvrir");
                         return;
@@ -474,7 +478,7 @@ public class FenetrePartieReseau extends javax.swing.JFrame implements TableMode
                     jTextFieldGameName.setEnabled(false);
                     jButtonConnect.setEnabled(false);
                 } else {
-                    JOptionPane.showMessageDialog(this, "Le serveur √† r√©pondu :\n"+r,"Impossible d'ouvrir la partie", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Le serveur √† rÈpondu :\n"+r,"Impossible d'ouvrir la partie", JOptionPane.ERROR_MESSAGE);
                     if ( jTextFieldGameName.getText().equals(""))
                         jButtonOpenGame.setText("Chercher");
                     else
@@ -485,7 +489,7 @@ public class FenetrePartieReseau extends javax.swing.JFrame implements TableMode
             } catch (UnsupportedEncodingException ex) {
                 Logger.getLogger(FenetrePartieReseau.class.getName()).log(Level.SEVERE, null, ex);
             }
-            else { // Quitte ou d√©truit cette partie
+            else { // Quitte ou dÈtruit cette partie
 
                 if ( (nomDePartie!=null) && ! tapis.verifyEndOfGame()) return;
 
@@ -531,19 +535,23 @@ public class FenetrePartieReseau extends javax.swing.JFrame implements TableMode
             majJoueursReseau = false;
             majJoueursReseau();
             partieEnCours = true; pasDePartie = false;
-            JoueurBelote j[] = { null, null, null, null };
+            IJoueurBelote j[] = { null, null, null, null };
 
-            // Inscription des joueurs sur le serveur r√©seau
+            // Inscription des joueurs sur le serveur rÈseau
             for ( int i = 0 ; i < 4; i++) {
                 int p = (i+4-posJoueurHumain+2)%4;
                 if ( (passGame!=null) && (joueurs[i] == null)) {
                         String id = placeParticipantReseauEn(i, "Ordi_"+i);
                         if ( id == null) { detruitPartieReseau(); return; }
                         joueurs[i] = new Joueur(id,"Ordi_"+i);
-                        j[p] = joueurs[i].joueur = new JoueurBelote(joueurs[i].nom, p);
+                        j[p] = joueurs[i].joueur = new JoueurIA(joueurs[i].nom, p);
 
                 } else if ( joueurs[i].id.equals(idJoueurHumain))
-                        j[p] = joueurs[i].joueur = new JoueurHumain(tapis.getRegle(), joueurs[i].nom+"(vous)", p, tapis);
+                        j[p] = joueurs[i].joueur = new JoueurHumain(tapis.getAnalyseur().getRegle(),
+                        		joueurs[i].nom+"(vous)",
+                        		p,
+                        		tapis,
+                        		tapis.getAnalyseur().getGraphicListener());
                 else
                         j[p] = joueurs[i].joueur = new JoueurReseau(joueurs[i].nom, p, this);
 
@@ -554,7 +562,7 @@ public class FenetrePartieReseau extends javax.swing.JFrame implements TableMode
             jButtonConnect.setEnabled(false);
             jButtonUseGame.setEnabled(false);
 
-            // Cr√©ation ou r√©cup√©ration du jeu de carte commun
+            // CrÈation ou rÈcupÈration du jeu de carte commun
             PileDeCarte p;
             if (passGame!=null) {
                 p = PileDeCarte.getJeuBelote();
@@ -566,7 +574,7 @@ public class FenetrePartieReseau extends javax.swing.JFrame implements TableMode
 
             // Initialisation de la partie
             tapis.decoreJeuDeCarte(p);
-            RegleBelote r = new RegleBelote(p, j, joueurs[RegleBelote.JOUEUR_EST].joueur.getOrdre());
+            AnalyseurJeuTemp r = new AnalyseurJeuTemp(p, j, joueurs[AnalyseurJeuTemp.JOUEUR_EST].joueur.getOrdre());
             r.setBeloteListener(this);
             tapis.nouvellePartie( r);
             partieACreer = false;
@@ -643,17 +651,17 @@ public class FenetrePartieReseau extends javax.swing.JFrame implements TableMode
                             
                         } else if ( ! partieEnCours ) joueurs[pos] = null;
                                 else if ( passGame != null) {
-                                    // un joueur c'est barr√©, si je suis le propri√©taire,
+                                    // un joueur c'est barrÈ, si je suis le propriÈtaire,
                                     // il faut le remplacer :-~
                                     r = ditAuServeur("action=USE&game="+nomDePartie+
                                             "&pass="+passGame+"&pos="+pos+"&pseudo=Ordi_"+joueurs[pos].nom);
                                     if ( r.startsWith("OK")) {
                                         joueurs[pos].id = r.split(":")[1];
                                         joueurs[pos].nom = "Ordi_"+joueurs[pos].nom;
-                                        joueurs[pos].joueur = tapis.getRegle().getJoueur(joueurs[pos].joueur.getOrdre()).clone();
+                                        joueurs[pos].joueur = tapis.getAnalyseur().getJoueur(joueurs[pos].joueur.getOrdre()).createClone();
                                         joueurs[pos].joueur.setNom(joueurs[pos].nom);
-                                        tapis.regle.changeJoueurPar(joueurs[pos].joueur);
-                                        // Il est forc√©ment synchro !
+                                        tapis.getAnalyseur().changeJoueurPar(joueurs[pos].joueur);
+                                        // Il est forcÈment synchro !
                                         ditAuServeur("action=OK&game="+nomDePartie+"&client="+joueurs[pos].id);
                                     } else System.err.println("Impossible de remplacer le joueur");
                                 }
@@ -672,9 +680,9 @@ public class FenetrePartieReseau extends javax.swing.JFrame implements TableMode
                 
                 jButtonStartGame.setEnabled(!partieEnCours && (passGame!=null));
 
-                // On d√©mare la partie si le jeu de carte √† √©t√© envoy√©
+                // On dÈmare la partie si le jeu de carte √† ÈtÈ envoyÈ
                 if ( (! partieEnCours) && (! partieACreer) && (jcourant > 3) ) {
-                    // D√©marre la partie !
+                    // DÈmarre la partie !
                     partieACreer = true;
                     jButtonStartGameActionPerformed(null);
                 }
@@ -684,7 +692,7 @@ public class FenetrePartieReseau extends javax.swing.JFrame implements TableMode
         dansMAJReseau--;
     }
 
-    /** Demande au serveur la liste des parties r√©seau */
+    /** Demande au serveur la liste des parties rÈseau */
     String[] recupereNomsPartiesReseau() {
         ArrayList<String> a = new ArrayList<String>();
 
@@ -696,8 +704,8 @@ public class FenetrePartieReseau extends javax.swing.JFrame implements TableMode
         } while ((r==null) || r.startsWith("<!DOCTYPE"));
 
         if ( r.startsWith("ERROR")) {
-            JOptionPane.showMessageDialog(this, "Le serveur √† r√©pondu :\n"+r,
-                    "R√©cup√©ration des parties en r√©seau", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Le serveur √† rÈpondu :\n"+r,
+                    "RÈcupÈration des parties en rÈseau", JOptionPane.ERROR_MESSAGE);
             return a.toArray(new String[a.size()]);
         }
         
@@ -708,7 +716,7 @@ public class FenetrePartieReseau extends javax.swing.JFrame implements TableMode
 
     }
 
-    /** Utilise une place autour de la table a travers le r√©seau retourne l'ID du joueur plac√© */
+    /** Utilise une place autour de la table a travers le rÈseau retourne l'ID du joueur placÈ */
     String placeParticipantReseauEn( int pos, String pseudo) {
         String r = ditAuServeur("action=USE&pos="+pos+"&game="+nomDePartie+"&pseudo="+pseudo);
         if ( r.startsWith("OK"))
@@ -754,15 +762,15 @@ public class FenetrePartieReseau extends javax.swing.JFrame implements TableMode
                 if ( r.startsWith("OK")) {
                     joueurs[pos].id = r.split(":")[1];
                     joueurs[pos].nom = "Ordi_"+joueurs[pos].nom;
-                    joueurs[pos].joueur = tapis.getRegle().getJoueur(joueurs[pos].joueur.getOrdre()).clone();
+                    joueurs[pos].joueur = tapis.getAnalyseur().getJoueur(joueurs[pos].joueur.getOrdre()).createClone();
                     joueurs[pos].joueur.setNom(joueurs[pos].nom);
-                    tapis.regle.changeJoueurPar(joueurs[pos].joueur);
-                    // Il est forc√©ment synchro !
+                    tapis.getAnalyseur().changeJoueurPar(joueurs[pos].joueur);
+                    // Il est forcÈment synchro !
                     ditAuServeur("action=OK&game="+nomDePartie+"&client="+joueurs[pos].id);
                     return null;
                 } else {
                     System.err.println("Impossible de remplacer le joueur");
-                    tapis.getRegle().demandeLaFinDeLaPartie(false);
+                    tapis.getAnalyseur().demandeLaFinDeLaPartie(false);
                 }
             } if ( r.startsWith("ERROR20")) {
                 finDePArtieImpromptue(r);
@@ -789,7 +797,7 @@ public class FenetrePartieReseau extends javax.swing.JFrame implements TableMode
        passGame = nomDePartie = null;
     }
     
-    /** Retourne la position du prochain joueur dans la partie r√©seau */
+    /** Retourne la position du prochain joueur dans la partie rÈseau */
     int getProchainJoueurReseau() {
         String r;
         do {
@@ -800,7 +808,7 @@ public class FenetrePartieReseau extends javax.swing.JFrame implements TableMode
         return Integer.valueOf(r.split(":")[1]);
     }
 
-    /** Est appel√© par RegleBelote pour informer de ce qui ce passe pendant le jeu */
+    /** Est appelÈ par RegleBelote pour informer de ce qui ce passe pendant le jeu */
     @Override
     public void newBeloteEvent( BeloteEvent e) {
         String r, value = "error";
@@ -824,7 +832,7 @@ public class FenetrePartieReseau extends javax.swing.JFrame implements TableMode
         
         if ( e.type == BeloteEvent.EV_SYNCHRO) {
 
-            // Envoie la synchro pour tous les joueurs g√©r√©s
+            // Envoie la synchro pour tous les joueurs gÈrÈs
             for ( int i = 0; i < 4; i++)
                 if ( ! (joueurs[i].joueur instanceof JoueurReseau)) {
                     // Valide le tour par le joueur local
@@ -837,7 +845,7 @@ public class FenetrePartieReseau extends javax.swing.JFrame implements TableMode
                 
 
             if ( passGame == null) {
-                // Attend le NEXT du propri√©taire de la partie si on a un joueur humain
+                // Attend le NEXT du propriÈtaire de la partie si on a un joueur humain
                 boolean wait = avecHumain;
                 
                 while( wait && (nomDePartie!=null) ) {
@@ -862,7 +870,7 @@ public class FenetrePartieReseau extends javax.swing.JFrame implements TableMode
         }
 
         int i = getJoueurReseau( e.from);
-        // Si c'est un coup d'un joueur r√©seau ne fait rien
+        // Si c'est un coup d'un joueur rÈseau ne fait rien
         if ( joueurs[ i].joueur instanceof JoueurReseau)
             return;
 
@@ -888,7 +896,7 @@ public class FenetrePartieReseau extends javax.swing.JFrame implements TableMode
         }
     }
 
-    String envoieActionDe( int pos, String idJoueur, String val, JoueurBelote me) {
+    String envoieActionDe( int pos, String idJoueur, String val, IJoueurBelote me) {
         String msg = null;
         if ( me instanceof JoueurHumain) {
             msg = fenetreDeChat.getChat();
@@ -919,7 +927,7 @@ public class FenetrePartieReseau extends javax.swing.JFrame implements TableMode
             if ( ( joueurs[i] != null ) && (joueurs[i].joueur == j))
                 return i;
 
-        // Au cas o√π il f√ªt remplac√© entre temps
+        // Au cas o√π il f√ªt remplacÈ entre temps
         j = j.getSuivant().getPrecedent();
         for ( int i = 0; i < 4; i ++)
             if ( ( joueurs[i] != null ) && (joueurs[i].joueur == j))
@@ -932,7 +940,7 @@ public class FenetrePartieReseau extends javax.swing.JFrame implements TableMode
     /** Envoie une requ√™te GET au serveur avec l'URL:
      *      jTextFieldURL.getText() + "?" + args
      *
-     *  D√©lais 5 secondes si trop de requ√™tes
+     *  DÈlais 5 secondes si trop de requ√™tes
      *  @return La valeur de retour du serveur
      */
     public String ditAuServeur( String args) {
@@ -970,7 +978,7 @@ public class FenetrePartieReseau extends javax.swing.JFrame implements TableMode
     }
 */
 
-    /** Effectue une requ√™te HTTP/GET et renvoie la r√©ponse sous forme de String */
+    /** Effectue une requ√™te HTTP/GET et renvoie la rÈponse sous forme de String */
     public String httpGet(String url) {
         try {
             String source = "";
@@ -1001,7 +1009,7 @@ public class FenetrePartieReseau extends javax.swing.JFrame implements TableMode
                 if (i!=0) data += "&";
                 data +=URLEncoder.encode(keys[i], "UTF-8")+"="+URLEncoder.encode(values[i], "UTF-8");
             }
-            //cr√©ation de la connection
+            //crÈation de la connection
             HttpURLConnection conn = (HttpURLConnection)new java.net.URL(adress).openConnection();
             conn.setRequestMethod("POST");
             conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
@@ -1014,7 +1022,7 @@ public class FenetrePartieReseau extends javax.swing.JFrame implements TableMode
             writer = new OutputStreamWriter(conn.getOutputStream());
             writer.write(data);
             writer.flush();
-            //lecture de la r√©ponse<br>
+            //lecture de la rÈponse<br>
             reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             String ligne;
             while ((ligne = reader.readLine()) != null) result += ligne + "\n";
@@ -1049,7 +1057,7 @@ public class FenetrePartieReseau extends javax.swing.JFrame implements TableMode
                 case 1: if ( joueurs[rowIndex] != null )
                             if ( joueurs[rowIndex].id == null) return "null";
                             else if (joueurs[rowIndex].id.equals(idJoueurHumain)) return "Vous (local)";
-                            else return "Joueur r√©seau";
+                            else return "Joueur rÈseau";
                         else return "";
                 case 2: if ( joueurs[rowIndex]==null) return "";
                         else if ( joueurs[rowIndex].value != null)

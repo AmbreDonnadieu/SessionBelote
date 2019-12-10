@@ -25,6 +25,7 @@ package graphisme;
 
 import belote.AnalyseurJeuTemp;
 import belote.GestionnaireCartesLecture;
+import belote.joueur.IJoueurBelote;
 import belote.joueur.JoueurHumain;
 import belote.AnalyseurInterfaceGraphique;
 import cartes.Carte;
@@ -139,7 +140,7 @@ public class TapisDeBelote extends JPanel implements AnalyseurInterfaceGraphique
         /* */
         /* Avec un humain */
         analyseur = new AnalyseurJeuTemp( decoreJeuDeCarte(PileDeCarte.getJeuBelote()),
-                    new JoueurHumain(null, "SUD", AnalyseurJeuTemp.JOUEUR_SUD, this));
+                    new JoueurHumain(null, "SUD", AnalyseurJeuTemp.JOUEUR_SUD, this, analyseur.getGraphicListener()));
         /* */
         
         analyseur.setGraphicListener(this);
@@ -233,12 +234,12 @@ public class TapisDeBelote extends JPanel implements AnalyseurInterfaceGraphique
             
             if ( analyseur.getQuiAPris() != null) {
                 g.setColor( Color.BLACK);
-                g.drawString( analyseur.getQuiAPris().nom + " a pris à " + analyseur.getCouleurAtout() + " (" +
+                g.drawString( analyseur.getQuiAPris().getNom() + " a pris à " + analyseur.getCouleurAtout() + " (" +
                               analyseur.getQuiAPris().getNbPlis() + "|" + analyseur.getQuiAPris().getSuivant().getNbPlis() + ')', 5, 20);
             }
 
             // Affiche les cartes des joueurs
-            belote.JoueurBelote j = analyseur.getJoueurQuiDistribue().getSuivant();
+            IJoueurBelote j = analyseur.getJoueurQuiDistribue().getSuivant();
             if ( (analyseur.getEtatDuJeu() != AnalyseurJeuTemp.ETAT_RIEN) &&
                  ( analyseur.getEtatDuJeu() != AnalyseurJeuTemp.ETAT_FINPARTIE))
                 for ( int i = 0; i < 4; i++) {
@@ -259,7 +260,7 @@ public class TapisDeBelote extends JPanel implements AnalyseurInterfaceGraphique
                         g.setColor(Color.BLACK);
                         switch ( j.getOrdre()) {
                             case AnalyseurJeuTemp.JOUEUR_NORD :
-                                    g.drawString( j.nom, getWidth()/2, BORDER);
+                                    g.drawString( j.getNom(), getWidth()/2, BORDER);
                                     if (( j == analyseur.getQuiAPris()) && ( analyseur.getCouleurAtout() != null))
                                         if ( analyseur.getCouleurAtout() != null)
                                             paintChoosedColor(g, ox + cardsW, BORDER + cardsH, analyseur.getCouleurAtout().toInt() );
@@ -267,7 +268,7 @@ public class TapisDeBelote extends JPanel implements AnalyseurInterfaceGraphique
                                     j.dessineMain(g, ox, BORDER, dx, 3, (!(j instanceof JoueurHumain)) && cartesTournees, this);
                                     break;
                             case AnalyseurJeuTemp.JOUEUR_EST :
-                                    g.drawString( j.nom, getWidth() - cardsW - BORDER, oy - 10);
+                                    g.drawString( j.getNom(), getWidth() - cardsW - BORDER, oy - 10);
                                     if (( j == analyseur.getQuiAPris())&& ( analyseur.getCouleurAtout() != null))
                                             paintChoosedColor(g, getWidth() - cardsW * 2, oy + cardsH, analyseur.getCouleurAtout().toInt() );
                                     
@@ -281,7 +282,7 @@ public class TapisDeBelote extends JPanel implements AnalyseurInterfaceGraphique
                                     j.dessineMain(g, ox, getHeight() - cardsH - BORDER, dx, 3,  (!(j instanceof JoueurHumain)) && cartesTournees, this);
                                     break;
                             case AnalyseurJeuTemp.JOUEUR_OUEST :
-                                    g.drawString( j.nom, 5, oy - 10);
+                                    g.drawString( j.getNom(), 5, oy - 10);
                                     if ( (j == analyseur.getQuiAPris()) && ( analyseur.getCouleurAtout() != null))
                                             paintChoosedColor(g, cardsW + BORDER, oy + cardsH, analyseur.getCouleurAtout().toInt() );
                                     
@@ -316,7 +317,7 @@ public class TapisDeBelote extends JPanel implements AnalyseurInterfaceGraphique
                     GCarte c = analyseur.getTapis().get(i).getRepresentationGraphique();
                     boolean win = (afficheCarteGagnante||((!analyseur.confirmPlis)&&(analyseur.getTapis().size()==4))) &&
                                     ((analyseur.getEtatDuJeu() == AnalyseurJeuTemp.ETAT_FINTOUR) || (analyseur.getEtatDuJeu() == AnalyseurJeuTemp.ETAT_JOUE)) &&
-                                    (c.carte == analyseur.getAnalyseur().meilleurCarte(analyseur.getTapis()));
+                                    (c.carte == GestionnaireCartesLecture.meilleurCarte(analyseur.getTapis()));
 
                     switch ( j.getOrdre()) {
                         case AnalyseurJeuTemp.JOUEUR_NORD:
@@ -366,7 +367,7 @@ public class TapisDeBelote extends JPanel implements AnalyseurInterfaceGraphique
             if ( (analyseur.getEtatDuJeu() == AnalyseurJeuTemp.ETAT_COUPEJEU) ||
                  (analyseur.getEtatDuJeu() == AnalyseurJeuTemp.ETAT_RIEN)) {
 
-                analyseur.getJeu().paint( g, 10, 10, (int)((getWidth()-cardsW)/33), (int)((getHeight()-cardsH)/33),
+                gestionnaireCarte.getJeuDeCarte().paint( g, 10, 10, (int)((getWidth()-cardsW)/33), (int)((getHeight()-cardsH)/33),
                                         cartesTournees);
             }
 
@@ -626,7 +627,7 @@ public class TapisDeBelote extends JPanel implements AnalyseurInterfaceGraphique
     }
 
     /** Retourne la règle en cours d'execution 'sur' ce tapis */
-    public AnalyseurJeuTemp getRegle() {
+    public AnalyseurJeuTemp getAnalyseur() {
         return analyseur;
     }
 

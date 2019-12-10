@@ -3,6 +3,7 @@ package belote.joueur;
 import java.awt.Component;
 import java.awt.Graphics;
 
+import belote.AnalyseurJeuTemp;
 import belote.GestionnaireCartesLecture;
 import cartes.Carte;
 import cartes.CouleurCarte;
@@ -16,19 +17,11 @@ public class JoueurIA extends AbstractJoueur {
 		// TODO Auto-generated constructor stub
 	}
 
-	@Override
-	public JoueurIA clone() {
-		JoueurIA j = new JoueurIA(nom, ordre);
-		j.regle = regle;
-		j.carteEnMain = carteEnMain;
-		j.tas = tas;
-		j.precedent = precedent;
-		j.suivant = suivant;
-		j.pointsTotaux = pointsTotaux;
-		j.nbPerdues = nbPerdues;
-		j.nbCapot = nbCapot;
-		j.nbPrises = nbPrises;
-		return j;
+    @Override
+    public IJoueurBelote createClone() {
+        JoueurHumain j = new JoueurHumain(nom, ordre);
+        j = (JoueurHumain) initClone((AbstractJoueur) j);
+        return j;
 	}
 
 	/** Renvoie le fait qu'il veuille prendre cet atout au premier tour */
@@ -69,7 +62,7 @@ public class JoueurIA extends AbstractJoueur {
 			}
 		}
 
-		if ( (RegleBelote.JOUEUR_EST == ordre) || (RegleBelote.JOUEUR_OUEST == ordre))
+		if ( (AnalyseurJeuTemp.JOUEUR_EST == ordre) || (AnalyseurJeuTemp.JOUEUR_OUEST == ordre))
 			if ( (joueurQuiCommence == this) && (tour==1) )
 				force += 1;
 
@@ -660,4 +653,5 @@ public class JoueurIA extends AbstractJoueur {
 	public int getNbPlis() {
 		return (int) ((tas.size() +suivant.suivant.tas.size())/4);
 	}
+
 }
