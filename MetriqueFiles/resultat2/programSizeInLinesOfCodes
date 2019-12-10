@@ -1,0 +1,23 @@
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/GestionnaireCartesLecture.java:9:	This class has too many methods, consider refactoring it.
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/StatistiquesBelote.java:58:	Avoid using redundant field initializer for 'listeners'
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/StatistiquesBelote.java:61:	Avoid using redundant field initializer for 'nbManchesE'
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/StatistiquesBelote.java:61:	Avoid using redundant field initializer for 'nbManchesN'
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:17:	This class has too many methods, consider refactoring it.
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:17:	Too many fields
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:80:	Avoid using redundant field initializer for 'confirmRebelote'
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:261:	Avoid really long methods.
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:261:	The method 'run()' has a NCSS line count of 227.
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/IJoueurBelote.java:12:	This class has too many methods, consider refactoring it.
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/AbstractJoueur.java:15:	This class has too many methods, consider refactoring it.
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/JoueurIA.java:13:	This class has too many methods, consider refactoring it.
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/JoueurIA.java:120:	Avoid really long methods.
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/JoueurIA.java:120:	The method 'joueUneCarte()' has a NCSS line count of 96.
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/PileDeCarte.java:32:	This class has too many methods, consider refactoring it.
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/graphisme/TapisDeBelote.java:23:	A high number of imports can indicate a high degree of coupling within an object.
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/graphisme/TapisDeBelote.java:63:	This class has too many methods, consider refactoring it.
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/graphisme/TapisDeBelote.java:63:	Too many fields
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/graphisme/TapisDeBelote.java:78:	Avoid using redundant field initializer for 'waitClick'
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/graphisme/TapisDeBelote.java:149:	Avoid using redundant field initializer for 'imageOK'
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/graphisme/TapisDeBelote.java:218:	Avoid really long methods.
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/graphisme/TapisDeBelote.java:218:	The method 'paintComponent(Graphics)' has a NCSS line count of 109.
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/graphisme/TapisDeBelote.java:584:	Avoid using redundant field initializer for 'partieVerrouillee'

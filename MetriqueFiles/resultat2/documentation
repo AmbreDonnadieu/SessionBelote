@@ -1,0 +1,300 @@
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurInterfaceGraphique.java:1:	Comment is too large: Too many lines
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurInterfaceGraphique.java:28:	Header comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurInterfaceGraphique.java:30:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurInterfaceGraphique.java:32:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurListener.java:1:	Comment is too large: Too many lines
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/BeloteEvent.java:1:	Comment is too large: Too many lines
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/BeloteEvent.java:48:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/BeloteEvent.java:49:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/BeloteEvent.java:50:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/BeloteEvent.java:51:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/BeloteEvent.java:52:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/BeloteEvent.java:54:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/GestionnaireCartesEcriture.java:6:	Header comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/GestionnaireCartesEcriture.java:8:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/GestionnaireCartesEcriture.java:20:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/GestionnaireCartesEcriture.java:24:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/GestionnaireCartesEcriture.java:28:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/GestionnaireCartesEcriture.java:32:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/GestionnaireCartesEcriture.java:36:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/GestionnaireCartesEcriture.java:41:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/GestionnaireCartesLecture.java:9:	Header comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/GestionnaireCartesLecture.java:11:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/GestionnaireCartesLecture.java:13:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/GestionnaireCartesLecture.java:14:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/GestionnaireCartesLecture.java:21:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/GestionnaireCartesLecture.java:23:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/GestionnaireCartesLecture.java:27:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/GestionnaireCartesLecture.java:37:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/GestionnaireCartesLecture.java:118:	Use opposite operator instead of the logic complement operator.
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/GestionnaireCartesLecture.java:126:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/GestionnaireCartesLecture.java:148:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/GestionnaireCartesLecture.java:169:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/GestionnaireCartesLecture.java:183:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/GestionnaireCartesLecture.java:193:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/GestionnaireCartesLecture.java:198:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/GestionnaireCartesLecture.java:211:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/GestionnaireCartesLecture.java:225:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/Main.java:1:	Comment is too large: Too many lines
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/Main.java:28:	Header comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/RegleTemp.java:9:	Header comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/RegleTemp.java:11:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/RegleTemp.java:12:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/RegleTemp.java:13:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/RegleTemp.java:36:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/RegleTemp.java:43:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/RegleTemp.java:47:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/RegleTemp.java:75:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/StatistiquesBelote.java:1:	Comment is too large: Too many lines
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/StatistiquesBelote.java:37:	Header comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/StatistiquesBelote.java:39:	Header comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/StatistiquesBelote.java:40:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/StatistiquesBelote.java:41:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/StatistiquesBelote.java:42:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/StatistiquesBelote.java:55:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/StatistiquesBelote.java:56:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/StatistiquesBelote.java:57:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/StatistiquesBelote.java:58:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/StatistiquesBelote.java:59:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/StatistiquesBelote.java:60:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/StatistiquesBelote.java:61:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/StatistiquesBelote.java:63:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/StatistiquesBelote.java:73:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/StatistiquesBelote.java:76:	Comment is too large: Line too long
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/StatistiquesBelote.java:93:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/AbstractJoueur.java:15:	Header comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/AbstractJoueur.java:17:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/AbstractJoueur.java:18:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/AbstractJoueur.java:23:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/AbstractJoueur.java:24:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/AbstractJoueur.java:25:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/AbstractJoueur.java:30:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/AbstractJoueur.java:31:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/AbstractJoueur.java:32:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/AbstractJoueur.java:33:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/AbstractJoueur.java:35:	Comment is too large: Too many lines
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/AbstractJoueur.java:49:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/AbstractJoueur.java:224:	Protected method constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/AbstractJoueur.java:228:	Protected method constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/AbstractJoueur.java:244:	Use opposite operator instead of the logic complement operator.
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/AbstractJoueur.java:301:	Protected method constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/AbstractJoueur.java:322:	Protected method constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/IJoueurBelote.java:12:	Header comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/IJoueurBelote.java:29:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/IJoueurBelote.java:31:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/IJoueurBelote.java:48:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/IJoueurBelote.java:50:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/IJoueurBelote.java:52:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/IJoueurBelote.java:57:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/IJoueurBelote.java:69:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/IJoueurBelote.java:71:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/IJoueurBelote.java:73:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/IJoueurBelote.java:75:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/IJoueurBelote.java:76:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/IJoueurBelote.java:77:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/IJoueurBelote.java:78:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/IJoueurBelote.java:79:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/IJoueurBelote.java:81:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/IJoueurBelote.java:83:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/IJoueurBelote.java:85:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/IJoueurBelote.java:87:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/IJoueurBelote.java:89:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/IJoueurBelote.java:91:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/IJoueurBelote.java:93:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/IJoueurBelote.java:95:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/IJoueurBelote.java:97:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/IJoueurBelote.java:99:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/IJoueurBelote.java:101:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/IJoueurBelote.java:103:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/IJoueurBelote.java:105:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/IJoueurBelote.java:107:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/IJoueurBelote.java:109:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/IJoueurBelote.java:111:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/IJoueurBelote.java:113:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/IJoueurBelote.java:115:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:17:	Header comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:18:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:20:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:22:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:23:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:25:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:26:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:27:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:28:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:29:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:30:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:31:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:32:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:33:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:34:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:35:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:36:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:47:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:48:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:49:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:50:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:51:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:54:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:59:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:60:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:62:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:63:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:64:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:65:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:66:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:67:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:68:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:69:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:70:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:72:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:73:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:74:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:79:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:80:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:81:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:82:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:88:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:140:	Comment is too large: Line too long
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:141:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:166:	Comment is too large: Line too long
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:167:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:197:	Comment is too large: Too many lines
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:211:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:259:	Comment is too large: Line too long
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:395:	Comment is too large: Too many lines
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:625:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:760:	Comment is too large: Line too long
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:762:	Comment is too large: Too many lines
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:821:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:934:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:959:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:963:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:964:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:980:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/JoueurHumain.java:17:	Header comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/JoueurHumain.java:19:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/JoueurHumain.java:20:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/JoueurHumain.java:22:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/JoueurHumain.java:27:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/JoueurHumain.java:29:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/JoueurHumain.java:43:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/JoueurHumain.java:53:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/JoueurHumain.java:94:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/JoueurHumain.java:95:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/JoueurHumain.java:96:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/JoueurHumain.java:135:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/JoueurReseau.java:7:	Header comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/JoueurReseau.java:9:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/JoueurReseau.java:11:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/Carte.java:1:	Comment is too large: Too many lines
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/Carte.java:27:	Header comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/Carte.java:29:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/Carte.java:30:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/Carte.java:31:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/Carte.java:33:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/Carte.java:56:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/Carte.java:60:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/Carte.java:69:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/Carte.java:73:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/Carte.java:77:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/CouleurCarte.java:1:	Comment is too large: Too many lines
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/CouleurCarte.java:25:	Header comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/CouleurCarte.java:27:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/CouleurCarte.java:28:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/CouleurCarte.java:29:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/CouleurCarte.java:30:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/CouleurCarte.java:31:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/CouleurCarte.java:32:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/CouleurCarte.java:34:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/CouleurCarte.java:35:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/CouleurCarte.java:37:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/CouleurCarte.java:45:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/CouleurCarte.java:61:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/PileDeCarte.java:1:	Comment is too large: Too many lines
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/PileDeCarte.java:32:	Header comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/PileDeCarte.java:76:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/PileDeCarte.java:104:	Comment is too large: Line too long
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/PileDeCarte.java:123:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/PileDeCarte.java:160:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/PileDeCarte.java:161:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/PileDeCarte.java:162:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/PileDeCarte.java:205:	Comment is too large: Line too long
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/ValeureCarte.java:1:	Comment is too large: Too many lines
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/ValeureCarte.java:25:	Header comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/ValeureCarte.java:27:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/ValeureCarte.java:28:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/ValeureCarte.java:29:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/ValeureCarte.java:30:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/ValeureCarte.java:31:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/ValeureCarte.java:32:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/ValeureCarte.java:33:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/ValeureCarte.java:34:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/ValeureCarte.java:35:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/ValeureCarte.java:36:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/ValeureCarte.java:37:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/ValeureCarte.java:38:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/ValeureCarte.java:39:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/ValeureCarte.java:40:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/ValeureCarte.java:41:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/ValeureCarte.java:42:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/ValeureCarte.java:44:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/ValeureCarte.java:45:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/ValeureCarte.java:46:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/ValeureCarte.java:47:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/ValeureCarte.java:48:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/ValeureCarte.java:49:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/ValeureCarte.java:50:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/ValeureCarte.java:51:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/ValeureCarte.java:52:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/ValeureCarte.java:53:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/ValeureCarte.java:54:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/ValeureCarte.java:55:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/ValeureCarte.java:56:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/ValeureCarte.java:57:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/ValeureCarte.java:58:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/ValeureCarte.java:75:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/ValeureCarte.java:77:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/ValeureCarte.java:97:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/ValeureCarte.java:101:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/ValeureCarte.java:112:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/ValeureCarte.java:125:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/ValeureCarte.java:130:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/JoueurIA.java:13:	Header comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/JoueurIA.java:15:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/JoueurIA.java:97:	Comment is too large: Line too long
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/JoueurIA.java:479:	Comment is too large: Line too long
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/JoueurIA.java:505:	Comment is too large: Line too long
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/JoueurIA.java:653:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/graphisme/TapisDeBelote.java:1:	Comment is too large: Too many lines
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/graphisme/TapisDeBelote.java:65:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/graphisme/TapisDeBelote.java:66:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/graphisme/TapisDeBelote.java:67:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/graphisme/TapisDeBelote.java:68:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/graphisme/TapisDeBelote.java:69:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/graphisme/TapisDeBelote.java:70:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/graphisme/TapisDeBelote.java:71:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/graphisme/TapisDeBelote.java:72:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/graphisme/TapisDeBelote.java:76:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/graphisme/TapisDeBelote.java:77:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/graphisme/TapisDeBelote.java:78:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/graphisme/TapisDeBelote.java:79:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/graphisme/TapisDeBelote.java:80:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/graphisme/TapisDeBelote.java:82:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/graphisme/TapisDeBelote.java:83:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/graphisme/TapisDeBelote.java:84:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/graphisme/TapisDeBelote.java:85:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/graphisme/TapisDeBelote.java:87:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/graphisme/TapisDeBelote.java:116:	Comment is too large: Too many lines
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/graphisme/TapisDeBelote.java:149:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/graphisme/TapisDeBelote.java:151:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/graphisme/TapisDeBelote.java:175:	Comment is too large: Too many lines
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/graphisme/TapisDeBelote.java:191:	Public method and constructor comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/graphisme/TapisDeBelote.java:418:	Comment is too large: Line too long
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/graphisme/TapisDeBelote.java:485:	Document empty method body
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/graphisme/TapisDeBelote.java:488:	Document empty method body
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/graphisme/TapisDeBelote.java:573:	Comment is too large: Line too long
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/graphisme/TapisDeBelote.java:584:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/graphisme/TapisDeBelote.java:585:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/graphisme/TapisDeBelote.java:586:	Field comments are required
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/graphisme/TapisDeBelote.java:601:	Comment is too large: Too many lines
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/graphisme/TapisDeBelote.java:602:	Comment is too large: Line too long
