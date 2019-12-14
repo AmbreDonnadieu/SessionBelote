@@ -1,0 +1,5 @@
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/BeloteEvent.java:33:	The class 'BeloteEvent' is suspected to be a Data Class (WOC=0.000%, NOPA=11, NOAM=0, WMC=1)
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/GestionnaireCartesLecture.java:9:	Possible God Class (WMC=70, ATFD=29, TCC=22.222%)
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:17:	Possible God Class (WMC=149, ATFD=112, TCC=14.949%)
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/PileDeCarte.java:32:	Possible God Class (WMC=60, ATFD=27, TCC=0.000%)
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/JoueurIA.java:13:	Possible God Class (WMC=246, ATFD=90, TCC=0.000%)

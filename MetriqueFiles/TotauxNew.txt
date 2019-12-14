@@ -1,0 +1,8 @@
+     5 badclass
+     0 classTooLenght
+    52 complexity
+   321 coupling
+    24 cycloComplexity
+   300 documentation
+    23 programSizeInLinesOfCodes
+   725 total

@@ -1,0 +1,52 @@
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/RegleTemp.java:55:	The method 'pointsDe(Carte)' has a cyclomatic complexity of 11.
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/RegleTemp.java:126:	Avoid unused method parameters such as 'carte'.
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/StatistiquesBelote.java:59:	Unnecessary use of fully qualified name 'javax.swing.JLabel' due to existing import 'javax.swing.JLabel'
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/StatistiquesBelote.java:90:	Avoid instantiating new objects inside loops
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/StatistiquesBelote.java:112:	Avoid instantiating new objects inside loops
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/StatistiquesBelote.java:142:	The method 'getValueAt(int, int)' has a cyclomatic complexity of 10.
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:8:	Avoid unused imports such as 'belote.joueur.AbstractJoueur'
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:17:	The class 'AnalyseurJeuTemp' has a total cyclomatic complexity of 149 (highest 18).
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:92:	Avoid instantiating new objects inside loops
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:109:	The method 'addCarteJouee(Carte)' has a cyclomatic complexity of 11.
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:187:	Avoid instantiating new objects inside loops
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:204:	Avoid instantiating new objects inside loops
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:261:	The method 'run()' has a cyclomatic complexity of 71.
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:261:	The method 'run()' has an NPath complexity of 2147483647
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:281:	Avoid instantiating new objects inside loops
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:321:	Avoid instantiating new objects inside loops
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:351:	Avoid instantiating new objects inside loops
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:625:	The method 'joueUnTour()' has a cyclomatic complexity of 18.
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:675:	Avoid instantiating new objects inside loops
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:731:	Avoid unused method parameters such as 'carte'.
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:784:	The method 'changeEtat(int)' has a cyclomatic complexity of 10.
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:862:	Consider simply returning the value vs storing it in local variable 'c'
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:870:	The method 'pointsDe(Carte)' has a cyclomatic complexity of 11.
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/AnalyseurJeuTemp.java:910:	Avoid unnecessary return statements
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/JoueurHumain.java:29:	Avoid unused constructor parameters such as 'regle'.
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/JoueurHumain.java:43:	Avoid unused constructor parameters such as 'regle'.
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/JoueurHumain.java:65:	Avoid instantiating new objects inside loops
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/PileDeCarte.java:46:	Unnecessary use of fully qualified name 'java.util.Random' due to existing import 'java.util.Random'
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/PileDeCarte.java:70:	Avoid unused local variables such as 'p'.
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/PileDeCarte.java:81:	Avoid instantiating new objects inside loops
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/PileDeCarte.java:165:	The method 'sort(GestionnaireCartesLecture)' has a cyclomatic complexity of 13.
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/PileDeCarte.java:228:	Avoid instantiating new objects inside loops
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/cartes/ValeureCarte.java:77:	The method 'valueOf(String)' has a cyclomatic complexity of 15.
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/JoueurIA.java:13:	The class 'JoueurIA' has a total cyclomatic complexity of 246 (highest 50).
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/JoueurIA.java:33:	The method 'getChoixAtout(CouleurCarte, int)' has a cyclomatic complexity of 25.
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/JoueurIA.java:33:	The method 'getChoixAtout(CouleurCarte, int)' has an NPath complexity of 3600
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/JoueurIA.java:35:	Avoid unused local variables such as 'nbAs'.
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/JoueurIA.java:36:	Avoid unused local variables such as 'aNeuf'.
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/JoueurIA.java:36:	Avoid unused local variables such as 'aValet'.
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/JoueurIA.java:120:	The method 'joueUneCarte()' has a cyclomatic complexity of 50.
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/JoueurIA.java:120:	The method 'joueUneCarte()' has an NPath complexity of 1320
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/JoueurIA.java:282:	The method 'donneLaGrosseDefausse()' has a cyclomatic complexity of 28.
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/JoueurIA.java:282:	The method 'donneLaGrosseDefausse()' has an NPath complexity of 1134
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/JoueurIA.java:412:	The method 'donneUnePetiteCarte()' has a cyclomatic complexity of 16.
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/JoueurIA.java:480:	The method 'donneCarteJusteDessous(Carte, boolean)' has a cyclomatic complexity of 12.
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/JoueurIA.java:506:	The method 'donneCarteJusteDessus(Carte, boolean)' has a cyclomatic complexity of 12.
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/belote/joueur/JoueurIA.java:541:	The method 'donneMeilleurAtoutNonMaitre()' has a cyclomatic complexity of 11.
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/graphisme/TapisDeBelote.java:72:	Unnecessary use of fully qualified name 'java.awt.Font' due to existing import 'java.awt.Font'
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/graphisme/TapisDeBelote.java:218:	The method 'paintComponent(Graphics)' has a cyclomatic complexity of 41.
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/graphisme/TapisDeBelote.java:218:	The method 'paintComponent(Graphics)' has an NPath complexity of 285048
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/graphisme/TapisDeBelote.java:223:	Avoid instantiating new objects inside loops
+/home/eddy/Documents/UQAC/8INF957/SessionBelote/NewJBelote/src/graphisme/TapisDeBelote.java:463:	Avoid instantiating new objects inside loops
