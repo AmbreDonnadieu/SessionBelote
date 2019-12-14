@@ -140,10 +140,11 @@ public class TapisDeBelote extends JPanel implements AnalyseurInterfaceGraphique
         /* */
         /* Avec un humain */
         analyseur = new AnalyseurJeuTemp( decoreJeuDeCarte(PileDeCarte.getJeuBelote()),
-                    new JoueurHumain(null, "SUD", AnalyseurJeuTemp.JOUEUR_SUD, this, analyseur.getGraphicListener()));
+                    new JoueurHumain(null, "SUD", AnalyseurJeuTemp.JOUEUR_SUD, this, this));
         /* */
         
         analyseur.setGraphicListener(this);
+        gestionnaireCarte = analyseur.getGestionnaireCartes();
     }
 
     boolean imageOK = false;
@@ -426,7 +427,7 @@ public class TapisDeBelote extends JPanel implements AnalyseurInterfaceGraphique
             PileDeCarte p = decoreJeuDeCarte(PileDeCarte.getJeuBelote());
             p.melange();
             analyseur = new AnalyseurJeuTemp( p,
-                            new JoueurHumain(null, "SUD", AnalyseurJeuTemp.JOUEUR_SUD, this));
+                            new JoueurHumain(null, "SUD", AnalyseurJeuTemp.JOUEUR_SUD, this, this));
         }
         analyseur.setGraphicListener(this);
 

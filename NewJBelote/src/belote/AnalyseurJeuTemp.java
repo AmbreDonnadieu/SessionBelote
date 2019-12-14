@@ -18,7 +18,7 @@ public class AnalyseurJeuTemp implements Runnable {
 	RegleTemp regle;
 	/* Liste des joueurs qui coupent à la couleur */
 	HashMap<CouleurCarte,ArrayList<IJoueurBelote>> naPlusDe, aCouleur;
-	/* Liste des joueurs qui n'ont plus d'atout */
+	/* Liste des joueurs qui n'ont plus d'regle.getCouleurAtout() */
 	boolean[] nAPlusDAtout= new boolean[4];
 	GestionnaireCartesEcriture gestionnaireCartes;
 
@@ -36,8 +36,8 @@ public class AnalyseurJeuTemp implements Runnable {
 	public static final String[] stringEtats = {
 			"Aucune partie en cours",
 			"Première distribution",
-			"Premier tour d'atout",
-			"Deuxième tour d'atout",
+			"Premier tour d'regle.getCouleurAtout()",
+			"Deuxième tour d'regle.getCouleurAtout()",
 			"Distribution du restant des cartes",
 			"Personne ne veut prendre",
 			"Partie en cours", "Fin du tour",
@@ -64,7 +64,6 @@ public class AnalyseurJeuTemp implements Runnable {
 	IJoueurBelote joueurCourant;
 	IJoueurBelote joueurQuiPrend;
 	IJoueurBelote joueurQuiCommence;
-	CouleurCarte atout;
 	public PileDeCarte dernierPli;  // la copie du dernier pli
 	public Carte cartePrise;
 	public StatistiquesBelote statistique;
@@ -86,13 +85,15 @@ public class AnalyseurJeuTemp implements Runnable {
 
 
 	public AnalyseurJeuTemp() {
-		// TODO Auto-generated constructor stub
-		naPlusDe = new HashMap<CouleurCarte, ArrayList<IJoueurBelote>>();
-		for( CouleurCarte c : CouleurCarte.COULEURS)
-			naPlusDe.put(c, new ArrayList<IJoueurBelote>());
+        nAPlusDAtout = new boolean[4];
+        naPlusDe = new HashMap<CouleurCarte, ArrayList<IJoueurBelote>>();
+        for( CouleurCarte c : CouleurCarte.COULEURS)
+            naPlusDe.put(c, new ArrayList<IJoueurBelote>());
 	}
 
-
+	public GestionnaireCartesLecture getGestionnaireCartes() {
+		return (GestionnaireCartesLecture) gestionnaireCartes;
+	}
 	
 	void nouvellePartie() {
 		for ( int i = 0; i < 4; i++) {
@@ -115,21 +116,21 @@ public class AnalyseurJeuTemp implements Runnable {
 				naPlusDe.get(regle.getCouleurDemandee(p)).add(joueurCourant);
 				if ( ! c.getCouleur().equals(regle.getCouleurAtout()))
 					switch (p.size()) {
-					case 2: // il n'a plus d'atout
-						joueurCourant.setNAPlusDe(atout);
+					case 2: // il n'a plus d'regle.getCouleurAtout()
+						joueurCourant.setNAPlusDe(regle.getCouleurAtout());
 						break;
 					case 3:
 					case 4: if ( gestionnaireCartes.meilleurCarte(p) == p.get(p.size()-3))
 						break; // Le partenaire est maitre on ne peut pas savoir
 					else
-						joueurCourant.setNAPlusDe(atout);
+						joueurCourant.setNAPlusDe(regle.getCouleurAtout());
 					}
-			} else // il n'a pas fourni à la couleur qui était l'atout
-				joueurCourant.setNAPlusDe(atout);
+			} else // il n'a pas fourni à la couleur qui était l'regle.getCouleurAtout()
+				joueurCourant.setNAPlusDe(regle.getCouleurAtout());
 
 		if ( regle.isAtout(c) && 
 				(gestionnaireCartes.combienIlResteDeCartesNonJoueesA(c.getCouleur()) == 0)) {
-			// Les 8 atouts sont tombés, plus personne ne coupe
+			// Les 8 regle.getCouleurAtout()s sont tombés, plus personne ne coupe
 			for ( int i = 0; i < 4; i ++)
 				nAPlusDAtout[i] = true;
 		}
@@ -139,6 +140,7 @@ public class AnalyseurJeuTemp implements Runnable {
 
 	/* Crée une partie réseau avec ces quatre joueurs placé dans le sens horaire en commencant par le Nord. */
 	public AnalyseurJeuTemp( PileDeCarte avecCeJeu, IJoueurBelote[] quatre_joueurs, int quiCommence) {
+		this();
 		int i;
 		regle = new RegleTemp();
 		gestionnaireCartes = new GestionnaireCartesEcriture(regle, avecCeJeu);
@@ -154,17 +156,23 @@ public class AnalyseurJeuTemp implements Runnable {
 		}
 
 		for ( i = 0; i< 4 ; i++)
+		{
 			joueurs.get(i).setEntreLesJoueurs(joueurs.get((i+3)%4), joueurs.get((i+1)%4));
+			joueurs.get(i).setGestionnaireCarte(gestionnaireCartes);
+			joueurs.get(i).setRegle(regle);
+		}
 
 		joueurQuiDistribue = joueurs.get(quiCommence).getPrecedent(); // pour distribuer
 		joueurCourant = joueurQuiDistribue.getPrecedent(); // pour couper le jeu
 		setPartieEnCours(false);
 		setGameSpeed(15);
 		try { changeEtat(ETAT_RIEN); } catch (Exception ex) { }
+		
 	}
 
 	/* Crée une partie locale composé de 3 joueur ordinateurs et d'un 'humain' placé au SUD du gestionnaireCartes.getTapis() */
 	public AnalyseurJeuTemp( PileDeCarte avecCeJeu, IJoueurBelote humain) {
+		this();
 		int i;
 
 		regle = new RegleTemp();
@@ -176,21 +184,21 @@ public class AnalyseurJeuTemp implements Runnable {
 
 		joueurs = new ArrayList<IJoueurBelote>(4);
 		for ( i = 0; i < 4; i++ )
-			/*           if ( (i%2) == 1)
-	                joueurs.add( new JoueurBelote(POSITIONS[i], i));
-	            else
-	                joueurs.add( new JoueurBelote1(POSITIONS[i], i));
-	 /* */
+		{
 			if ( (humain!=null) && (i == humain.getOrdre()))
 				joueurs.add( humain);
 			else
 				joueurs.add( new JoueurIA(POSITIONS[i], i));
-		/* */
+		}
 
 
 		for ( i = 0; i< 4 ; i++)
+		{
 			joueurs.get(i).setEntreLesJoueurs(joueurs.get((i+3)%4), joueurs.get((i+1)%4));
-
+			joueurs.get(i).setGestionnaireCarte(gestionnaireCartes);
+			joueurs.get(i).setRegle(regle);
+		}
+		
 		joueurQuiDistribue = joueurCourant = joueurs.get(JOUEUR_EST);
 		joueurCourant = joueurQuiDistribue.getPrecedent();
 
@@ -298,7 +306,7 @@ public class AnalyseurJeuTemp implements Runnable {
 					changeEtat( ETAT_DISTRIBUE1);
 				}
 				gestionnaireCartes.getTapis().add( gestionnaireCartes.distribueUneCarte());
-				atout = null;
+				regle.setCouleurAtout(null);
 				waitSynchroReseau();
 
 				boolean okPrise = true;
@@ -334,7 +342,7 @@ public class AnalyseurJeuTemp implements Runnable {
 								if ( a.equals(gestionnaireCartes.getTapis().get(0).getCouleur())) {
 									graphic_listener.unlockRead();
 									JOptionPane.showMessageDialog(graphic_listener.getComponent(), "Le joueur "+ joueurCourant.getNom() + " ne peut choisir " +
-											a + " au deuxième tour d'atout.", "Désolé ...", JOptionPane.ERROR_MESSAGE);
+											a + " au deuxième tour d'regle.getCouleurAtout().", "Désolé ...", JOptionPane.ERROR_MESSAGE);
 									graphic_listener.lockRead();
 									a = null;
 								} else
@@ -372,7 +380,7 @@ public class AnalyseurJeuTemp implements Runnable {
 						}
 
 						gestionnaireCartes.remettreUneCarteDansJeu(gestionnaireCartes.getTapis().donneUneCarte());
-						atout = null;
+						regle.setCouleurAtout(null);
 						okPrise = true;
 
 						changeEtat( ETAT_FINTOUR);
@@ -380,16 +388,16 @@ public class AnalyseurJeuTemp implements Runnable {
 
 					} else { // distribue la fin du jeu
 
-						atout = a;
+						regle.setCouleurAtout(a);
 
 						if ( confirmPlis) {
 							graphic_listener.unlockRead();
 							JOptionPane.showMessageDialog(graphic_listener.getComponent(),
 									"Le joueur " + joueurQuiPrend.getNom() + " a pris à " +
-											atout, "Info", JOptionPane.INFORMATION_MESSAGE);
+											regle.getCouleurAtout(), "Info", JOptionPane.INFORMATION_MESSAGE);
 							/*     int r =  JOptionPane.showConfirmDialog(graphic_listener.getComponent(),
 	                                "Le joueur " + joueurQuiPrend.getNom() + " a pris à " +
-	                                atout, "Info", JOptionPane.INFORMATION_MESSAGE);
+	                                regle.getCouleurAtout(), "Info", JOptionPane.INFORMATION_MESSAGE);
 							 */
 							graphic_listener.lockRead();
 							/*   if ( r == JOptionPane.NO_OPTION) {
@@ -398,7 +406,7 @@ public class AnalyseurJeuTemp implements Runnable {
 	                                joueurCourant = joueurCourant.suivant;
 	                            }
 	                            jeu.add(gestionnaireCartes.getTapis().donneUneCarte());
-	                            atout = null;
+	                            regle.getCouleurAtout() = null;
 	                            changeEtat( ETAT_FINTOUR);
 	                            break;
 	                        } else if ( r == JOptionPane.CANCEL_OPTION)
@@ -430,7 +438,7 @@ public class AnalyseurJeuTemp implements Runnable {
 
 				if ( avecAnnonces) verifieLesAnnonces();
 
-				if ( atout != null ) {
+				if ( regle.getCouleurAtout() != null ) {
 					this.setJoueurQuiCommence(joueurQuiDistribue.getSuivant());
 					for (int tour = 1; tour <= 8; tour++) {
 						joueUnTour();
@@ -648,9 +656,9 @@ public class AnalyseurJeuTemp implements Runnable {
 						c = null;
 					}
 					else {
-						if ( c.estCouleur(atout)) {
-							if (((c.getValeur().equals(ValeureCarte.CARD_R)) && joueurCourant.getMain().contient(atout, ValeureCarte.CARD_D)) ||
-									((c.getValeur().equals(ValeureCarte.CARD_D)) && joueurCourant.getMain().contient(atout, ValeureCarte.CARD_R))) {
+						if ( c.estCouleur(regle.getCouleurAtout())) {
+							if (((c.getValeur().equals(ValeureCarte.CARD_R)) && joueurCourant.getMain().contient(regle.getCouleurAtout(), ValeureCarte.CARD_D)) ||
+									((c.getValeur().equals(ValeureCarte.CARD_D)) && joueurCourant.getMain().contient(regle.getCouleurAtout(), ValeureCarte.CARD_R))) {
 
 								if ( confirmBelote && avecHumain) {
 									graphic_listener.unlockRead();
@@ -684,13 +692,13 @@ public class AnalyseurJeuTemp implements Runnable {
 		}
 	}
 
-	/** Vérifie que le joueur 'lui' peut jouer cette atout 'carte' */
+	/** Vérifie que le joueur 'lui' peut jouer cette regle.getCouleurAtout() 'carte' */
 	private boolean verifieAtoutJouePar( IJoueurBelote lui, Carte carte) {
-		Carte m = GestionnaireCartesLecture.meilleurCarteDansA(gestionnaireCartes.getTapis(), atout);
+		Carte m = GestionnaireCartesLecture.meilleurCarteDansA(gestionnaireCartes.getTapis(), regle.getCouleurAtout());
 
 		if ( GestionnaireCartesLecture.positionDe(carte) > GestionnaireCartesLecture.positionDe(m)) return true;
 		else {
-			carte = GestionnaireCartesLecture.meilleurCarteDansA(lui.getMain(), atout);
+			carte = GestionnaireCartesLecture.meilleurCarteDansA(lui.getMain(), regle.getCouleurAtout());
 			if ( carte == null) return true;
 			if ( GestionnaireCartesLecture.positionDe(carte) < GestionnaireCartesLecture.positionDe(m)) return true;
 		}
@@ -705,18 +713,18 @@ public class AnalyseurJeuTemp implements Runnable {
 		p = gestionnaireCartes.getTapis().get(0);
 
 		if (carte.estCouleur(p)) { // si même couleur
-			if ( p.estCouleur(atout)) { // si atout demandé
+			if ( p.estCouleur(regle.getCouleurAtout())) { // si regle.getCouleurAtout() demandé
 				return verifieAtoutJouePar( lui, carte);
 			} else return true;
 
 		} else { // ! même couleur
-			if ( p.estCouleur(atout)) { // si atout demandé
-				if (  lui.getMain().contient(atout)) return false;
+			if ( p.estCouleur(regle.getCouleurAtout())) { // si regle.getCouleurAtout() demandé
+				if (  lui.getMain().contient(regle.getCouleurAtout())) return false;
 				else return verifieDefausse(lui, carte);
-			} else { // ! même couleur, ! atout demandé
+			} else { // ! même couleur, ! regle.getCouleurAtout() demandé
 				if ( lui.getMain().contient(p.getCouleur())) return false;
 
-				if ( carte.estCouleur(atout)) {
+				if ( carte.estCouleur(regle.getCouleurAtout())) {
 					if ( lui.getMain().contient(p.getCouleur())) return false;
 					else return verifieAtoutJouePar(lui, carte);
 				} else { // il devrait couper mais ne l'a pas fait
@@ -730,14 +738,14 @@ public class AnalyseurJeuTemp implements Runnable {
 	/** Vérifie que le joueur a le droit de ne pas couper */
 	private boolean verifieDefausse( IJoueurBelote lui, Carte carte) {
 
-		if ( ! lui.getMain().contient(atout)) return true;
+		if ( ! lui.getMain().contient(regle.getCouleurAtout())) return true;
 
 		// son partenaire est il maitre ?
 		if ( gestionnaireCartes.getTapis().size()>=2)
 			if ( GestionnaireCartesLecture.meilleurCarte(gestionnaireCartes.getTapis()).equals(gestionnaireCartes.getTapis().get(gestionnaireCartes.getTapis().size()-2)))
 				return true;
 
-		if ( ! lui.getMain().contient(atout)) return true;
+		if ( ! lui.getMain().contient(regle.getCouleurAtout())) return true;
 		return false;
 	}
 
@@ -837,13 +845,13 @@ public class AnalyseurJeuTemp implements Runnable {
 		else return null;
 	}
 
-	/** Retourne la couleur choisie à l'atout pour cette partie */
+	/** Retourne la couleur choisie à l'regle.getCouleurAtout() pour cette partie */
 	public CouleurCarte getCouleurAtout() {
 		if ((intEtatDuJeu == ETAT_ATOUT1) || (intEtatDuJeu == ETAT_ATOUT2)) return null;
-		return atout;
+		return regle.getCouleurAtout();
 	}
 
-	/** Retourne la couleur demandée au 1er tour d'atout */
+	/** Retourne la couleur demandée au 1er tour d'regle.getCouleurAtout() */
 	public CouleurCarte getCouleurDemandee() {
 		if ( gestionnaireCartes.getTapis().isEmpty() ) return null;
 		else return gestionnaireCartes.getTapis().get(0).getCouleur();
@@ -866,12 +874,12 @@ public class AnalyseurJeuTemp implements Runnable {
 
 	}
 
-	/** Renvoie les points d'une carte en fonction de l'atout actuel */
+	/** Renvoie les points d'une carte en fonction de l'regle.getCouleurAtout() actuel */
 	public int pointsDe( Carte c) {
 		int p = 0;
 		if ( c == null) return -1;
 
-		if ( (atout!=null) && c.estCouleur(atout))
+		if ( (regle.getCouleurAtout()!=null) && c.estCouleur(regle.getCouleurAtout()))
 			switch ( c.getValeur().toInt()) {
 			case ValeureCarte.NCARD_V: p += 18; break;
 			case ValeureCarte.NCARD_9: p += 14; break;

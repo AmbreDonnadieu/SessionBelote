@@ -26,11 +26,11 @@ public class JoueurHumain extends AbstractJoueur {
 	
     PileDeCarte nonTriees;
 
-    public JoueurHumain(RegleTemp regle, String nom, int ordre, TapisDeBelote tapis0, AnalyseurInterfaceGraphique graphic_listener) {
+    public JoueurHumain(RegleTemp regle, String nom, int ordre, TapisDeBelote tapis0, AnalyseurInterfaceGraphique graphic_listener0) {
         super(nom, ordre);
         tapis = tapis0;
         nonTriees = new PileDeCarte();
-        this.graphic_listener=graphic_listener;
+        graphic_listener=graphic_listener0;
     }
     
     @Override
@@ -104,8 +104,8 @@ public class JoueurHumain extends AbstractJoueur {
         tapis.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         graphic_listener.unlockRead();
         if ( tapis.playWithMouse) {
-            PileDeCarte p = carteEnMain.deCouleur(gestionnaireCarte.getTapis().get(0).getCouleur());
-            p.add( gestionnaireCarte.getTapis().get(0));
+            PileDeCarte p = carteEnMain.deCouleur(atout0.getCouleur());
+            p.add( atout0);
             Carte c = tapis.joueCarte(p);
             tapis.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             return (c!= null);

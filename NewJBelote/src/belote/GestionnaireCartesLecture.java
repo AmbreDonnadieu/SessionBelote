@@ -26,6 +26,7 @@ public class GestionnaireCartesLecture {
 
 	public GestionnaireCartesLecture( RegleTemp regle0, PileDeCarte jeuCarte) {
 		regle = regle0;
+		tapis = new PileDeCarte();
 
 		jeuDeCarte = (PileDeCarte)jeuCarte.clone();
 		cartesNonJouees = (PileDeCarte)jeuCarte.clone();

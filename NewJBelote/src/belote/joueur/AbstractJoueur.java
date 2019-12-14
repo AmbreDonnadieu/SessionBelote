@@ -9,7 +9,7 @@ import cartes.Carte;
 import cartes.CouleurCarte;
 import cartes.PileDeCarte;
 import java.lang.String;
-
+import java.util.HashSet;
 import java.util.Set;
 
 public abstract class AbstractJoueur implements IJoueurBelote {
@@ -47,10 +47,20 @@ public abstract class AbstractJoueur implements IJoueurBelote {
     }*/
 
 	public AbstractJoueur(String nom0, int ordre0) {
+		naPlusDe = new HashSet<CouleurCarte>();
+		aCouleur = new HashSet<CouleurCarte>();
 		nom = nom0;
 		ordre = ordre0;
 		carteEnMain = new PileDeCarte();
 		tas = new PileDeCarte();
+	}
+	
+	public AbstractJoueur(String nom0, int ordre0, GestionnaireCartesLecture gestionnairCartes) {
+		nom = nom0;
+		ordre = ordre0;
+		carteEnMain = new PileDeCarte();
+		tas = new PileDeCarte();
+		this.gestionnaireCarte = gestionnairCartes;
 	}
 
 	/** Dit au joueur où il se trouve autour de la table */
